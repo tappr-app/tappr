@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState }from 'react'
 import{ useForm } from 'react-hook-form';
 import { connect } from 'react-redux'
 import { FormDiv } from '../styles/Styled'
 
 const LoginForm = props =>{
     const { register, handleSubmit, watch, errors, setValue } = useForm();
+
 
     const onSubmit = data => console.log(data)
     return(
