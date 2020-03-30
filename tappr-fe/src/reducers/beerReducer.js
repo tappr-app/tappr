@@ -4,7 +4,7 @@ const initialState = {
     error: ''
 };
 
-export default beerReducer = (state = initialState, action) => {
+export const beerReducer = (state = initialState, action) => {
   switch(action.type) {
     default:
       return state
