@@ -1,0 +1,21 @@
+{
+    "version": 2,
+    "name": "tappr-fe",
+    "builds": [
+      {
+        "src": "tappr-fe/package.json",
+        "use": "@now/static-build",
+        "config": {
+          "distDir": "build"
+        }
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "tappr-fe/$1"
+      }
+    ]
+  }
+  
+  
