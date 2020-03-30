@@ -8,8 +8,11 @@ const RegisterForm = props =>{
     return(
         <FormDiv>
             <label>Username</label>
-            <input name='username' ref={register({required: true, maxLength: 20})}></input>
-
+            <input name='username' ref={register({required: true, maxLength: 10})}></input>
+            {errors.username &&
+                errors.username.type === 'required' && 'Required Field'}
+            {errors.username &&
+                errors.username.type === 'maxLength' && 'Please use less than 10 characters'}
             <label>Password</label>
             <input type='password' name='password' ref={register({required: true, minLength: 8})}></input>
             {/* add a second Password input for verification? Possible stretch? Also make some regex requirements? */}
@@ -32,4 +35,4 @@ const mapPropsToState = state =>{
     };
 };
 
-export default connect(mapPropsToState, {})(Register)
+export default connect(mapPropsToState, {})(RegisterForm)
