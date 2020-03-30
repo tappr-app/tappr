@@ -4,9 +4,8 @@ import { connect } from 'react-redux'
 import { FormDiv } from '../styles/Styled'
 
 const RegisterForm = props =>{
-    const { register, handleSubmit, watch, errors, setValue } = useForm({
-        validateCriteriaMode: "all"
-      });
+    const { register, handleSubmit, watch, errors, setValue } = useForm();
+
     const onSubmit = data => console.log(data)
     return(
         <FormDiv>
