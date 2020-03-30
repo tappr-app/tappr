@@ -23,8 +23,7 @@ const RegisterForm = props =>{
 
     }
     const onSubmit = e => {
-        e.preventDefault();
-        props.handlePostData()
+        props.handlePostData(newUser)
     }
     console.log(newUser)
     return(
