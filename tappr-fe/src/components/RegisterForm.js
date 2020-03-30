@@ -38,10 +38,17 @@ const RegisterForm = props =>{
             Make a birthday format? Write function to verify user age (is this an action or should I write the fn in the scope of this component?) */}
 
             <label>Bio(Optional)</label>
-            <textarea name='bio' ref={register({ maxLength: 500 })}></textarea>
-            <button type='submit'>Register</button>
-            <label>Already registered?</label>
-            <button>Login</button>
+            <textarea className='user-bio' name='bio' ref={register({ maxLength: 500 })}></textarea>
+            <div className='form-btn-main'>
+                <div className='form-submit'>
+                    <button className='form-action main' type='submit'>Register</button>
+                </div>
+                <div className='route-form'>
+                    <label>Returning?</label>
+                    <button className='form-action'>Login</button>
+                </div>
+                
+            </div>
         </form>
         </FormDiv>
     )

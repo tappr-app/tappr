@@ -20,9 +20,15 @@ const LoginForm = props =>{
             <label>Password</label>
             <input type='password' name='password' ref={register({required: true, minLength: 8})}></input>
             {errors.password && 'Password Required'}
-            <button type='submit'>Login</button>
-            <label>New User?</label>
-            <button>Register</button>
+            <div className='form-btn-main'>
+            <div className='form-submit'>
+                    <button className='form-action main' type='submit'>Login</button>
+                </div>
+                <div className='route-form'>
+                    <label>New User?</label>
+                    <button className='form-action'>Register</button>                   
+                </div>         
+            </div>
         </form>
         </FormDiv>
     )
