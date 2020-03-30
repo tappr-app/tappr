@@ -1,11 +1,12 @@
-import React from 'react'
+import React from 'react';
+import axios from 'axios';
 import{ useForm } from 'react-hook-form';
 import { connect } from 'react-redux'
 import { FormDiv } from '../styles/Styled'
 
 const RegisterForm = props =>{
     const { register, handleSubmit, watch, errors, setValue } = useForm();
-
+    console.log(props)
     const onSubmit = data => console.log(data)
     return(
         
