@@ -20,7 +20,7 @@ const UserDashboard = (props) => {
         <div>
           <div>
             <h2>Featured Beers</h2>
-            {randomBeers.map((beer) => {
+            {randomBeers.map((beer) => (
               <Link to="/">
                 <div key={beer.id}>
                   <img src={beer.image_url} alt={beer.name} />
@@ -28,12 +28,12 @@ const UserDashboard = (props) => {
                   <p>{beer.abv}</p>
                 </div>
               </Link>
-            })}
+            ))}
           </div>
 
           <div>
             <h2>Drinkscover</h2>
-            {props.beer.map((beer) => {
+            {props.beer.map((beer) => (
               <Link to="/">
                 <div key={beer.id}>
                   <img src={beer.image_url} alt={beer.name} />
@@ -44,12 +44,12 @@ const UserDashboard = (props) => {
                   <button>Favorite</button>
                 </div>
               </Link>
-            })}
+            ))}
           </div>
 
           <div>
             <h2>Favorite Brews</h2>
-            {myBeers.map((beer) => {
+            {myBeers.map((beer) => (
               <Link to="/">
                 <div key={beer.id}>
                   <img src={beer.image_url} alt={beer.name} />
@@ -57,7 +57,7 @@ const UserDashboard = (props) => {
                   <p>{beer.abv}</p>
                 </div>
               </Link>
-            })}
+            ))}
             <Link to="/">View All</Link>
           </div>
         </div>

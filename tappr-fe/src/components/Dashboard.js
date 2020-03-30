@@ -18,7 +18,7 @@ const Dashboard = (props) => {
         <div>
           <div>
             <h2>Featured Beers</h2>
-            {randomBeers.map((beer) => {
+            {randomBeers.map((beer) => (
               <Link to='/'>
                 <div key={beer.id}>
                   <img src={beer.image_url} alt={beer.name} />
@@ -26,11 +26,11 @@ const Dashboard = (props) => {
                   <p>{beer.abv}</p>
                 </div>
               </Link>
-            })}
+            ))}
           </div>
 
           <div>
-            {props.beer.map((beer) => {
+            {props.beer.map((beer) => (
               <Link to="/">
                 <div key={beer.id}>
                   <img src={beer.image_url} alt={beer.name} />
@@ -40,7 +40,7 @@ const Dashboard = (props) => {
                   <p>{beer.abv}</p>
                 </div>
               </Link>
-            })}
+            ))}
           </div>
         </div>
       )}
