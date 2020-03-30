@@ -2,7 +2,8 @@ const initialState = {
     beer: [],
     isFetching: false,
     error: ''
-};
+
+}
 
 export const beerReducer = (state = initialState, action) => {
   switch(action.type) {
@@ -10,3 +11,4 @@ export const beerReducer = (state = initialState, action) => {
       return state
   };
 };
+
