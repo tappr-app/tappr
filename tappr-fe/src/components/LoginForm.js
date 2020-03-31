@@ -4,11 +4,11 @@ import { connect } from 'react-redux'
 import { handleLogin } from '../actions/index'
 import { FormDiv } from '../styles/Styled'
 import GuestNavbar from './GuestNavbar';
-import { axiosWithAuth } from '../utils/axiosWithAuth';
+
 
 
 const LoginForm = props =>{
-    const { register, handleSubmit, watch, errors, setValue } = useForm();
+    const { register, handleSubmit, errors} = useForm();
 
     const [credentials, setCredentials] = useState({
         username: '',
