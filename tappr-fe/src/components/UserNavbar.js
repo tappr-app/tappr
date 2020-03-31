@@ -1,18 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const UserNavbar = () => {
+const UserNavbar = (props) => {
   const user_username = window.localStorage.getItem('user_username');
+  const user_id = window.localStorage.getItem('user_id');
+
+  const userProfile = (id) => {
+    props.history.push(`/my-profile/${id}`);
+  };
+
+  const userBrews = (id) => {
+    props.history.push(`/my-brews/${id}`);
+  };
 
   return (
     <div>
       <nav>
-        <Link to="/">Tap List</Link>
-        <Link to="/">My Favorite Brews</Link>
-        <Link to="/">Add a Beer</Link>
-        <Link to="/">Logout</Link>
-        {/* For user profile */}
-        <Link to="/">{user_username}</Link>
+        <Link to="/my-dashboard">Tap List</Link>
+        <button onClick={() => userBrews(user_id)}>My Favorite Brews</button>
+        <Link to="/add-a-beer">Add a Beer</Link>
+        <Link to="/logout">Logout</Link>
+        <button onClick={() => userProfile(user_id)}>{user_username}</button>
       </nav>
     </div>
   );
