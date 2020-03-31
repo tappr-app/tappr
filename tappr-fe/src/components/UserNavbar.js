@@ -13,13 +13,20 @@ const UserNavbar = (props) => {
     props.history.push(`/my-brews/${id}`);
   };
 
+  const logout = () => {
+    window.localStorage.removeItem('token');
+    window.localStorage.removeItem('user_id');
+    window.localStorage.removeItem('user_username');
+    props.history.push('/login');
+  };
+
   return (
     <div>
       <nav>
         <Link to="/my-dashboard">Tap List</Link>
         <button onClick={() => userBrews(user_id)}>My Favorite Brews</button>
         <Link to="/add-a-beer">Add a Beer</Link>
-        <Link to="/logout">Logout</Link>
+        <button onClick={() => logout()}>Logout</button>
         <button onClick={() => userProfile(user_id)}>{user_username}</button>
       </nav>
     </div>
