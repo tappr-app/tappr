@@ -13,8 +13,6 @@ const RegisterForm = props =>{
         bio: ''
     });
 
-    console.log(props);
-
     const handleChanges = e =>{
         setNewUser({
             ...newUser,
@@ -36,8 +34,6 @@ const RegisterForm = props =>{
     const returntoLogin = () => {
       props.history.push('/login');
     };
-
-    console.log(newUser);
     
     return(
       <>

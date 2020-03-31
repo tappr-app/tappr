@@ -4,11 +4,9 @@ import { connect } from 'react-redux'
 import { handleLogin } from '../actions/index'
 import { FormDiv } from '../styles/Styled'
 import GuestNavbar from './GuestNavbar';
-import { axiosWithAuth } from '../utils/axiosWithAuth';
-
 
 const LoginForm = props =>{
-    const { register, handleSubmit, watch, errors, setValue } = useForm();
+    const { register, handleSubmit, errors } = useForm();
 
     const [credentials, setCredentials] = useState({
         username: '',
@@ -29,12 +27,8 @@ const LoginForm = props =>{
       props.history.push('/register');
     };
   
-
-
-
-
     return(
-        <>
+      <>
         <GuestNavbar />
         <FormDiv>
             <h2 className='form-title'>Login</h2>
@@ -63,12 +57,12 @@ const LoginForm = props =>{
                 <button className='form-action' onClick={() => registerUser()}>Register</button>                   
             </div>         
             </div>
-           </form>
+          </form>
         </FormDiv>       
         }
-        </>
-    )
-}
+      </>
+    );
+};
 
 const mapPropsToState = state =>{
     return{

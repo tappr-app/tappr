@@ -5,8 +5,6 @@ const UserNavbar = (props) => {
   const user_username = window.localStorage.getItem('user_username');
   const user_id = window.localStorage.getItem('user_id');
 
-  console.log(props);
-
   const userProfile = (id) => {
     props.history.push(`/my-profile/${id}`);
   };
