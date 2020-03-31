@@ -43,7 +43,7 @@ export const beerReducer = (state = initialState, action) => {
       return{
         ...state,
         error: action.payload
-
+      }
     case GET_API_BEERS:
       return {
         ...state,
