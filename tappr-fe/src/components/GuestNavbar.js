@@ -5,9 +5,10 @@ const GuestNavbar = () => {
   return (
     <div>
       <nav>
-        <Link to="/">Tap List</Link>
-        <Link to="/">Register</Link>
-        <Link to="/">Login</Link>
+        <Link to="/">Home</Link>
+        <Link to="/dashboard">Tap List</Link>
+        <Link to="/register">Register</Link>
+        <Link to="/login">Login</Link>
       </nav>
     </div>
   );
