@@ -11,23 +11,29 @@ const RegisterForm = props =>{
         username: '',
         password: '',
         bio: ''
-    })
-    console.log(props)
+    });
+
+    console.log(props);
+
     const handleChanges = e =>{
         e.preventDefault();
         setNewUser({
             ...newUser,
             [e.target.name]: e.target.value
         })
+    };
 
-    }
     const onSubmit = e => {
-        props.handlePostData(newUser)
-    }
+        props.handlePostData(newUser);
+        props.history.push('/my-dashboard');
+    };
+
     const returntoLogin = () => {
       props.history.push('/login');
-    }
-    console.log(newUser)
+    };
+
+    console.log(newUser);
+    
     return(
       <>
         <GuestNavbar />
