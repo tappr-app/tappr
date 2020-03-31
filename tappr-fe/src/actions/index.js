@@ -21,6 +21,9 @@ export const GET_API_BEERS_FAILURE = 'GET_API_BEERS_FAILURE';
 export const ADD_BEER = 'ADD_BEER';
 export const ADD_BEER_SUCCESS = 'ADD_BEER_SUCCESS';
 export const ADD_BEER_FAILURE = 'ADD_BEER_FAILURE';
+export const UPDATE_BEER = 'UPDATE_BEER';
+export const UPDATE_BEER_SUCCESS = 'UPDATE_BEER_SUCCESS';
+export const UPDATE_BEER_FAILURE = 'UPDATE_BEER_FAILURE';
 
 export const handlePostData = payload => dispatch => {
   dispatch({ type: POST_USER });
@@ -76,4 +79,15 @@ export const addBeer = (newBeer) => dispatch => {
       console.log(error);
       dispatch({ type: ADD_BEER_FAILURE, payload: error.message });
     });
+};
+
+export const updatedBeer = (updatedBeer) => dispatch => {
+  dispatch({ type: UPDATE_BEER });
+  axiosWithAuth().put(`/beers/${updatedBeer.id}`, updatedBeer)
+    .then(res => {
+      dispatch({ type: UPDATE_BEER_SUCCESS, payload: res.data });
+    })
+    .catch(error => {
+      dispatch({ type: UPDATE_BEER_FAILURE, payload: error.message });
+    })
 };
