@@ -1,14 +1,25 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { getPunkBeers } from '../actions/index';
 import GuestNavbar from './GuestNavbar';
 
 const Dashboard = (props) => {
   const [randomBeers, setRandomBeers] = useState([]);
+  const randomABV = Math.floor((Math.random() * 8) + 6);
+  const randomPage = Math.floor((Math.random() * 20) + 1);
 
   useEffect(() => {
-    // Fetch Beer List
-    // Fetch Random Beer List
+    props.getPunkBeers();
+
+    axios.get(`https://api.punkapi.com/v2/beers/?abv_lt=${randomABV}&page=${randomPage}&per_page=5`)
+      .then(res => {
+        setRandomBeers(res.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }, []);
 
   return (
@@ -55,4 +66,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, {})(Dashboard);
+export default connect(mapStateToProps, { getPunkBeers })(Dashboard);
