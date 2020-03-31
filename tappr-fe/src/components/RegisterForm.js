@@ -11,33 +11,41 @@ const RegisterForm = props =>{
         username: '',
         password: '',
         bio: ''
-    })
-    console.log(props)
+    });
+
+    console.log(props);
+
     const handleChanges = e =>{
         e.preventDefault();
         setNewUser({
             ...newUser,
             [e.target.name]: e.target.value
         })
+    };
 
-    }
     const onSubmit = e => {
         props.handlePostData(newUser);
+
         setNewUser({
             username: '',
             password: '',
             bio: ''
         })
     }
+        props.history.push('/my-dashboard');
+    };
+
     const returntoLogin = () => {
       props.history.push('/login');
-    }
-    console.log(newUser)
+    };
+
+    console.log(newUser);
+    
     return(
         <>
+      <GuestNavbar />
         {props.isPosting ? <div className='posting-user'>Creating your profile, pour a pint and get ready to login!</div> :
       <>
-        <GuestNavbar />
         <FormDiv>
         <h2 className='form-title'>Register</h2>
         <form className='register-user' onSubmit={handleSubmit(onSubmit)}>

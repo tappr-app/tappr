@@ -13,6 +13,10 @@ export const USER_LOGIN = 'USER_LOGIN'
 export const LOGGED_IN= 'LOGGED_IN'
 
 
+export const GET_API_BEERS = 'GET_API_BEERS';
+export const GET_API_BEERS_SUCCESS = 'GET_API_BEERS_SUCCESS';
+export const GET_API_BEERS_FAILURE = 'GET_API_BEERS_FAILURE';
+
 export const handlePostData = payload => dispatch => {
     dispatch({type: POST_USER});
     axiosWithAuth()
@@ -41,4 +45,23 @@ export const handleLogin = credentials => dispatch =>{
         console.log(err)
         dispatch({ type: SET_ERROR, payload: 'Party foul! Action wasn\'t completed' })
     })
+        window.localStorage.setItem('user_id', res.data.user.id);
+        window.localStorage.setItem('user_username', res.data.user.username);
+        window.localStorage.setItem('token', res.data.token);
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
+
+export const getPunkBeers = () => dispatch => {
+  dispatch({ type: GET_API_BEERS });
+  axios.get('https://api.punkapi.com/v2/beers')
+    .then(res => {
+      dispatch({ type: GET_API_BEERS_SUCCESS, payload: res.data });
+    })
+    .catch(error => {
+      dispatch({ type: GET_API_BEERS_FAILURE, payload: error.message });
+    });
+
 }
