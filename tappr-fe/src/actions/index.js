@@ -39,18 +39,14 @@ export const handleLogin = credentials => dispatch =>{
     .then(res=>{
         console.log('LOGIN', res)
         localStorage.setItem('token', JSON.stringify(res.data.token))
-        dispatch({ type: LOGGED_IN})
+        window.localStorage.setItem('user_id', res.data.user.id);
+        window.localStorage.setItem('user_username', res.data.user.username);
+        window.localStorage.setItem('token', res.data.token);
+        dispatch({ type: LOGGED_IN});
     })
     .catch(err=>{
         console.log(err)
         dispatch({ type: SET_ERROR, payload: 'Party foul! Action wasn\'t completed' })
-    })
-        window.localStorage.setItem('user_id', res.data.user.id);
-        window.localStorage.setItem('user_username', res.data.user.username);
-        window.localStorage.setItem('token', res.data.token);
-    })
-    .catch(error => {
-      console.log(error);
     });
 };
 
