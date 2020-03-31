@@ -10,5 +10,17 @@ export const handlePostData = payload => dispatch => {
     .then(res=>{
         console.log('POST', res)
     })
+    .catch(err=> console.log(console.log(err)
+    ))
 
+}
+
+export const handleLogin = credentials => dispatch =>{
+    dispatch({type: USER_LOGIN});
+    axiosWithAuth()
+    .post('/auth/login', credentials)
+    .then(res=>{
+        console.log('LOGIN', res)
+    })
+    .catch(err=> console.log(err))
 }

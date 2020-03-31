@@ -5,21 +5,33 @@ import { FormDiv } from '../styles/Styled'
 
 const LoginForm = props =>{
     const { register, handleSubmit, watch, errors, setValue } = useForm();
+    const [credentials, setCredentials] = useState({
+        username: '',
+        password: ''
+    })
+    const handleChanges = e =>{
+        e.preventDefault();
+        setCredentials({
+            ...credentials,
+            [e.target.name]: e.target.value
+        })
 
-
-    const onSubmit = data => console.log(data)
+    }
+    const onSubmit = e => {
+        props.handleLogin(credentials)
+    }
     return(
         <FormDiv>
             <h2 className='form-title'>Login</h2>
             <form className='login-user' onSubmit={handleSubmit(onSubmit)}>
             <label>Username</label>
-            <input name='username'
+            <input name='username' onChange={handleChanges}
                 ref={register({ required: true})}/>              
             {errors.username && 'Username Required'}
             {errors.username &&
                 errors.username.type === 'maxLength' && 'Please use less than 10 characters'}
             <label>Password</label>
-            <input type='password' name='password' ref={register({required: true, minLength: 8})}></input>
+            <input type='password' name='password' onChange={handleChanges} ref={register({required: true, minLength: 8})}></input>
             {errors.password && 'Password Required'}
             <div className='form-btn-main'>
             <div className='form-submit'>
