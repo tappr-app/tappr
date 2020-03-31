@@ -17,9 +17,6 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>TAPPR</h1>
-        <RegisterForm />
-
         <Route exact path="/" render={(props) => <LandingPage {...props} />} />
         <Route exact path="/login" render={(props) => <LoginForm {...props} />} />
         <Route exact path="/register" render={(props) => <RegisterForm {...props} />} />
