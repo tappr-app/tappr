@@ -16,9 +16,12 @@
         "dest": "tappr-fe/$1"
       }
     ],
-    "env": {
-      "CI": "false"
+    "process":{
+      "env": {
+        "CI": "false"
+      }
     }
+
   }
   
   
