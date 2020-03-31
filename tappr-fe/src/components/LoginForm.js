@@ -6,7 +6,7 @@ import { FormDiv } from '../styles/Styled'
 import GuestNavbar from './GuestNavbar';
 
 const LoginForm = props =>{
-    const { register, handleSubmit, errors } = useForm();
+    const { register, handleSubmit, errors} = useForm();
 
     const [credentials, setCredentials] = useState({
         username: '',

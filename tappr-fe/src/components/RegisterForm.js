@@ -6,7 +6,8 @@ import { FormDiv } from '../styles/Styled';
 import GuestNavbar from './GuestNavbar';
 
 const RegisterForm = props =>{
-    const { register, handleSubmit, errors } = useForm();
+    const { register, handleSubmit, errors} = useForm();
+
     const [newUser, setNewUser] = useState({
         username: '',
         password: '',
