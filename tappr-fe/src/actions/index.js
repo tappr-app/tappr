@@ -1,7 +1,17 @@
-import axios from 'axios';
+import axios from 'axios'
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 
-export const POST_USER = 'POST_USER';
+// General Actions
+export const SET_ERROR = 'SET_ERROR'
+
+// Register Actions
+export const POST_USER = 'POST_USER'
+export const USER_CREATED = 'USER_CREATED'
+
+// Login Actions
+export const USER_LOGIN = 'USER_LOGIN'
+export const LOGGED_IN= 'LOGGED_IN'
+
 
 export const GET_API_BEERS = 'GET_API_BEERS';
 export const GET_API_BEERS_SUCCESS = 'GET_API_BEERS_SUCCESS';
@@ -13,12 +23,30 @@ export const handlePostData = payload => dispatch => {
     .post('/auth/register', payload)
     .then(res=>{
         console.log('POST', res);
+        dispatch({ type: USER_CREATED})
+    })
+    .catch(err=>{
+        console.log(err)
+        dispatch({ type: SET_ERROR, payload: 'Party foul! Action wasn\'t completed' })
+    } 
+    )
+
+}
+
+export const handleLogin = credentials => dispatch =>{
+    dispatch({type: USER_LOGIN});
+    axios.post('https://tappr-app-api.herokuapp.com/api/auth/login', credentials)
+    .then(res=>{
+        console.log('LOGIN', res)
+        localStorage.setItem('token', JSON.stringify(res.data.token))
         window.localStorage.setItem('user_id', res.data.user.id);
         window.localStorage.setItem('user_username', res.data.user.username);
         window.localStorage.setItem('token', res.data.token);
+        dispatch({ type: LOGGED_IN});
     })
-    .catch(error => {
-      console.log(error);
+    .catch(err=>{
+        console.log(err)
+        dispatch({ type: SET_ERROR, payload: 'Party foul! Action wasn\'t completed' })
     });
 };
 
@@ -31,4 +59,5 @@ export const getPunkBeers = () => dispatch => {
     .catch(error => {
       dispatch({ type: GET_API_BEERS_FAILURE, payload: error.message });
     });
+
 }
