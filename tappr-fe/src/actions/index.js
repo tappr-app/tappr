@@ -81,7 +81,7 @@ export const addBeer = (newBeer) => dispatch => {
     });
 };
 
-export const updatedBeer = (updatedBeer) => dispatch => {
+export const updateBeer = (updatedBeer) => dispatch => {
   dispatch({ type: UPDATE_BEER });
   axiosWithAuth().put(`/beers/${updatedBeer.id}`, updatedBeer)
     .then(res => {

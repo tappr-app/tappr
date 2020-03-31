@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux'; 
 import { updateBeer } from '../actions/index';
+import UserNavbar from './UserNavbar';
 
 const initialBeerState = {
   name: '',
@@ -18,23 +19,23 @@ const UpdateBeer = (props) => {
   const { id } = useParams();
 
   useEffect(() => {
-    const eventToEdit = props.events.find(event => `${event._id}` === id);
+    const beerToEdit = props.beer.find(beer => `${beer.id}` === id);
 
-    if (eventToEdit) {
-      setUpdatedEvent(eventToEdit);
+    if (beerToEdit) {
+      setUpdatedBeer(beerToEdit);
     };
-  }, [props.events, id]);
+  }, [props.beer, id]);
 
   const handleChange = event => {
-    setUpdatedEvent({
-      ...updatedEvent,
+    setUpdatedBeer({
+      ...updatedBeer,
       [event.target.name]: event.target.value
     });
   };
 
-  const handleSubmit = () => {
-    props.updateEvent(updatedEvent);
-    props.history.push('/api/events');
+  const handleSubmit = (id) => {
+    props.updateBeer(updatedBeer);
+    props.history.push(`/brews/${id}`);
   };
 
   const cancel = () => {
@@ -43,79 +44,65 @@ const UpdateBeer = (props) => {
 
   return (
     <div>
-      <nav className="nav_links">
-        <Link to="/">Login</Link>
-        <Link to="/api/events">Upcoming Events</Link>
-        <Link to="/api/users/events">My Events</Link>
-        <Link to="/api/create-event">Create Event</Link>
-        <Link to="/" onClick={signOut}>Signout</Link>
-      </nav>
-
-      <form onSubmit={handleSubmit}>
+      <UserNavbar />
+      <form onSubmit={() => handleSubmit(id)}>
         <div>
-          <label htmlFor="title">Title</label>
+          <label htmlFor="name">Name</label>
           <input
-            id="title"
-            name="eventTitle"
-            type="text"
-            defaultValue={updatedEvent.eventTitle}
+            id="name"
+            name="name"
+            defaultValue={updatedBeer.name}
+            onChange={handleChange} />
+        </div>
+        <div>
+          <label htmlFor="tagline">Tagline</label>
+          <input
+            id="tagline"
+            name="tagline"
+            defaultValue={updatedBeer.tagline}
             onChange={handleChange} />
         </div>
         <div>
           <label htmlFor="description">Description</label>
           <input
             id="description"
-            name="eventDescription"
-            type="text"
-            defaultValue={updatedEvent.eventDescription}
+            name="description"
+            defaultValue={updatedBeer.description}
             onChange={handleChange} />
         </div>
         <div>
-          <label htmlFor="start_time">Event Start</label>
+          <label htmlFor="image_url">Image URL</label>
           <input
-            id="start_time"
-            name="eventStart"
-            type="datetime-local"
-            defaultValue={updatedEvent.eventStart}
-            onChange={handleChange} />
-        </div>
-        <div>
-          <label htmlFor="end_time">Event End</label>
-          <input
-              id="end_time"
-              name="eventEnd"
-              type="datetime-local"
-              defaultValue={updatedEvent.eventEnd}
+              id="image_url"
+              name="image_url"
+              defaultValue={updatedBeer.image_url}
               onChange={handleChange} />
         </div>
         <div>
-          <label htmlFor="address">Address</label>
+          <label htmlFor="abv">ABV</label>
           <input
-              id="address"
-              name="eventAddress"
-              type="text"
-              defaultValue={updatedEvent.eventAddress}
+              id="abv"
+              name="abv"
+              defaultValue={updatedBeer.abv}
               onChange={handleChange} />
         </div>
         <div>
-          <label htmlFor="city">City</label>
+          <label htmlFor="food_name">Food Pairing</label>
           <input
-              id="city"
-              name="eventCity"
-              type="text"
-              defaultValue={updatedEvent.eventCity}
+              id="food_name"
+              name="food_name"
+              defaultValue={updatedBeer.food_name}
               onChange={handleChange} />
         </div>
         <div>
-          <label htmlFor="country">Country</label>
+          <label htmlFor="comment">Comment</label>
           <input
-              id="country"
-              name="eventCountry"
-              type="text"
-              defaultValue={updatedEvent.eventCountry}
+              id="comment"
+              name="comment"
+              defaultValue={updatedBeer.comment}
               onChange={handleChange} />
         </div>
-        <button>Update Event</button>
+        <button>Update Beer</button>
         <button onClick={cancel}>Cancel</button>
       </form>
     </div>
@@ -124,8 +111,8 @@ const UpdateBeer = (props) => {
 
 const mapStateToProps = state => {
   return {
-    events: state.events
+    beer: state.beer
   };
 };
 
-export default connect(mapStateToProps, { updateEvent })(UpdateBeer);
+export default connect(mapStateToProps, { updateBeer })(UpdateBeer);
