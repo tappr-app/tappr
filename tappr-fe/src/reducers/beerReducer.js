@@ -6,7 +6,13 @@ import {
   LOGGED_IN,
   GET_API_BEERS, 
   GET_API_BEERS_SUCCESS, 
-  GET_API_BEERS_FAILURE 
+  GET_API_BEERS_FAILURE,
+  ADD_BEER,
+  ADD_BEER_SUCCESS,
+  ADD_BEER_FAILURE,
+  UPDATE_BEER,
+  UPDATE_BEER_SUCCESS,
+  UPDATE_BEER_FAILURE
 } from '../actions/index';
 
 
@@ -62,6 +68,44 @@ export const beerReducer = (state = initialState, action) => {
         ...state,
         isFetching: false,
         error: ''
+      }
+    case ADD_BEER:
+      return {
+        ...state,
+        isFetching: true,
+        error: ''
+      }
+    case ADD_BEER_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        error: '',
+        beer: [...state.beer, action.payload]
+      }
+    case ADD_BEER_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.payload
+      }
+    case UPDATE_BEER:
+      return {
+        ...state,
+        isFetching: true,
+        error: ''
+      }
+    case UPDATE_BEER_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        error: '',
+        beer: action.payload
+      }
+    case UPDATE_BEER_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.payload
       }
     default:
       return state

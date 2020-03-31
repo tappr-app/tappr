@@ -7,13 +7,12 @@ import GuestNavbar from './GuestNavbar';
 
 const RegisterForm = props =>{
     const { register, handleSubmit, errors} = useForm();
+
     const [newUser, setNewUser] = useState({
         username: '',
         password: '',
         bio: ''
     });
-
-    console.log(props);
 
     const handleChanges = e =>{
         setNewUser({
@@ -36,8 +35,6 @@ const RegisterForm = props =>{
     const returntoLogin = () => {
       props.history.push('/login');
     };
-
-    console.log(newUser);
     
     return(
       <>
