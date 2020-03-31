@@ -15,7 +15,7 @@ const RegisterForm = props =>{
 
     console.log(props);
 
-    const handleChanges = e =>{
+    const handleChanges = e =>{/Users/lturner/Projects/tappr/tappr-fe/src/actions/index.js
         e.preventDefault();
         setNewUser({
             ...newUser,
@@ -31,10 +31,9 @@ const RegisterForm = props =>{
             password: '',
             bio: ''
         })
-    }
         props.history.push('/my-dashboard');
-    };
-
+    }
+  
     const returntoLogin = () => {
       props.history.push('/login');
     };
@@ -42,10 +41,10 @@ const RegisterForm = props =>{
     console.log(newUser);
     
     return(
-        <>
-      <GuestNavbar />
+      <>
         {props.isPosting ? <div className='posting-user'>Creating your profile, pour a pint and get ready to login!</div> :
       <>
+        <GuestNavbar />
         <FormDiv>
         <h2 className='form-title'>Register</h2>
         <form className='register-user' onSubmit={handleSubmit(onSubmit)}>
