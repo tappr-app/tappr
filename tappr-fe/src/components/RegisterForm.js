@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-
 import{ useForm } from 'react-hook-form';
-import { connect } from 'react-redux'
-import { handlePostData } from '../actions/index'
-
-import { FormDiv } from '../styles/Styled'
+import { connect } from 'react-redux';
+import { handlePostData } from '../actions/index';
+import { FormDiv } from '../styles/Styled';
+import GuestNavbar from './GuestNavbar';
 
 const RegisterForm = props =>{
     const { register, handleSubmit, watch, errors, setValue } = useForm();
@@ -30,10 +29,15 @@ const RegisterForm = props =>{
             bio: ''
         })
     }
+    const returntoLogin = () => {
+      props.history.push('/login');
+    }
     console.log(newUser)
     return(
         <>
         {props.isPosting ? <div className='posting-user'>Creating your profile, pour a pint and get ready to login!</div> :
+      <>
+        <GuestNavbar />
         <FormDiv>
         <h2 className='form-title'>Register</h2>
         <form className='register-user' onSubmit={handleSubmit(onSubmit)}>
@@ -71,12 +75,12 @@ const RegisterForm = props =>{
             </div>
             <div className='route-form'>
                 <label>Returning?</label>
-                <button className='form-action'>Login</button>
+                <button className='form-action' onClick={() => returntoLogin()}>Login</button>
             </div>
-            
-        </div>
-    </form>
-    </FormDiv>        
+          </div>
+        </form>
+      </FormDiv> 
+      </>
     }
     </>
     )
