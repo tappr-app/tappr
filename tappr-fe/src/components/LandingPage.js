@@ -40,7 +40,7 @@ const LandingPage = () => {
         </div>
         <div>
           <h3>Start happy hour!</h3>
-          <span role='img' aria-label='beer-clink'>🍻</span>
+          <span role='img' aria-label='beer-clink' alt='beer-salute'>🍻</span>
         </div>
       </div>
       <Link to='/register'><span>Register Here</span></Link>
