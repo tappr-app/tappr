@@ -1,7 +1,10 @@
 import React, { useState }from 'react'
 import{ useForm } from 'react-hook-form';
 import { connect } from 'react-redux'
+import { handleLogin } from '../actions/index'
+
 import { FormDiv } from '../styles/Styled'
+
 
 const LoginForm = props =>{
     const { register, handleSubmit, watch, errors, setValue } = useForm();
@@ -21,6 +24,9 @@ const LoginForm = props =>{
         props.handleLogin(credentials)
     }
     return(
+        <>
+        {props.isPosting ? <div className='posting-user'>Brewing your profile, welcome to happy hour!</div>
+        :
         <FormDiv>
             <h2 className='form-title'>Login</h2>
             <form className='login-user' onSubmit={handleSubmit(onSubmit)}>
@@ -42,15 +48,19 @@ const LoginForm = props =>{
                     <button className='form-action'>Register</button>                   
                 </div>         
             </div>
-        </form>
-        </FormDiv>
+            </form>
+        </FormDiv>       
+        }
+        </>
+
     )
 }
 
 const mapPropsToState = state =>{
     return{
-        isFetching: state.isFetching
+        isPosting: state.isPosting,
+        error: state.error
     };
 };
 
-export default connect(mapPropsToState, {})(LoginForm)
+export default connect(mapPropsToState, { handleLogin })(LoginForm)

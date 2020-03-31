@@ -1,4 +1,4 @@
-import { POST_USER, USER_CREATED, SET_ERROR } from "../actions";
+import { POST_USER, USER_CREATED, SET_ERROR, USER_LOGIN, LOGGED_IN } from "../actions";
 
 const initialState = {
     beer: [],
@@ -15,6 +15,16 @@ export const beerReducer = (state = initialState, action) => {
         isPosting: true
       }
     case USER_CREATED:
+      return {
+        ...state,
+        isPosting: false
+      }
+    case USER_LOGIN:
+      return {
+        ...state,
+        isPosting: true
+      }
+    case LOGGED_IN:
       return {
         ...state,
         isPosting: false

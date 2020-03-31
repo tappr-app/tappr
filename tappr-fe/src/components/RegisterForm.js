@@ -33,7 +33,7 @@ const RegisterForm = props =>{
     console.log(newUser)
     return(
         <>
-        {props.isPosting ? <div className='posting-user'>Brewing your profile, welcome to happy hour!</div> :
+        {props.isPosting ? <div className='posting-user'>Creating your profile, pour a pint and get ready to login!</div> :
         <FormDiv>
         <h2 className='form-title'>Register</h2>
         <form className='register-user' onSubmit={handleSubmit(onSubmit)}>
@@ -84,7 +84,8 @@ const RegisterForm = props =>{
 
 const mapPropsToState = state =>{
     return{
-        isPosting: state.isPosting
+        isPosting: state.isPosting,
+        error: state.error
     };
 };
 

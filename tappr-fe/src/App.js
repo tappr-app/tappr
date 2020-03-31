@@ -1,5 +1,6 @@
 import React from 'react';
 import RegisterForm from './components/RegisterForm';
+import LoginForm from './components/LoginForm';
 
 
 function App() {
@@ -8,6 +9,7 @@ function App() {
       <header className="App-header">
         <h1>TAPPR</h1>
         <RegisterForm />
+        <LoginForm />
       </header>
     </div>
   );
