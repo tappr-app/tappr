@@ -15,8 +15,7 @@ const RegisterForm = props =>{
 
     console.log(props);
 
-    const handleChanges = e =>{/Users/lturner/Projects/tappr/tappr-fe/src/actions/index.js
-        e.preventDefault();
+    const handleChanges = e =>{
         setNewUser({
             ...newUser,
             [e.target.name]: e.target.value
