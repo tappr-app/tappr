@@ -9,12 +9,12 @@ const initialBeerState = {
   tagline: '',
   description: '',
   image_url: '',
-  abv: ''
+  abv: '',
+  food_name: '',
+  comment: ''
 };
 
 function AddBeer(props) {
-  const user_id = window.localStorage.getItem('user_id');
-
   const { register, errors } = useForm();
 
   const [newBeer, setNewBeer] = useState(initialBeerState);
@@ -26,10 +26,10 @@ function AddBeer(props) {
     });
   };
 
-  const onSubmit = (id) => {
+  const onSubmit = () => {
       console.log(newBeer);
       props.addBeer(newBeer);
-      props.history.push(`/my-brews/${id}`);
+      props.history.push('/my-dashboard');
   };
 
   const cancel = () => {
@@ -83,7 +83,23 @@ function AddBeer(props) {
               onChange={handleChanges}
           />
           <br />
-          <button onClick={() => onSubmit(user_id)}>Create Beer</button>
+          <label htmlFor="food_name">Food Pairing</label>
+          <br />
+          <input
+              name="food_name"
+              ref={register}
+              onChange={handleChanges}
+          />
+          <br />
+          <label htmlFor="comment">Comment</label>
+          <br />
+          <input
+              name="comment"
+              ref={register}
+              onChange={handleChanges}
+          />
+          <br />
+          <button onClick={() => onSubmit()}>Create Beer</button>
           <button onClick={cancel}>Cancel</button>
       </form>
     </div>

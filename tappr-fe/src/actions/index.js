@@ -67,7 +67,7 @@ export const getPunkBeers = () => dispatch => {
 
 export const addBeer = (newBeer) => dispatch => {
   dispatch({ type: ADD_BEER });
-  axiosWithAuth().post('/users/beers', newBeer)
+  axiosWithAuth().post('/beers', newBeer)
     .then(res => {
       console.log(res);
       dispatch({ type: ADD_BEER_SUCCESS, payload: res.data });
