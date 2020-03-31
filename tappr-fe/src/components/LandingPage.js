@@ -45,7 +45,7 @@ const LandingPage = () => {
       </div>
       <Link to='/register'><span>Register Here</span></Link>
       <footer>
-        <span>Tappr was developed and maintained by <a>@anhogan</a> and <a>@landoDev</a></span>
+        <span>Tappr was developed and maintained by <a href='https://github.com/anhogan'>@anhogan</a> and <a href='https://github.com/landoDev'>@landoDev</a></span>
       </footer>
 
       
