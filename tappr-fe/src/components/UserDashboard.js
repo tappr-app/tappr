@@ -69,19 +69,21 @@ const UserDashboard = (props) => {
             ))}
           </div>
 
-          <div>
-            <h2>Favorite Brews</h2>
-            {myBeers.map((beer) => (
-              <Link to="/">
-                <div key={beer.id}>
-                  <img src={beer.image_url} alt={beer.name} />
-                  <h5>{beer.name}</h5>
-                  <p>{beer.abv}</p>
-                </div>
-              </Link>
-            ))}
-            <Link to="/">View All</Link>
-          </div>
+          {myBeers !== undefined ? 
+            <div>
+              <h2>Favorite Brews</h2>
+              {myBeers.map((beer) => (
+                <Link to="/">
+                  <div key={beer.id}>
+                    <img src={beer.image_url} alt={beer.name} />
+                    <h5>{beer.name}</h5>
+                    <p>{beer.abv}</p>
+                  </div>
+                </Link>
+              ))}
+              <Link to="/">View All</Link>
+            </div>
+          : <h3>No Favorites Yet, Drink More to Find Some</h3>}
         </div>
       )}
     </div>
