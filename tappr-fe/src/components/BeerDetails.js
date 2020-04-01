@@ -1,4 +1,5 @@
 import React from 'react';
+import UserNavbar from './UserNavbar';
 
 const BeerDetails = (props) => {
   // onClick handler for Update Button
@@ -8,7 +9,8 @@ const BeerDetails = (props) => {
 
   return (
     <div>
-
+      <UserNavbar />
+      <span>BeerDetails</span>
     </div>
   );
 };

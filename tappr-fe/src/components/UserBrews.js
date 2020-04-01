@@ -33,6 +33,7 @@ const UserBrews = (props) => {
             <img src={beer.image_url} alt={beer.name} />
             <h5>{beer.name}</h5>
             <p>{beer.abv}</p>
+            <button onClick={()=> beerDetails(id)}>More Details</button>
           </div> 
           )         
         })}
