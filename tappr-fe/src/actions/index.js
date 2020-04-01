@@ -32,6 +32,10 @@ export const handlePostData = payload => dispatch => {
     .then(res => {
         console.log('POST', res);
         dispatch({ type: USER_CREATED })
+        localStorage.setItem('token', JSON.stringify(res.data.token))
+        window.localStorage.setItem('user_id', res.data.user.id);
+        window.localStorage.setItem('user_username', res.data.user.username);
+        window.localStorage.setItem('token', res.data.token);
     })
     .catch(err => {
         console.log(err)
