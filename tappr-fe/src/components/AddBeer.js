@@ -9,9 +9,7 @@ const initialBeerState = {
   tagline: '',
   description: '',
   image_url: '',
-  abv: '',
-  food_name: '',
-  comment: ''
+  abv: ''
 };
 
 function AddBeer(props) {
@@ -79,22 +77,6 @@ function AddBeer(props) {
           <input
               name="abv"
               type="number"
-              ref={register}
-              onChange={handleChanges}
-          />
-          <br />
-          <label htmlFor="food_name">Food Pairing</label>
-          <br />
-          <input
-              name="food_name"
-              ref={register}
-              onChange={handleChanges}
-          />
-          <br />
-          <label htmlFor="comment">Comment</label>
-          <br />
-          <input
-              name="comment"
               ref={register}
               onChange={handleChanges}
           />

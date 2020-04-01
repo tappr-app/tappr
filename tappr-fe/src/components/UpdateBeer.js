@@ -9,9 +9,7 @@ const initialBeerState = {
   tagline: '',
   description: '',
   image_url: '',
-  abv: '',
-  food_name: '',
-  comment: ''
+  abv: ''
 };
 
 const UpdateBeer = (props) => {
@@ -84,22 +82,6 @@ const UpdateBeer = (props) => {
               id="abv"
               name="abv"
               defaultValue={updatedBeer.abv}
-              onChange={handleChange} />
-        </div>
-        <div>
-          <label htmlFor="food_name">Food Pairing</label>
-          <input
-              id="food_name"
-              name="food_name"
-              defaultValue={updatedBeer.food_name}
-              onChange={handleChange} />
-        </div>
-        <div>
-          <label htmlFor="comment">Comment</label>
-          <input
-              id="comment"
-              name="comment"
-              defaultValue={updatedBeer.comment}
               onChange={handleChange} />
         </div>
         <button>Update Beer</button>
