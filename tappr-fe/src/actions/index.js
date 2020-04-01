@@ -36,7 +36,6 @@ export const handlePostData = payload => dispatch => {
     .then(res => {
         console.log('POST', res);
         dispatch({ type: USER_CREATED })
-        localStorage.setItem('token', JSON.stringify(res.data.token))
         window.localStorage.setItem('user_id', res.data.user.id);
         window.localStorage.setItem('user_username', res.data.user.username);
         window.localStorage.setItem('token', res.data.token);
@@ -51,12 +50,11 @@ export const handleLogin = credentials => dispatch =>{
     dispatch({type: USER_LOGIN});
     axios.post('https://tappr-app-api.herokuapp.com/api/auth/login', credentials)
     .then(res=>{
-        console.log('LOGIN', res)
-        localStorage.setItem('token', JSON.stringify(res.data.token))
+        console.log('LOGIN', res);
+        dispatch({ type: LOGGED_IN});
         window.localStorage.setItem('user_id', res.data.user.id);
         window.localStorage.setItem('user_username', res.data.user.username);
         window.localStorage.setItem('token', res.data.token);
-        dispatch({ type: LOGGED_IN});
     })
     .catch(err=>{
         console.log(err)
