@@ -86,3 +86,71 @@ export const NavLinks = styled.a`
       color: #F6C101;
     }
 `;
+
+export const FeaturedBeerLinks = styled.a`
+    width: 18%;
+    margin: 1%;
+    font-size: 20px;
+    color: black;
+    text-decoration: none;
+    &:hover {
+      color: #F6C101;
+    }
+`;
+
+export const BeerLinks = styled.a`
+    width: 30%;
+    margin: 1%;
+    font-size: 20px;
+    color: black;
+    text-decoration: none;
+    &:hover {
+      color: #F6C101;
+    }
+`;
+
+export const DashboardFlexFeaturedDiv = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid black;
+    margin: 1%;
+`;
+
+export const DashboardFlexDiv = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    margin: 1%;
+`;
+
+export const DashboardFeaturedDiv = styled.div`
+    width: 100%;
+    margin: 1%;
+    overflow: auto;
+`;
+
+export const BeerImage = styled.img`
+    width: 85px;
+    height: 250px;
+    margin-left: 35%;
+    margin-right: auto;
+`;
+
+export const ImageDiv = styled.div`
+  padding-left: 10%;
+  padding-right: 10%;
+`;
+
+export const SectionTitle = styled.h2`
+    font-size: 36px;
+    text-align: center
+`;
+
+export const BeerName = styled.h5`
+    font-size: 16px;
+    text-align: center;
+`;
+
+export const BeerText = styled.p`
+    font-size: 12px;
+    text-align: center
+`;
