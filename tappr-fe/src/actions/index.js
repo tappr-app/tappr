@@ -5,7 +5,7 @@ import { axiosWithAuth } from "../utils/axiosWithAuth";
 export const SET_ERROR = 'SET_ERROR';
 
 // Register Actions
-export const POST_USER = 'POST_USER'
+export const POST_USER = 'POST_USER';
 export const USER_CREATED = 'USER_CREATED';
 
 // Login Actions
@@ -16,6 +16,7 @@ export const LOGGED_IN= 'LOGGED_IN';
 export const GET_USER_DATA = 'GET_USER_DATA';
 export const GET_USER_DATA_SUCCESS = 'GET_USER_DATA_SUCCESS';
 export const GET_USER_DATA_FAILURE = 'GET_USER_DATA_FAILURE';
+
 // Fetch Beer Actions
 export const GET_API_BEERS = 'GET_API_BEERS';
 export const GET_API_BEERS_SUCCESS = 'GET_API_BEERS_SUCCESS';
@@ -35,13 +36,12 @@ export const handlePostData = payload => dispatch => {
     .post('/auth/register', payload)
     .then(res => {
         console.log('POST', res);
-        dispatch({ type: USER_CREATED })
+        dispatch({ type: USER_CREATED });
         window.localStorage.setItem('user_id', res.data.user.id);
         window.localStorage.setItem('user_username', res.data.user.username);
         window.localStorage.setItem('token', res.data.token);
     })
     .catch(err => {
-        console.log(err)
         dispatch({ type: SET_ERROR, payload: 'Party foul! Action wasn\'t completed' })
     });
 };
@@ -49,30 +49,29 @@ export const handlePostData = payload => dispatch => {
 export const handleLogin = credentials => dispatch =>{
     dispatch({type: USER_LOGIN});
     axios.post('https://tappr-app-api.herokuapp.com/api/auth/login', credentials)
-    .then(res=>{
-        console.log('LOGIN', res);
-        dispatch({ type: LOGGED_IN});
-        window.localStorage.setItem('user_id', res.data.user.id);
-        window.localStorage.setItem('user_username', res.data.user.username);
-        window.localStorage.setItem('token', res.data.token);
-    })
-    .catch(err=>{
-        console.log(err)
-        dispatch({ type: SET_ERROR, payload: 'Party foul! Action wasn\'t completed' })
-    });
+      .then(res=>{
+          console.log('LOGIN', res);
+          dispatch({ type: LOGGED_IN});
+          window.localStorage.setItem('user_id', res.data.user.id);
+          window.localStorage.setItem('user_username', res.data.user.username);
+          window.localStorage.setItem('token', res.data.token);
+      })
+      .catch(err=>{
+          dispatch({ type: SET_ERROR, payload: 'Party foul! Action wasn\'t completed' })
+      });
 };
 
 export const getProfile = id => dispatch =>{
   dispatch({type: GET_USER_DATA});
   axiosWithAuth()
-  .get(`/users/${id}`)
-  .then(res=>{
-    console.log('user profile', res);
-    dispatch({type: GET_USER_DATA_SUCCESS, payload: res.data})
-  })
-  .catch(error => {
-    dispatch({ type: GET_USER_DATA_FAILURE, payload: error.message });
-  });
+    .get(`/users/${id}`)
+    .then(res=>{
+      console.log('user profile', res);
+      dispatch({type: GET_USER_DATA_SUCCESS, payload: res.data})
+    })
+    .catch(error => {
+      dispatch({ type: GET_USER_DATA_FAILURE, payload: error.message });
+    });
 }
 
 export const getPunkBeers = () => dispatch => {
@@ -95,7 +94,6 @@ export const addBeer = (newBeer) => dispatch => {
       dispatch({ type: ADD_BEER_SUCCESS, payload: res.data });
     })
     .catch(error => {
-      console.log(error);
       dispatch({ type: ADD_BEER_FAILURE, payload: error.message });
     });
 };

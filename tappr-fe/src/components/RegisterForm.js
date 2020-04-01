@@ -66,7 +66,7 @@ const RegisterForm = props =>{
               {/* add a second Password input for verification? Possible stretch? Also make some regex requirements? */}
 
               <label>Age</label>
-              <input type='number' name='age' onChange={handleChanges} ref={register({required: true, min: 21})}></input> */}
+              <input type='number' name='age' onChange={handleChanges} ref={register({required: true, min: 21})}></input>
               {errors.age &&
                   errors.age.type === 'required' && 'Required Field'}
               {errors.age &&
