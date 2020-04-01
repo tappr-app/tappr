@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-
+import { Link } from 'react-router-dom';
 import { getProfile } from '../actions/index';
 import UserNavbar from './UserNavbar';
 
@@ -15,8 +15,9 @@ const UserBrews = (props) => {
   };
 
   // onClick handler for Beer Details Button
-  const beerDetails = (id) => {
-    props.history.push(`/brews/${id}`);
+  const beerDetails = beerId => {
+    console.log('id on click', beerId)
+    props.history.push(`/brews/${beerId}`);
   };
 
   return (
@@ -33,7 +34,7 @@ const UserBrews = (props) => {
             <img src={beer.image_url} alt={beer.name} />
             <h5>{beer.name}</h5>
             <p>{beer.abv}</p>
-            <button onClick={()=> beerDetails(id)}>More Details</button>
+            <Link to={`/brews/${beer.id}`}>More Details</Link>
           </div> 
           )         
         })}
