@@ -34,6 +34,16 @@ const BeerDetails = (props) => {
           <p>{thisBeer.beer.tagline}</p>
           <p>{thisBeer.beer.description}</p>
           <p>ABV: {thisBeer.beer.abv}</p>
+          {thisBeer.food !== [] ? <p>Pairings: None yet! Add some below.</p>
+          :
+          <p>Pairings:{thisBeer.food.forEach(element => {
+            return <li>{element}</li>
+          })}</p>}
+          {thisBeer.comments !== [] ? <p>Comments: No Comments. Add some below!</p>
+          :
+          <p>Pairings:{thisBeer.comments.forEach(element => {
+            return <li>{element}</li>
+          })}</p>}          
         </div>
       : <div>Loading brewski</div>
       }
