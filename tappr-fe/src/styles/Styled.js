@@ -199,7 +199,7 @@ export const LoadingText = styled.p`
 
 export const FavoriteButton = styled.button`
     width: 30%;
-    font-size: 12px;
+    font-size: 16px;
     border: 1px solid #F6C101;
     background: #C96E12;
     margin-left: 35%;
@@ -207,5 +207,6 @@ export const FavoriteButton = styled.button`
     &:hover {
       color: black;
       background: #F6C101;
+      cursor: pointer;
     }
 `;
