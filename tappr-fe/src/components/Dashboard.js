@@ -30,7 +30,7 @@ const Dashboard = (props) => {
           <div>
             <h2>Featured Beers</h2>
             {randomBeers.map((beer) => (
-              <Link to='/'>
+              <Link to='/' key={beer.id}>
                 <div key={beer.id}>
                   <img src={beer.image_url} alt={beer.name} />
                   <h5>{beer.name}</h5>
@@ -42,7 +42,7 @@ const Dashboard = (props) => {
 
           <div>
             {props.beer.map((beer) => (
-              <Link to="/">
+              <Link to="/" key={beer.id}>
                 <div key={beer.id}>
                   <img src={beer.image_url} alt={beer.name} />
                   <h3>{beer.name}</h3>
