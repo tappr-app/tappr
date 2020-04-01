@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
+import { Navbar } from '../styles/Styled';
 
 const UserNavbar = (props) => {
   const history = useHistory()
@@ -24,13 +25,16 @@ const UserNavbar = (props) => {
 
   return (
     <div>
-      <nav>
+      <Navbar>
         <Link to="/my-dashboard">Tap List</Link>
-        <button onClick={() => userBrews(user_id)}>My Favorite Brews</button>
+        <Link to={`/my-brews/${user_id}`}>My Favorite Brews</Link>
+        {/* <button onClick={() => userBrews(user_id)}>My Favorite Brews</button> */}
         <Link to="/add-a-beer">Add a Beer</Link>
-        <button onClick={() => logout()}>Logout</button>
-        <button onClick={() => userProfile(user_id)}>{user_username}</button>
-      </nav>
+        <Link to='/login' onClick={() => logout()}>My Favorite Brews</Link>
+        {/* <button onClick={() => logout()}>Logout</button> */}
+        <Link to={`/my-profile/${user_id}`}>{user_username}</Link>
+        {/* <button onClick={() => userProfile(user_id)}>{user_username}</button> */}
+      </Navbar>
     </div>
   );
 };

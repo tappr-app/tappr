@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 
-
 export const FormDiv = styled.div`
     // Outer most box
     display: flex;
@@ -67,5 +66,23 @@ export const FormDiv = styled.div`
                 border: 2px solid #000000;
             }
         }
+    }
+`;
+
+export const Navbar = styled.nav`
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    border-bottom: 2px solid #F6C101;
+    padding: 1%;
+    margin: 1%;
+`;
+
+export const NavLinks = styled.a`
+    font-size: 20px;
+    color: black;
+    text-decoration: none;
+    &:hover {
+      color: #F6C101;
     }
 `;
