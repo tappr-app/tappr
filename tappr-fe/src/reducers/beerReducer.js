@@ -32,6 +32,7 @@ const initialState = {
 };
 
 export const beerReducer = (state = initialState, action) => {
+  console.log('payload', action.payload)
   switch(action.type) {
     case POST_USER:
       return {

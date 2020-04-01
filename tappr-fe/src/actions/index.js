@@ -97,12 +97,17 @@ export const getPunkBeers = () => dispatch => {
 };
 
 // adding to the brew takes an id and payload as an arg!
-export const addMyBrews = (id, payload) => dispatch =>{
+export const addMyBrews = (payload) => dispatch =>{
   dispatch({type: ADD_MY_BREWS});
-  // grabs the user data from api
-  getProfile(id)
-  // then posts the data
-  axiosWithAuth().post('/users/beers', payload)
+  // DEVS, THE sAVEBEER SENDS WHAT THE BE ACCEPTS, KEEP IN MIND WHEN ALTERING
+  const saveBeer = {
+    name: payload.name,
+    tagline: payload.tagline,
+    description: payload.description,
+    image_url: payload.image_url,
+    abv: payload.abv
+  }
+  axiosWithAuth().post('/users/beers', saveBeer)
   .then(res => {
     console.log(res);
     dispatch({ type: ADD_MY_BREWS_SUCCESS, payload: res.data });

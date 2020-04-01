@@ -43,7 +43,7 @@ const UserDashboard = (props) => {
   }, []);
 
   const handleAddBrew = beer =>{
-    props.addMyBrews(user_id, beer);
+    props.addMyBrews(beer);
   }
 
   return (
