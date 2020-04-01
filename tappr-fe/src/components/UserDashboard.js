@@ -78,7 +78,10 @@ const UserDashboard = (props) => {
                   <p><i>{beer.tagline}</i></p>
                   <p>{beer.description}</p>
                   <p>{beer.abv}</p>
-                  <button>Favorite</button>
+                  <button onClick={e =>{
+                    e.preventDefault();
+                    handleAddBrew(beer)
+                  }}>Favorite</button>
                 </div>
               </Link>
             ))}
