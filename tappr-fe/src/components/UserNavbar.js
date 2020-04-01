@@ -28,6 +28,7 @@ const UserNavbar = (props) => {
         <Link to="/my-dashboard">Tap List</Link>
         <button onClick={() => userBrews(user_id)}>My Favorite Brews</button>
         <Link to="/add-a-beer">Add a Beer</Link>
+        <Link to={`/my-brews/${user_id}`}>My Brews</Link>
         <button onClick={() => logout()}>Logout</button>
         <button onClick={() => userProfile(user_id)}>{user_username}</button>
       </nav>

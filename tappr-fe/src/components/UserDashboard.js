@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getPunkBeers } from '../actions/index';
+import { getPunkBeers, addMyBrews } from '../actions/index';
 import UserNavbar from './UserNavbar';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 
@@ -11,6 +11,13 @@ const UserDashboard = (props) => {
 
   const [randomBeers, setRandomBeers] = useState([]);
   const [myBeers, setMyBeers] = useState([]);
+  const [addBrew, setAddBrew] = useState({
+    "name": "",
+    "tagline": "",
+    "description": "",
+    "image_url": "",
+    "abv": NaN
+  })
 
   const randomABV = Math.floor((Math.random() * 8) + 6);
   const randomPage = Math.floor((Math.random() * 20) + 1);
@@ -35,6 +42,10 @@ const UserDashboard = (props) => {
       });
   }, []);
 
+  const handleAddBrew = beer =>{
+    props.addMyBrews(beer);
+  }
+
   return (
     <div>
       <UserNavbar />
@@ -48,6 +59,10 @@ const UserDashboard = (props) => {
                   <img src={beer.image_url} alt={beer.name} />
                   <h5>{beer.name}</h5>
                   <p>{beer.abv}</p>
+                  <button onClick={e =>{
+                    e.preventDefault();
+                    handleAddBrew(beer)
+                  }}>Add to My Brews</button>
                 </div>
               </Link>
             ))}
@@ -63,7 +78,10 @@ const UserDashboard = (props) => {
                   <p><i>{beer.tagline}</i></p>
                   <p>{beer.description}</p>
                   <p>{beer.abv}</p>
-                  <button>Favorite</button>
+                  <button onClick={e =>{
+                    e.preventDefault();
+                    handleAddBrew(beer)
+                  }}>Favorite</button>
                 </div>
               </Link>
             ))}
@@ -97,4 +115,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { getPunkBeers })(UserDashboard);
+export default connect(mapStateToProps, { getPunkBeers, addMyBrews })(UserDashboard);

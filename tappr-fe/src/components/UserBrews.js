@@ -1,21 +1,61 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { getProfile } from '../actions/index';
+import UserNavbar from './UserNavbar';
 
 const UserBrews = (props) => {
+  const id = window.localStorage.getItem('user_id')
+  useEffect(()=>{
+    props.getProfile(id)
+  }, [])
   // onClick handler for Update Button
-  // const updateBeer = (id) => {
-  //   props.history.push(`/update-a-beer/${id}`);
-  // };
+  const updateBeer = (id) => {
+    props.history.push(`/update-a-beer/${id}`);
+  };
 
   // onClick handler for Beer Details Button
-  // const beerDetails = (id) => {
-  //   props.history.push(`/brews/${id}`);
-  // };
+  const beerDetails = beerId => {
+    console.log('id on click', beerId)
+    props.history.push(`/brews/${beerId}`);
+  };
 
   return (
     <div>
+    <div>
+      <UserNavbar />
+      {props.readyToMount ? 
+        <div>
+        <h2>{props.active_user.user.username}'s Brew Collection</h2>
+        <div className='user-brews'>
+        {props.active_user.beers.map(beer => {
+          return(
+          <div key={beer.id}>
+            <img src={beer.image_url} alt={beer.name} />
+            <h5>{beer.name}</h5>
+            <p>{beer.abv}</p>
+            <Link to={`/brews/${beer.id}`}>More Details</Link>
+          </div> 
+          )         
+        })}
+        </div>
+        </div>
+      :
+      <div>Loading your personal tap...</div>
+      }
+
+    </div>       
 
     </div>
   );
 };
 
-export default UserBrews;
+const mapPropsToState = state =>{
+  return{
+    active_user: state.active_user,
+    isFetching: state.isFetching,
+    readyToMount: state.readyToMount
+  }
+}
+
+export default connect(mapPropsToState, { getProfile })(UserBrews);
