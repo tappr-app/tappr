@@ -21,9 +21,10 @@ import {
 
 const initialState = {
     beer: [],
-    current_user: {},
+    active_user: {},
     isFetching: false,
     isPosting: false,
+    readyToMount: false,
     error: ''
 };
 
@@ -63,8 +64,9 @@ export const beerReducer = (state = initialState, action) => {
     case GET_USER_DATA_SUCCESS:
       return {
         ...state,
-        current_user: action.payload,
+        active_user: action.payload,
         isFetching: false,
+        readyToMount: true,
         error: ''
       }
     case GET_USER_DATA_FAILURE:

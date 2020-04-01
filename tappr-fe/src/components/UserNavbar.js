@@ -1,23 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const UserNavbar = (props) => {
+  const history = useHistory()
   const user_username = window.localStorage.getItem('user_username');
   const user_id = window.localStorage.getItem('user_id');
 
   const userProfile = (id) => {
-    props.history.push(`/my-profile/${id}`);
+    history.push(`/my-profile/${id}`);
   };
 
   const userBrews = (id) => {
-    props.history.push(`/my-brews/${id}`);
+    history.push(`/my-brews/${id}`);
   };
 
   const logout = () => {
     window.localStorage.removeItem('token');
     window.localStorage.removeItem('user_id');
     window.localStorage.removeItem('user_username');
-    props.history.push('/login');
+    history.push('/login');
   };
 
   return (
