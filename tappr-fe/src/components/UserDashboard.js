@@ -11,6 +11,13 @@ const UserDashboard = (props) => {
 
   const [randomBeers, setRandomBeers] = useState([]);
   const [myBeers, setMyBeers] = useState([]);
+  const [addBrew, setAddBrew] = useState({
+    "name": "",
+    "tagline": "",
+    "description": "",
+    "image_url": "",
+    "abv": NaN
+  })
 
   const randomABV = Math.floor((Math.random() * 8) + 6);
   const randomPage = Math.floor((Math.random() * 20) + 1);
@@ -35,9 +42,8 @@ const UserDashboard = (props) => {
       });
   }, []);
 
-  const handleAddBrew = e =>{
-    e.preventDefault();
-    props.addMyBrews(user_id);
+  const handleAddBrew = beer =>{
+    props.addMyBrews(user_id, beer);
   }
 
   return (
@@ -53,7 +59,10 @@ const UserDashboard = (props) => {
                   <img src={beer.image_url} alt={beer.name} />
                   <h5>{beer.name}</h5>
                   <p>{beer.abv}</p>
-                  <button onClick={handleAddBrew}>Add to My Brews</button>
+                  <button onClick={e =>{
+                    e.preventDefault();
+                    handleAddBrew(beer)
+                  }}>Add to My Brews</button>
                 </div>
               </Link>
             ))}
