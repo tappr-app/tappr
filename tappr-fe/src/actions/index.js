@@ -16,6 +16,11 @@ export const LOGGED_IN= 'LOGGED_IN';
 export const GET_USER_DATA = 'GET_USER_DATA';
 export const GET_USER_DATA_SUCCESS = 'GET_USER_DATA_SUCCESS';
 export const GET_USER_DATA_FAILURE = 'GET_USER_DATA_FAILURE';
+export const ADD_MY_BREWS = 'ADD_MY_BREWS';
+export const ADD_MY_BREWS_SUCCESS = 'ADD_MY_BREWS_SUCCESS';
+export const ADD_MY_BREWS_FAILURE = 'ADD_MY_BREWS_FAILURE';
+
+
 // Fetch Beer Actions
 export const GET_API_BEERS = 'GET_API_BEERS';
 export const GET_API_BEERS_SUCCESS = 'GET_API_BEERS_SUCCESS';
@@ -77,6 +82,8 @@ export const getProfile = id => dispatch =>{
   });
 }
 
+
+
 export const getPunkBeers = () => dispatch => {
   dispatch({ type: GET_API_BEERS });
   axios.get('https://api.punkapi.com/v2/beers')
@@ -88,6 +95,24 @@ export const getPunkBeers = () => dispatch => {
     });
 
 };
+
+// adding to the brew takes an id as an arg!
+export const addMyBrew = id => dispatch =>{
+  dispatch({type: ADD_MY_BREWS});
+  // grabs the user data from api
+  getProfile(id)
+  // then posts the data
+  axiosWithAuth().post('/users/beers')
+  .then(res => {
+    console.log(res);
+    dispatch({ type: ADD_MY_BREWS_SUCCESS, payload: res.data });
+  })
+  .catch(error => {
+    console.log(error);
+    dispatch({ type: ADD_MY_BREWS_FAILURE, payload: error.message });
+  });
+}
+
 
 export const addBeer = (newBeer) => dispatch => {
   dispatch({ type: ADD_BEER });

@@ -1,5 +1,6 @@
 import React from 'react';
 
+//this will need getMyProfile for state
 const UserBrews = (props) => {
   // onClick handler for Update Button
   const updateBeer = (id) => {
