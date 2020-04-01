@@ -109,11 +109,23 @@ export const BeerLinks = styled.a`
     }
 `;
 
+export const MyBrewsLinks = styled.a`
+    width: 98%;
+    margin: 1%;
+    font-size: 20px;
+    color: black;
+    text-decoration: none;
+    &:hover {
+      color: #F6C101;
+    }
+`;
+
 export const DashboardFlexFeaturedDiv = styled.div`
     display: flex;
     flex-wrap: wrap;
     border: 1px solid black;
     margin: 1%;
+    padding: 1%;
 `;
 
 export const DashboardFlexDiv = styled.div`
@@ -128,10 +140,33 @@ export const DashboardFeaturedDiv = styled.div`
     overflow: auto;
 `;
 
+export const DiscoverBrewsFlexDiv = styled.div`
+    width: 31%;
+    margin: 1%;
+    overflow: auto;
+`;
+
+export const BeerListDashboardDiv = styled.div`
+    width: 64%;
+    margin: 1%;
+`;
+
+export const MyBrewsDashboardDiv = styled.div`
+    width: 31%;
+    margin: 1%;
+`;
+
 export const BeerImage = styled.img`
     width: 85px;
     height: 250px;
     margin-left: 35%;
+    margin-right: auto;
+`;
+
+export const DiscoverBeerImage = styled.img`
+    width: 85px;
+    height: 250px;
+    margin-left: 25%;
     margin-right: auto;
 `;
 
@@ -153,4 +188,24 @@ export const BeerName = styled.h5`
 export const BeerText = styled.p`
     font-size: 12px;
     text-align: center
+`;
+
+export const LoadingText = styled.p`
+    font-size: 24px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+`;
+
+export const FavoriteButton = styled.button`
+    width: 30%;
+    font-size: 12px;
+    border: 1px solid #F6C101;
+    background: #C96E12;
+    margin-left: 35%;
+    border-radius: 10px;
+    &:hover {
+      color: black;
+      background: #F6C101;
+    }
 `;

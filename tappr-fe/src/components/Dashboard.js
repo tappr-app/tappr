@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { getPunkBeers } from '../actions/index';
 import GuestNavbar from './GuestNavbar';
 import  { 
@@ -14,7 +13,8 @@ import  {
   ImageDiv, 
   SectionTitle, 
   BeerName, 
-  BeerText } from '../styles/Styled';
+  BeerText
+} from '../styles/Styled';
 
 const Dashboard = (props) => {
   const [randomBeers, setRandomBeers] = useState([]);
