@@ -21,7 +21,7 @@ import {
 
 const initialState = {
     beer: [],
-    current_user: '',
+    current_user: {},
     isFetching: false,
     isPosting: false,
     error: ''
