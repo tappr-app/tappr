@@ -2,16 +2,20 @@ import axios from 'axios'
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 // General Actions
-export const SET_ERROR = 'SET_ERROR'
+export const SET_ERROR = 'SET_ERROR';
 
 // Register Actions
 export const POST_USER = 'POST_USER'
-export const USER_CREATED = 'USER_CREATED'
+export const USER_CREATED = 'USER_CREATED';
 
 // Login Actions
-export const USER_LOGIN = 'USER_LOGIN'
-export const LOGGED_IN= 'LOGGED_IN'
+export const USER_LOGIN = 'USER_LOGIN';
+export const LOGGED_IN= 'LOGGED_IN';
 
+// User Data Actions
+export const GET_USER_DATA = 'GET_USER_DATA';
+export const GET_USER_DATA_SUCCESS = 'GET_USER_DATA_SUCCESS';
+export const GET_USER_DATA_FAILURE = 'GET_USER_DATA_FAILURE';
 // Fetch Beer Actions
 export const GET_API_BEERS = 'GET_API_BEERS';
 export const GET_API_BEERS_SUCCESS = 'GET_API_BEERS_SUCCESS';
@@ -59,6 +63,19 @@ export const handleLogin = credentials => dispatch =>{
         dispatch({ type: SET_ERROR, payload: 'Party foul! Action wasn\'t completed' })
     });
 };
+
+export const getProfile = id => dispatch =>{
+  dispatch({type: GET_USER_DATA});
+  axiosWithAuth()
+  .get(`/users/${id}`)
+  .then(res=>{
+    console.log('user profile', res);
+    dispatch({type: GET_USER_DATA_SUCCESS, payload: res.data})
+  })
+  .catch(error => {
+    dispatch({ type: GET_USER_DATA_FAILURE, payload: error.message });
+  });
+}
 
 export const getPunkBeers = () => dispatch => {
   dispatch({ type: GET_API_BEERS });
