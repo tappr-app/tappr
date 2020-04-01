@@ -96,13 +96,13 @@ export const getPunkBeers = () => dispatch => {
 
 };
 
-// adding to the brew takes an id as an arg!
-export const addMyBrew = id => dispatch =>{
+// adding to the brew takes an id and payload as an arg!
+export const addMyBrews = (id, payload) => dispatch =>{
   dispatch({type: ADD_MY_BREWS});
   // grabs the user data from api
   getProfile(id)
   // then posts the data
-  axiosWithAuth().post('/users/beers')
+  axiosWithAuth().post('/users/beers', payload)
   .then(res => {
     console.log(res);
     dispatch({ type: ADD_MY_BREWS_SUCCESS, payload: res.data });

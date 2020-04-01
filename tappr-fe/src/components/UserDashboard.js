@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getPunkBeers } from '../actions/index';
+import { getPunkBeers, addMyBrews } from '../actions/index';
 import UserNavbar from './UserNavbar';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 
@@ -35,6 +35,11 @@ const UserDashboard = (props) => {
       });
   }, []);
 
+  const handleAddBrew = e =>{
+    e.preventDefault();
+    props.addMyBrews(user_id);
+  }
+
   return (
     <div>
       <UserNavbar />
@@ -48,6 +53,7 @@ const UserDashboard = (props) => {
                   <img src={beer.image_url} alt={beer.name} />
                   <h5>{beer.name}</h5>
                   <p>{beer.abv}</p>
+                  <button onClick={handleAddBrew}>Add to My Brews</button>
                 </div>
               </Link>
             ))}
@@ -97,4 +103,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { getPunkBeers })(UserDashboard);
+export default connect(mapStateToProps, { getPunkBeers, addMyBrews })(UserDashboard);
