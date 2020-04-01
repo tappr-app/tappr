@@ -4,6 +4,9 @@ import {
   SET_ERROR, 
   USER_LOGIN, 
   LOGGED_IN,
+  GET_USER_DATA,
+  GET_USER_DATA_SUCCESS,
+  GET_USER_DATA_FAILURE,
   GET_API_BEERS, 
   GET_API_BEERS_SUCCESS, 
   GET_API_BEERS_FAILURE,
@@ -18,8 +21,10 @@ import {
 
 const initialState = {
     beer: [],
+    active_user: {},
     isFetching: false,
     isPosting: false,
+    readyToMount: false,
     error: ''
 };
 
@@ -48,6 +53,26 @@ export const beerReducer = (state = initialState, action) => {
     case SET_ERROR:
       return{
         ...state,
+        error: action.payload
+      }
+    case GET_USER_DATA:
+      return {
+        ...state,
+        isFetching: true,
+        error: ''
+      }
+    case GET_USER_DATA_SUCCESS:
+      return {
+        ...state,
+        active_user: action.payload,
+        isFetching: false,
+        readyToMount: true,
+        error: ''
+      }
+    case GET_USER_DATA_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
         error: action.payload
       }
     case GET_API_BEERS:

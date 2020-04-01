@@ -15,12 +15,7 @@
         "src": "/(.*)",
         "dest": "tappr-fe/$1"
       }
-    ],
-    "process":{
-      "env": {
-        "CI": "false"
-      }
-    }
+    ]
 
   }
   

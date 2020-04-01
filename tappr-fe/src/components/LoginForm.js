@@ -21,6 +21,7 @@ const LoginForm = props =>{
     }
     const onSubmit = e => {
         props.handleLogin(credentials)
+        props.history.push('/my-dashboard');
     }
     
     const registerUser = () => {
