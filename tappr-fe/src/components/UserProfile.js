@@ -5,7 +5,6 @@ import UserNavbar from './UserNavbar';
 import { getProfile } from '../actions/index';
 
 const UserProfile = props => {
-  console.log('profile props', props)
   const id = window.localStorage.getItem('user_id')
   useEffect(()=>{
     props.getProfile(id)

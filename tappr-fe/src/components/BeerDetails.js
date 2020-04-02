@@ -5,24 +5,25 @@ import { axiosWithAuth } from '../utils/axiosWithAuth';
 
 
 const BeerDetails = (props) => {
-  const params = useParams()
+  const params = useParams();
+
   const [thisBeer, setThisBeer] = useState()
   const [beerReady, setBeerReady] = useState(false)
 
   useEffect(()=>{
     axiosWithAuth().get(`/beers/${params.id}`)
-    .then(res=>{
-      console.log(res)
-      setThisBeer(res.data);
-      setBeerReady(true)
-    })
-    .catch(err=> console.log(err))
-  }, [])
+      .then(res=>{
+        setThisBeer(res.data);
+        setBeerReady(true)
+      })
+      .catch(err=> console.log(err));
+  }, []);
+
   // onClick handler for Update Button
   const updateBeer = (id) => {
     props.history.push(`/update-a-beer/${id}`)
   };
-  console.log(thisBeer)
+  
   return (
     <div>
       <UserNavbar />

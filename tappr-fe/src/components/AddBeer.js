@@ -36,7 +36,6 @@ function AddBeer(props) {
   };
 
   const onSubmit = () => {
-      console.log(newBeer);
       props.addBeer(newBeer);
       props.history.push('/my-dashboard');
   };
