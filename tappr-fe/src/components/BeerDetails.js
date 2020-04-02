@@ -9,9 +9,15 @@ import { axiosWithAuth } from '../utils/axiosWithAuth';
 const BeerDetails = (props) => {
   const params = useParams();
 
-  const [editingPairing, setEditingPairing] = useState(false)
-  const [addPairing, setAddPairing] = useState({
+  const [editingPairing, setEditingPairing] = useState(false);
+  const [newPairing, setNewPairing] = useState({
     food_name: ''
+  });
+  const [editingComment, setEditingComment] = useState(false);
+  const [newComment, setNewComment] = useState({
+    comment: '',
+    beer_id: NaN,
+    user_id: NaN
   })
   const [thisBeer, setThisBeer] = useState()
   const [beerReady, setBeerReady] = useState(false)
@@ -20,42 +26,51 @@ const BeerDetails = (props) => {
     axiosWithAuth().get(`/beers/${params.id}`)
       .then(res=>{
         setThisBeer(res.data);
-        setBeerReady(true)
+        setBeerReady(true);
       })
       .catch(err=> console.log(err));
-  }, [props.addPairing]);
+  }, []);
   // put props actions in dependency?
   // onClick handler for Update Button
   const updateBeer = (id) => {
     props.history.push(`/update-a-beer/${id}`)
   };
 
-  // Pairing CRUD functions
+  // ===== Pairing CRUD functions ===== //
   const handleEditPairing = e =>{
     e.preventDefault();
     setEditingPairing(true)
   }
   const handleChangesPairing = e =>{
-    setAddPairing({
-        ...addPairing,
+    setNewPairing({
+        ...newPairing,
         [e.target.name]: e.target.value
     })
 };
 
 const handleAddPairing = e =>{
-  console.log('args on submit', thisBeer.beer.id, addPairing)
-  e.preventDefault();
-  props.addPairing(thisBeer.beer.id, addPairing)
+  props.addPairing(thisBeer.beer.id, newPairing);
+  setNewPairing({
+    food_name: ''
+  });
+  setEditingPairing(false)
 }
 
-// const handleChangesComments = e =>{
-//   setAddPairing({
-//       ...addPairing,
-//       [e.target.name]: e.target.value
-//   })
-// };
-
-
+// ===== Comment CRUD functions ===== //
+const handleEditComment = e =>{
+  e.preventDefault();
+  setEditingComment(true)
+}
+const handleChangesComments = e =>{
+  setNewComment({
+      ...newComment,
+      [e.target.name]: e.target.value
+  })
+};
+const handleAddComment = e =>{
+  e.preventDefault();
+}
+console.log(newComment)
   
   return (
     <div>
@@ -83,11 +98,20 @@ const handleAddPairing = e =>{
           (<form onSubmit={handleAddPairing}>
             <label>Food name:</label>
             <input name='food_name' onChange={handleChangesPairing}/>
-            <button>Post</button>
+            <button type='submit'>Post</button>
             <span onClick={()=> setEditingPairing(false)}>Cancel</span>
           </form>)
           : (<button onClick={handleEditPairing}>Add Pairing</button>)
-          }        
+          }
+          {editingComment ? 
+          (<form onSubmit={handleAddComment}>
+            <label>Leave Comment:</label>
+            <input name='food_name' onChange={handleChangesComments}/>
+            <button type='submit'>Post</button>
+            <span onClick={()=> setEditingComment(false)}>Cancel</span>
+          </form>)
+          : (<button onClick={handleEditComment}>Add Comment</button>)
+          }                      
         </div>  
       : <div>Loading brewski</div>
       }
