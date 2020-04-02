@@ -14,10 +14,6 @@ const UserBrews = (props) => {
     props.history.push(`/update-a-beer/${id}`);
   };
 
-  // onClick handler for Beer Details Button
-  const beerDetails = beerId => {
-    props.history.push(`/brews/${beerId}`);
-  };
 
   return (
     <div>
@@ -34,6 +30,8 @@ const UserBrews = (props) => {
             <h5>{beer.name}</h5>
             <p>{beer.abv}</p>
             <Link to={`/brews/${beer.id}`}>More Details</Link>
+            <label>Remove from Collection</label>
+            <button>X</button>
           </div> 
           )         
         })}
