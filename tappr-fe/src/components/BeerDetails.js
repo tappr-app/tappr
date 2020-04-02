@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { connect } from 'react-redux';
+
 import UserNavbar from './UserNavbar';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 
@@ -18,7 +20,7 @@ const BeerDetails = (props) => {
       })
       .catch(err=> console.log(err));
   }, []);
-
+  // put props actions in dependency?
   // onClick handler for Update Button
   const updateBeer = (id) => {
     props.history.push(`/update-a-beer/${id}`)
@@ -54,4 +56,10 @@ const BeerDetails = (props) => {
   );
 };
 
-export default BeerDetails;
+const mapStateToProps = state => {
+  return {
+    isPosting: state.isPosting,
+  };
+};
+
+export default connect(mapStateToProps, {})(BeerDetails);

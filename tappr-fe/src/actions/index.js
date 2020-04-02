@@ -21,6 +21,7 @@ export const ADD_MY_BREWS = 'ADD_MY_BREWS';
 export const ADD_MY_BREWS_SUCCESS = 'ADD_MY_BREWS_SUCCESS';
 export const ADD_MY_BREWS_FAILURE = 'ADD_MY_BREWS_FAILURE';
 
+
 // Fetch Beer Actions
 export const GET_API_BEERS = 'GET_API_BEERS';
 export const GET_API_BEERS_SUCCESS = 'GET_API_BEERS_SUCCESS';
@@ -33,6 +34,10 @@ export const ADD_BEER_FAILURE = 'ADD_BEER_FAILURE';
 export const UPDATE_BEER = 'UPDATE_BEER';
 export const UPDATE_BEER_SUCCESS = 'UPDATE_BEER_SUCCESS';
 export const UPDATE_BEER_FAILURE = 'UPDATE_BEER_FAILURE';
+
+export const ADD_PAIRING = 'ADD_PAIRING';
+export const ADD_PAIRING_SUCCESS = 'ADD_PAIRING_SUCCESS';
+export const ADD_PAIRING_FAILURE = 'ADD_PAIRING_FAILURE';
 
 export const handlePostData = payload => dispatch => {
   dispatch({ type: POST_USER });
@@ -110,6 +115,7 @@ export const addMyBrews = (payload) => dispatch =>{
 }
 
 
+
 export const addBeer = (newBeer) => dispatch => {
   dispatch({ type: ADD_BEER });
   axiosWithAuth().post('/beers', newBeer)
@@ -121,7 +127,20 @@ export const addBeer = (newBeer) => dispatch => {
     });
 };
 
-
+export const addPairing = (beer, entry) => dispatch => {
+  dispatch({ type: ADD_PAIRING });
+  const id = beer.id
+  const newPairing = {
+    food_name: entry
+  }
+  axiosWithAuth().post(`/api/beers/${id}/foods`, newPairing)
+    .then(res => {
+      dispatch({ type: ADD_PAIRING_SUCCESS, payload: res.data });
+    })
+    .catch(error => {
+      dispatch({ type: ADD_PAIRING_FAILURE, payload: error.message });
+    });
+};
 
 export const updateBeer = (updatedBeer) => dispatch => {
   dispatch({ type: UPDATE_BEER });
@@ -133,3 +152,5 @@ export const updateBeer = (updatedBeer) => dispatch => {
       dispatch({ type: UPDATE_BEER_FAILURE, payload: error.message });
     })
 };
+
+
