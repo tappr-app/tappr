@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { connect } from 'react-redux';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 import { addBeer } from '../actions/index';
 import UserNavbar from './UserNavbar';
 import { 
@@ -27,11 +28,38 @@ function AddBeer(props) {
   const { register, errors } = useForm();
 
   const [newBeer, setNewBeer] = useState(initialBeerState);
+  const [results, setResults] = useState();
 
   const handleChanges = (e) => {
     setNewBeer({
       ...newBeer,
       [e.target.name]: e.target.value
+    });
+  };
+
+  const search = (e) => {
+    setNewBeer({
+      ...newBeer,
+      name: e.target.value
+    });
+    axiosWithAuth().get(`/beers?name=${e.target.value}`)
+      .then(res => {
+        console.log(res);
+        setResults(res.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
+  const fillInBeer = (beer) => {
+    setNewBeer({
+      ...newBeer,
+      name: beer.name,
+      tagline: beer.tagline,
+      description: beer.description,
+      image_url: beer.image_url,
+      abv: beer.abv
     });
   };
 
@@ -52,11 +80,22 @@ function AddBeer(props) {
             <FormTitle>Add a Beer</FormTitle>
             <FormLabel htmlFor="name">Beer Name</FormLabel>
             <br />
-            <FormInput
+            <div>
+              <FormInput
                 name="name"
                 ref={register({ required: true })}
-                onChange={handleChanges}
-            />
+                onChange={search}
+              />
+              <div className="dropdown-menu">
+                {results !== undefined ? 
+                <>
+                  {results.map((beer) => (
+                    <p onClick={() => fillInBeer(beer)}>{beer.name}</p>
+                  ))}
+                </>
+                : null}
+              </div>
+            </div>
             {errors.name && errors.name.type === 'required' && 'Name is required!'}
             <br />
             <FormLabel htmlFor="tagline">Tagline</FormLabel>
