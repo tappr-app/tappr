@@ -2,13 +2,15 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getPunkBeers, addMyBrews } from '../actions/index';
+import { getPunkBeers, addMyBrews, getProfile } from '../actions/index';
 import UserNavbar from './UserNavbar';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
+import Spinner from 'react-bootstrap/Spinner'
 import  { 
   DashboardFlexFeaturedDiv, 
   DashboardFlexDiv, 
   DashboardFeaturedDiv, 
+  DrinkscoverBeer,
   MyBrewsDashboardDiv,
   BeerListDashboardDiv,
   BeerImage, 
@@ -26,9 +28,7 @@ import  {
 
 const UserDashboard = (props) => {
   const user_id = window.localStorage.getItem('user_id');
-
   const [randomBeers, setRandomBeers] = useState([]);
-  const [myBeers, setMyBeers] = useState([]);
   const [addBrew, setAddBrew] = useState({
     "name": "",
     "tagline": "",
@@ -51,19 +51,14 @@ const UserDashboard = (props) => {
         console.log(error);
       });
   
-    axiosWithAuth().get(`/users/${user_id}`)
-      .then(res => {
-        setMyBeers(res.data.user.beers);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }, []);
+      props.getProfile(user_id)
 
+  }, []);
   const handleAddBrew = beer =>{
+    console.log(beer)
     props.addMyBrews(beer);
   }
-
+ 
   return (
     <div>
       <UserNavbar />
@@ -89,7 +84,7 @@ const UserDashboard = (props) => {
               <SectionTitle>Drinkscover</SectionTitle>
               <DashboardFlexFeaturedDiv>
                 {props.beer.map((beer) => (
-                  <BeerLinks href={`/brews/${beer.id}`} key={beer.id}>
+                  <DrinkscoverBeer key={beer.id}>
                     <ImageDiv>
                       <DiscoverBeerImage src={beer.image_url} alt={beer.name} />
                     </ImageDiv>
@@ -97,8 +92,15 @@ const UserDashboard = (props) => {
                     <BeerText><i>{beer.tagline}</i></BeerText>
                     <BeerText>{beer.description}</BeerText>
                     <BeerText>ABV: {beer.abv}</BeerText>
-                    <FavoriteButton>Favorite</FavoriteButton>
-                  </BeerLinks>
+                    <div className='actions-dashboard'>
+                    <BeerLinks href={`/brews/${beer.id}`}>More Details</BeerLinks>
+                    {props.isPosting ? <Spinner animation="border" variant="success"/> : <FavoriteButton onClick={e =>{
+                      e.preventDefault();
+                      handleAddBrew(beer)
+                    }
+                    }>Favorite</FavoriteButton> }
+                    </div>
+                  </DrinkscoverBeer>
                 ))}
               </DashboardFlexFeaturedDiv>
             </BeerListDashboardDiv>
@@ -106,14 +108,11 @@ const UserDashboard = (props) => {
             <MyBrewsDashboardDiv>
               <SectionTitle>Favorite Brews</SectionTitle>
               <DashboardFlexFeaturedDiv>
-                {myBeers !== undefined ? 
+                {props.readyToMount?  
                   <div>
-                    {myBeers.map((beer) => (
+                    {props.active_user.beers.map((beer) => (
                       <MyBrewsLinks href={`/brews/${beer.id}`} key={beer.id}>
                         <DashboardFeaturedDiv key={beer.id}>
-                          <ImageDiv>
-                            <BeerImage src={beer.image_url} alt={beer.name} />
-                          </ImageDiv>
                           <BeerName>{beer.name}</BeerName>
                           <BeerText>ABV: {beer.abv}</BeerText>
                         </DashboardFeaturedDiv>
@@ -134,8 +133,11 @@ const UserDashboard = (props) => {
 const mapStateToProps = state => {
   return {
     beer: state.beer,
-    isFetching: state.isFetching
+    active_user: state.active_user,
+    isFetching: state.isFetching,
+    isPosting: state.isPosting,
+    readyToMount: state.readyToMount
   };
 };
 
-export default connect(mapStateToProps, { getPunkBeers, addMyBrews })(UserDashboard);
+export default connect(mapStateToProps, { getPunkBeers, addMyBrews, getProfile })(UserDashboard);

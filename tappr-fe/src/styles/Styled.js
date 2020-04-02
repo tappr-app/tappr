@@ -174,13 +174,31 @@ export const FeaturedBeerLinks = styled.a`
 `;
 
 export const BeerLinks = styled.a`
+    align-self: center;
+    width: 50%;
+    margin: 0 auto;
+    margin-bottom: 3%;
+    font-size: 15px;
+    text-decoration: none;
+    text-align: center;
+    &:hover {
+      color: #F6C101;
+    }
+`;
+
+export const DrinkscoverBeer = styled.div`
     width: 30%;
     margin: 1%;
     font-size: 20px;
     color: black;
-    text-decoration: none;
-    &:hover {
-      color: #F6C101;
+    .actions-dashboard{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-content: center;
+        .spinner-border{
+            margin: 0 auto;
+        }
     }
 `;
 
