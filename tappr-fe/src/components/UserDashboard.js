@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getPunkBeers, addMyBrews, getProfile } from '../actions/index';
 import UserNavbar from './UserNavbar';
+import SearchForm from './SearchForm';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import Spinner from 'react-bootstrap/Spinner'
 import  { 
@@ -78,6 +79,8 @@ const UserDashboard = (props) => {
               </FeaturedBeerLinks>
             ))}
           </DashboardFlexFeaturedDiv>
+
+          <SearchForm />
 
           <DashboardFlexDiv>
             <BeerListDashboardDiv>
