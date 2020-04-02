@@ -100,7 +100,14 @@ const handleUpdateCommentChanges = e =>{
 }
 
 const handleUpdateComment = (beerId, comment) =>{
-  props.updateBeerComment(beerId, comment)
+  props.updateBeerComment(beerId, comment);
+  setUpdatingComment(false)
+  axiosWithAuth().get(`/beers/${params.id}`)
+  .then(res=>{
+    setThisBeer(res.data);
+    setBeerReady(true);
+  })
+  .catch(err=> console.log(err));
 }
 console.log(thisBeer)
   return (
