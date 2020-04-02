@@ -7,6 +7,7 @@ import  {
   DashboardFlexFeaturedDiv, 
   DashboardFlexDiv, 
   DashboardFeaturedDiv, 
+  DrinkscoverBeer,
   BeerImage, 
   FeaturedBeerLinks, 
   BeerLinks,
@@ -55,8 +56,7 @@ const Dashboard = (props) => {
 
           <DashboardFlexDiv>
             {props.beer.map((beer) => (
-              <BeerLinks href={`/brews/${beer.id}`} key={beer.id}>
-                <DashboardFeaturedDiv key={beer.id}>
+                <DrinkscoverBeer key={beer.id}>
                   <ImageDiv>
                     <BeerImage src={beer.image_url} alt={beer.name} />
                   </ImageDiv>
@@ -64,8 +64,11 @@ const Dashboard = (props) => {
                   <BeerText><i>{beer.tagline}</i></BeerText>
                   <BeerText>{beer.description}</BeerText>
                   <BeerText>ABV: {beer.abv}</BeerText>
-                </DashboardFeaturedDiv>
-              </BeerLinks>
+                  <div className='actions-dashboard'>
+                    <BeerLinks href={`/brews/${beer.id}`}>More Details</BeerLinks>
+                  </div>
+                </DrinkscoverBeer>
+
             ))}
           </DashboardFlexDiv>
         </div>
