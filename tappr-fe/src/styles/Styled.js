@@ -121,6 +121,9 @@ export const DrinkscoverBeer = styled.div`
         flex-direction: column;
         justify-content: space-evenly;
         align-content: center;
+        .spinner-border{
+            margin: 0 auto;
+        }
     }
 `;
 

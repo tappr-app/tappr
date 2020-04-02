@@ -62,6 +62,7 @@ const UserDashboard = (props) => {
   }, []);
 
   const handleAddBrew = beer =>{
+    console.log(beer)
     props.addMyBrews(beer);
   }
 
@@ -100,7 +101,11 @@ const UserDashboard = (props) => {
                     <BeerText>ABV: {beer.abv}</BeerText>
                     <div className='actions-dashboard'>
                     <BeerLinks href={`/brews/${beer.id}`}>More Details</BeerLinks>
-                    {props.isPosting ? <Spinner animation="border" variant="success"/> : <FavoriteButton onClick={()=> handleAddBrew(beer.id)}>Favorite</FavoriteButton> }
+                    {props.isPosting ? <Spinner animation="border" variant="success"/> : <FavoriteButton onClick={e =>{
+                      e.preventDefault();
+                      handleAddBrew(beer)
+                    }
+                    }>Favorite</FavoriteButton> }
                     </div>
                   </DrinkscoverBeer>
                 ))}
