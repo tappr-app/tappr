@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getPunkBeers } from '../actions/index';
+import { getPunkBeers, addMyBrews } from '../actions/index';
 import UserNavbar from './UserNavbar';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import  { 
@@ -29,6 +29,13 @@ const UserDashboard = (props) => {
 
   const [randomBeers, setRandomBeers] = useState([]);
   const [myBeers, setMyBeers] = useState([]);
+  const [addBrew, setAddBrew] = useState({
+    "name": "",
+    "tagline": "",
+    "description": "",
+    "image_url": "",
+    "abv": NaN
+  })
 
   const randomABV = Math.floor((Math.random() * 8) + 6);
   const randomPage = Math.floor((Math.random() * 20) + 1);
@@ -52,6 +59,10 @@ const UserDashboard = (props) => {
         console.log(error);
       });
   }, []);
+
+  const handleAddBrew = beer =>{
+    props.addMyBrews(beer);
+  }
 
   return (
     <div>
@@ -127,4 +138,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { getPunkBeers })(UserDashboard);
+export default connect(mapStateToProps, { getPunkBeers, addMyBrews })(UserDashboard);
