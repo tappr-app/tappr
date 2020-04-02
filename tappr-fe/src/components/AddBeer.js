@@ -3,6 +3,17 @@ import { useForm } from "react-hook-form";
 import { connect } from 'react-redux';
 import { addBeer } from '../actions/index';
 import UserNavbar from './UserNavbar';
+import { 
+  OuterFormDiv,
+  Form,
+  FormTitle,
+  FormLabel,
+  FormInput,
+  FormTextBox,
+  FormButtonMainDiv,
+  FormButtonDiv,
+  FormButton
+ } from '../styles/Styled';
 
 const initialBeerState = {
   name: '',
@@ -37,53 +48,62 @@ function AddBeer(props) {
   return (
     <div>
       <UserNavbar />
-      <form>
-          <h1>Add a Beer</h1>
-          <label htmlFor="name">Beer Name</label>
-          <br />
-          <input
-              name="name"
-              ref={register({ required: true })}
-              onChange={handleChanges}
-          />
-          {errors.beerName && <span>Name is required!</span>}
-          <br />
-          <label htmlFor="tagline">Tagline</label>
-          <br />
-          <input
-              name="tagline"
-              ref={register}
-              onChange={handleChanges}
-          />
-          <br />
-          <label htmlFor="description">Description</label>
-          <br />
-          <input
-              name="description"
-              ref={register}
-              onChange={handleChanges}
-          />
-          <br />
-          <label htmlFor="image_url">Image URL</label>
-          <br />
-          <input
-              name="image_url"
-              ref={register}
-              onChange={handleChanges}
-          />
-          <br />
-          <label htmlFor="abv">ABV</label>
-          <br />
-          <input
-              name="abv"
-              type="number"
-              ref={register}
-              onChange={handleChanges}
-          />
-          <br />
-          <button onClick={() => onSubmit()}>Create Beer</button>
-          <button onClick={cancel}>Cancel</button>
-      </form>
+      <OuterFormDiv>
+        <Form>
+            <FormTitle>Add a Beer</FormTitle>
+            <FormLabel htmlFor="name">Beer Name</FormLabel>
+            <br />
+            <FormInput
+                name="name"
+                ref={register({ required: true })}
+                onChange={handleChanges}
+            />
+            {errors.name && errors.name.type === 'required' && 'Name is required!'}
+            <br />
+            <FormLabel htmlFor="tagline">Tagline</FormLabel>
+            <br />
+            <FormInput
+                name="tagline"
+                ref={register}
+                onChange={handleChanges}
+            />
+            <br />
+            <FormLabel htmlFor="description">Description</FormLabel>
+            <br />
+            <FormTextBox
+                name="description"
+                ref={register}
+                onChange={handleChanges}
+            />
+            <br />
+            <FormLabel htmlFor="image_url">Image URL</FormLabel>
+            <br />
+            <FormInput
+                name="image_url"
+                ref={register}
+                onChange={handleChanges}
+            />
+            <br />
+            <FormLabel htmlFor="abv">ABV</FormLabel>
+            <br />
+            <FormInput
+                name="abv"
+                type="number"
+                ref={register}
+                onChange={handleChanges}
+            />
+            <br />
+            <FormButtonMainDiv>
+              <FormButtonDiv>
+                <FormButton onClick={() => onSubmit()}>Create Beer</FormButton>
+              </FormButtonDiv>
+
+              <FormButtonDiv>
+                <FormButton onClick={cancel}>Cancel</FormButton>
+              </FormButtonDiv>
+            </FormButtonMainDiv>
+        </Form>
+      </OuterFormDiv>
     </div>
   )
 }
