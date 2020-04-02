@@ -42,7 +42,7 @@ const RegisterForm = props =>{
     
     return(
       <>
-        {props.isPosting ? <div className='posting-user'>Creating your profile, pour a pint and get ready to login!</div> :
+        {props.isPosting ? <div className='posting-user'>Creating your profile, pour a pint and get ready to lager-in!</div> :
           (
             <>
               <GuestNavbar />
@@ -84,7 +84,7 @@ const RegisterForm = props =>{
                   </div>
                   <div className='route-form'>
                       <label>Returning?</label>
-                      <button className='form-action' onClick={() => returntoLogin()}>Login</button>
+                      <button className='form-action' onClick={() => returntoLogin()}>Lager-In</button>
                   </div>
                 </div>
               </form>

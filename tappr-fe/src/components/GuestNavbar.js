@@ -8,7 +8,7 @@ const GuestNavbar = () => {
         <NavLinks href='/'>Home</NavLinks>
         <NavLinks href='/dashboard'>Tap List</NavLinks>
         <NavLinks href='/register'>Register</NavLinks>
-        <NavLinks href='/login'>Login</NavLinks>
+        <NavLinks href='/login'>Lager-In</NavLinks>
       </Navbar>
     </div>
   );
