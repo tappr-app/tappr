@@ -10,6 +10,7 @@ const BeerDetails = (props) => {
   const params = useParams();
   const activeId = window.localStorage.getItem('user_id')
 
+  const [canCrud, setCanCrud] = useState(false);
   const [editingPairing, setEditingPairing] = useState(false);
   const [newPairing, setNewPairing] = useState({
     food_name: ''
@@ -31,6 +32,7 @@ const BeerDetails = (props) => {
       })
       .catch(err=> console.log(err));
   }, []);
+  
   // put props actions in dependency?
   // onClick handler for Update Button
   const updateBeer = (id) => {
@@ -79,7 +81,6 @@ const handleAddComment = e =>{
   setEditingComment(false)
 }
 
-  console.log(thisBeer)
   return (
     <div>
       <UserNavbar />
@@ -101,9 +102,14 @@ const handleAddComment = e =>{
           :
           <div>Comments:{thisBeer.comments.map(element => {
             return (
-            <div>
-              <p key={element.user_id}>{element.comment}</p><span>edit</span>
-              <span>delete</span>
+            <div key={element.user_id}>
+              <p>{element.comment}</p>
+              {parseInt(activeId) === element.user_id ?
+              <div>
+              <button>edit</button>
+              <button>delete</button>
+              </div> : <div></div>}
+
             </div>
             )
           })}</div>}  
