@@ -181,6 +181,20 @@ export const BeerLinks = styled.a`
     font-size: 15px;
     text-decoration: none;
     text-align: center;
+    color: #C96E12;
+    &:hover {
+      color: #F6C101;
+    }
+`;
+
+export const ViewAllLink = styled.a`
+    align-self: center;
+    width: 100%;
+    margin: 0 35% 3% 35%;
+    font-size: 15px;
+    text-decoration: none;
+    text-align: center;
+    color: #C96E12;
     &:hover {
       color: #F6C101;
     }
@@ -304,6 +318,18 @@ export const FavoriteButton = styled.button`
       color: #F6C101;
       cursor: pointer;
     }
+`;
+
+export const ViewAllMainDiv = styled.div`
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+`;
+
+export const ViewAllDiv = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
 `;
 
 // ADD A BEER FORM STYLING

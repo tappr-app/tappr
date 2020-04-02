@@ -92,7 +92,7 @@ export const getPunkBeers = () => dispatch => {
 // adding to the brew takes an id and payload as an arg!
 export const addMyBrews = (payload) => dispatch =>{
   dispatch({type: ADD_MY_BREWS});
-  // DEVS, THE sAVEBEER SENDS WHAT THE BE ACCEPTS, KEEP IN MIND WHEN ALTERING
+  // DEVS, THE SAVEBEER SENDS WHAT THE BE ACCEPTS, KEEP IN MIND WHEN ALTERING
   const saveBeer = {
     name: payload.name,
     tagline: payload.tagline,

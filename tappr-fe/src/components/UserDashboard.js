@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { getPunkBeers, addMyBrews, getProfile } from '../actions/index';
 import UserNavbar from './UserNavbar';
 import SearchForm from './SearchForm';
-import { axiosWithAuth } from '../utils/axiosWithAuth';
 // import Spinner from 'react-bootstrap/Spinner';
 import  { 
   DashboardFlexFeaturedDiv, 
@@ -24,19 +22,15 @@ import  {
   BeerName, 
   BeerText,
   LoadingText,
-  FavoriteButton
+  FavoriteButton,
+  ViewAllLink,
+  ViewAllMainDiv,
+  ViewAllDiv
 } from '../styles/Styled';
 
 const UserDashboard = (props) => {
   const user_id = window.localStorage.getItem('user_id');
   const [randomBeers, setRandomBeers] = useState([]);
-  const [addBrew, setAddBrew] = useState({
-    "name": "",
-    "tagline": "",
-    "description": "",
-    "image_url": "",
-    "abv": NaN
-  })
 
   const randomABV = Math.floor((Math.random() * 8) + 6);
   const randomPage = Math.floor((Math.random() * 20) + 1);
@@ -112,7 +106,7 @@ const UserDashboard = (props) => {
               <SectionTitle>Favorite Brews</SectionTitle>
               <DashboardFlexFeaturedDiv>
                 {props.readyToMount?  
-                  <div>
+                  <ViewAllMainDiv>
                     {props.active_user.beers.map((beer) => (
                       <MyBrewsLinks href={`/brews/${beer.id}`} key={beer.id}>
                         <DashboardFeaturedDiv key={beer.id}>
@@ -121,8 +115,10 @@ const UserDashboard = (props) => {
                         </DashboardFeaturedDiv>
                       </MyBrewsLinks>
                     ))}
-                    <Link to={`/my-brews/${user_id}`}>View All</Link>
-                  </div>
+                    <ViewAllDiv>
+                      <ViewAllLink href={`/my-brews/${user_id}`}>View All</ViewAllLink>
+                    </ViewAllDiv>
+                  </ViewAllMainDiv>
                 : <LoadingText>No Favorites Yet, Drink More to Find Some</LoadingText>}
               </DashboardFlexFeaturedDiv>
             </MyBrewsDashboardDiv>
