@@ -38,6 +38,9 @@ export const UPDATE_BEER_FAILURE = 'UPDATE_BEER_FAILURE';
 export const ADD_PAIRING = 'ADD_PAIRING';
 export const ADD_PAIRING_SUCCESS = 'ADD_PAIRING_SUCCESS';
 export const ADD_PAIRING_FAILURE = 'ADD_PAIRING_FAILURE';
+export const ADD_BEER_COMMENT = 'ADD_BEER_COMMENT'
+export const ADD_BEER_COMMENT_SUCCESS = 'ADD_BEER_COMMENT_SUCCESS'
+export const ADD_BEER_COMMENT_FAILURE = 'ADD_BEER_COMMENT_FAILURE'
 
 export const handlePostData = payload => dispatch => {
   dispatch({ type: POST_USER });
@@ -127,18 +130,25 @@ export const addBeer = (newBeer) => dispatch => {
     });
 };
 
-export const addPairing = (beer, entry) => dispatch => {
+export const addPairing = (id, entry) => dispatch => {
   dispatch({ type: ADD_PAIRING });
-  const id = beer.id
-  const newPairing = {
-    food_name: entry
-  }
-  axiosWithAuth().post(`/api/beers/${id}/foods`, newPairing)
+  axiosWithAuth().post(`/beers/${id}/foods`, entry)
     .then(res => {
       dispatch({ type: ADD_PAIRING_SUCCESS, payload: res.data });
     })
     .catch(error => {
       dispatch({ type: ADD_PAIRING_FAILURE, payload: error.message });
+    });
+};
+
+export const addBeerComment = (id, entry) => dispatch => {
+  dispatch({ type: ADD_BEER_COMMENT });
+  axiosWithAuth().post(`/beers/${id}/foods`, entry)
+    .then(res => {
+      dispatch({ type: ADD_BEER_COMMENT_SUCCESS, payload: res.data });
+    })
+    .catch(error => {
+      dispatch({ type: ADD_BEER_COMMENT_FAILURE, payload: error.message });
     });
 };
 

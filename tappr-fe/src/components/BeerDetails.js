@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
-
+import { addPairing } from '../actions/index';
 import UserNavbar from './UserNavbar';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 
@@ -23,13 +23,14 @@ const BeerDetails = (props) => {
         setBeerReady(true)
       })
       .catch(err=> console.log(err));
-  }, []);
+  }, [props.addPairing]);
   // put props actions in dependency?
   // onClick handler for Update Button
   const updateBeer = (id) => {
     props.history.push(`/update-a-beer/${id}`)
   };
 
+  // Pairing CRUD functions
   const handleEditPairing = e =>{
     e.preventDefault();
     setEditingPairing(true)
@@ -40,7 +41,13 @@ const BeerDetails = (props) => {
         [e.target.name]: e.target.value
     })
 };
-console.log(addPairing)
+
+const handleAddPairing = e =>{
+  console.log('args on submit', thisBeer.beer.id, addPairing)
+  e.preventDefault();
+  props.addPairing(thisBeer.beer.id, addPairing)
+}
+
 // const handleChangesComments = e =>{
 //   setAddPairing({
 //       ...addPairing,
@@ -48,7 +55,7 @@ console.log(addPairing)
 //   })
 // };
 
-  console.log('beer details for',thisBeer);
+
   
   return (
     <div>
@@ -61,18 +68,19 @@ console.log(addPairing)
           <p>{thisBeer.beer.tagline}</p>
           <p>{thisBeer.beer.description}</p>
           <p>ABV: {thisBeer.beer.abv}</p>
-          {thisBeer.food !== [] ? <p>Pairings: None yet! Add some below.</p>
-          :
-          <p>Pairings:{thisBeer.food.forEach(element => {
-            return <li>{element}</li>
-          })}</p>}
+          {thisBeer.food === [] ? <p>Pairings: None yet! Add some below.</p>
+          :<div>
+          <p>Pairings:</p>
+          <ul>{thisBeer.food.map(element => {
+            return <li key={element.id}>{element.food_name}</li>
+          })}</ul></div>}
           {thisBeer.comments !== [] ? <p>Comments: No Comments. Add some below!</p>
           :
           <p>Comments:{thisBeer.comments.forEach(element => {
             return <li>{element}</li>
           })}</p>}  
           {editingPairing ? 
-          (<form>
+          (<form onSubmit={handleAddPairing}>
             <label>Food name:</label>
             <input name='food_name' onChange={handleChangesPairing}/>
             <button>Post</button>
@@ -93,4 +101,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, {})(BeerDetails);
+export default connect(mapStateToProps, { addPairing })(BeerDetails);
