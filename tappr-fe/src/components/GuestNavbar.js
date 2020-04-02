@@ -1,15 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Navbar, NavLinks } from '../styles/Styled';
 
 const GuestNavbar = () => {
   return (
     <div>
-      <nav>
-        <Link to="/">Home</Link>
-        <Link to="/dashboard">Tap List</Link>
-        <Link to="/register">Register</Link>
-        <Link to="/login">Login</Link>
-      </nav>
+      <Navbar>
+        <NavLinks href='/'>Home</NavLinks>
+        <NavLinks href='/dashboard'>Tap List</NavLinks>
+        <NavLinks href='/register'>Register</NavLinks>
+        <NavLinks href='/login'>Login</NavLinks>
+      </Navbar>
     </div>
   );
 };

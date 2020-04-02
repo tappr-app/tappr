@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 
-
 export const FormDiv = styled.div`
     // Outer most box
     display: flex;
@@ -67,5 +66,147 @@ export const FormDiv = styled.div`
                 border: 2px solid #000000;
             }
         }
+    }
+`;
+
+export const Navbar = styled.nav`
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    border-bottom: 2px solid #F6C101;
+    padding: 1%;
+    margin: 1%;
+`;
+
+export const NavLinks = styled.a`
+    font-size: 20px;
+    color: black;
+    text-decoration: none;
+    &:hover {
+      color: #F6C101;
+    }
+`;
+
+export const FeaturedBeerLinks = styled.a`
+    width: 18%;
+    margin: 1%;
+    font-size: 20px;
+    color: black;
+    text-decoration: none;
+    &:hover {
+      color: #F6C101;
+    }
+`;
+
+export const BeerLinks = styled.a`
+    width: 30%;
+    margin: 1%;
+    font-size: 20px;
+    color: black;
+    text-decoration: none;
+    &:hover {
+      color: #F6C101;
+    }
+`;
+
+export const MyBrewsLinks = styled.a`
+    width: 98%;
+    margin: 1%;
+    font-size: 20px;
+    color: black;
+    text-decoration: none;
+    &:hover {
+      color: #F6C101;
+    }
+`;
+
+export const DashboardFlexFeaturedDiv = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid black;
+    margin: 1%;
+    padding: 1%;
+`;
+
+export const DashboardFlexDiv = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    margin: 1%;
+`;
+
+export const DashboardFeaturedDiv = styled.div`
+    width: 100%;
+    margin: 1%;
+    overflow: auto;
+`;
+
+export const DiscoverBrewsFlexDiv = styled.div`
+    width: 31%;
+    margin: 1%;
+    overflow: auto;
+`;
+
+export const BeerListDashboardDiv = styled.div`
+    width: 64%;
+    margin: 1%;
+`;
+
+export const MyBrewsDashboardDiv = styled.div`
+    width: 31%;
+    margin: 1%;
+`;
+
+export const BeerImage = styled.img`
+    width: 85px;
+    height: 250px;
+    margin-left: 35%;
+    margin-right: auto;
+`;
+
+export const DiscoverBeerImage = styled.img`
+    width: 85px;
+    height: 250px;
+    margin-left: 25%;
+    margin-right: auto;
+`;
+
+export const ImageDiv = styled.div`
+  padding-left: 10%;
+  padding-right: 10%;
+`;
+
+export const SectionTitle = styled.h2`
+    font-size: 36px;
+    text-align: center
+`;
+
+export const BeerName = styled.h5`
+    font-size: 16px;
+    text-align: center;
+`;
+
+export const BeerText = styled.p`
+    font-size: 12px;
+    text-align: center
+`;
+
+export const LoadingText = styled.p`
+    font-size: 24px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+`;
+
+export const FavoriteButton = styled.button`
+    width: 30%;
+    font-size: 16px;
+    border: 1px solid #F6C101;
+    background: #C96E12;
+    margin-left: 35%;
+    border-radius: 10px;
+    &:hover {
+      color: black;
+      background: #F6C101;
+      cursor: pointer;
     }
 `;

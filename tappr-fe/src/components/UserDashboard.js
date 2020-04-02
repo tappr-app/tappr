@@ -5,6 +5,24 @@ import { Link } from 'react-router-dom';
 import { getPunkBeers, addMyBrews } from '../actions/index';
 import UserNavbar from './UserNavbar';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
+import  { 
+  DashboardFlexFeaturedDiv, 
+  DashboardFlexDiv, 
+  DashboardFeaturedDiv, 
+  MyBrewsDashboardDiv,
+  BeerListDashboardDiv,
+  BeerImage, 
+  DiscoverBeerImage,
+  FeaturedBeerLinks, 
+  BeerLinks,
+  MyBrewsLinks,
+  ImageDiv, 
+  SectionTitle, 
+  BeerName, 
+  BeerText,
+  LoadingText,
+  FavoriteButton
+} from '../styles/Styled';
 
 const UserDashboard = (props) => {
   const user_id = window.localStorage.getItem('user_id');
@@ -49,59 +67,64 @@ const UserDashboard = (props) => {
   return (
     <div>
       <UserNavbar />
-      {props.isFetching ? (<div>Tapping the Keg...</div>) : (
+      {props.isFetching ? (<LoadingText>Tapping the Keg...</LoadingText>) : (
         <div>
-          <div>
-            <h2>Featured Beers</h2>
+          <SectionTitle>Featured Beers</SectionTitle>
+          <DashboardFlexFeaturedDiv>
             {randomBeers.map((beer) => (
-              <Link to="/" key={beer.id}>
-                <div key={beer.id}>
-                  <img src={beer.image_url} alt={beer.name} />
-                  <h5>{beer.name}</h5>
-                  <p>{beer.abv}</p>
-                  <button onClick={e =>{
-                    e.preventDefault();
-                    handleAddBrew(beer)
-                  }}>Add to My Brews</button>
-                </div>
-              </Link>
+              <FeaturedBeerLinks href={`/brews/${beer.id}`} key={beer.id}>
+                <DashboardFeaturedDiv key={beer.id}>
+                  <ImageDiv>
+                    <BeerImage src={beer.image_url} alt={beer.name} />
+                  </ImageDiv>
+                  <BeerName>{beer.name}</BeerName>
+                  <BeerText>ABV: {beer.abv}</BeerText>
+                </DashboardFeaturedDiv>
+              </FeaturedBeerLinks>
             ))}
-          </div>
+          </DashboardFlexFeaturedDiv>
 
-          <div>
-            <h2>Drinkscover</h2>
-            {props.beer.map((beer) => (
-              <Link to="/" key={beer.id}>
-                <div key={beer.id}>
-                  <img src={beer.image_url} alt={beer.name} />
-                  <h3>{beer.name}</h3>
-                  <p><i>{beer.tagline}</i></p>
-                  <p>{beer.description}</p>
-                  <p>{beer.abv}</p>
-                  <button onClick={e =>{
-                    e.preventDefault();
-                    handleAddBrew(beer)
-                  }}>Favorite</button>
-                </div>
-              </Link>
-            ))}
-          </div>
+          <DashboardFlexDiv>
+            <BeerListDashboardDiv>
+              <SectionTitle>Drinkscover</SectionTitle>
+              <DashboardFlexFeaturedDiv>
+                {props.beer.map((beer) => (
+                  <BeerLinks href={`/brews/${beer.id}`} key={beer.id}>
+                    <ImageDiv>
+                      <DiscoverBeerImage src={beer.image_url} alt={beer.name} />
+                    </ImageDiv>
+                    <BeerName>{beer.name}</BeerName>
+                    <BeerText><i>{beer.tagline}</i></BeerText>
+                    <BeerText>{beer.description}</BeerText>
+                    <BeerText>ABV: {beer.abv}</BeerText>
+                    <FavoriteButton>Favorite</FavoriteButton>
+                  </BeerLinks>
+                ))}
+              </DashboardFlexFeaturedDiv>
+            </BeerListDashboardDiv>
 
-          {myBeers !== undefined ? 
-            <div>
-              <h2>Favorite Brews</h2>
-              {myBeers.map((beer) => (
-                <Link to="/" key={beer.id}>
-                  <div key={beer.id}>
-                    <img src={beer.image_url} alt={beer.name} />
-                    <h5>{beer.name}</h5>
-                    <p>{beer.abv}</p>
+            <MyBrewsDashboardDiv>
+              <SectionTitle>Favorite Brews</SectionTitle>
+              <DashboardFlexFeaturedDiv>
+                {myBeers !== undefined ? 
+                  <div>
+                    {myBeers.map((beer) => (
+                      <MyBrewsLinks href={`/brews/${beer.id}`} key={beer.id}>
+                        <DashboardFeaturedDiv key={beer.id}>
+                          <ImageDiv>
+                            <BeerImage src={beer.image_url} alt={beer.name} />
+                          </ImageDiv>
+                          <BeerName>{beer.name}</BeerName>
+                          <BeerText>ABV: {beer.abv}</BeerText>
+                        </DashboardFeaturedDiv>
+                      </MyBrewsLinks>
+                    ))}
+                    <Link to={`/my-brews/${user_id}`}>View All</Link>
                   </div>
-                </Link>
-              ))}
-              <Link to="/">View All</Link>
-            </div>
-          : <h3>No Favorites Yet, Drink More to Find Some</h3>}
+                : <LoadingText>No Favorites Yet, Drink More to Find Some</LoadingText>}
+              </DashboardFlexFeaturedDiv>
+            </MyBrewsDashboardDiv>
+          </DashboardFlexDiv>
         </div>
       )}
     </div>

@@ -1,9 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { getPunkBeers } from '../actions/index';
 import GuestNavbar from './GuestNavbar';
+import  { 
+  DashboardFlexFeaturedDiv, 
+  DashboardFlexDiv, 
+  DashboardFeaturedDiv, 
+  BeerImage, 
+  FeaturedBeerLinks, 
+  BeerLinks,
+  ImageDiv, 
+  SectionTitle, 
+  BeerName, 
+  BeerText
+} from '../styles/Styled';
 
 const Dashboard = (props) => {
   const [randomBeers, setRandomBeers] = useState([]);
@@ -27,32 +38,36 @@ const Dashboard = (props) => {
       <GuestNavbar />
       {props.isFetching ? (<div>Tapping the Keg...</div>) : (
         <div>
-          <div>
-            <h2>Featured Beers</h2>
+          <SectionTitle>Featured Beers</SectionTitle>
+          <DashboardFlexFeaturedDiv>
             {randomBeers.map((beer) => (
-              <Link to='/' key={beer.id}>
-                <div key={beer.id}>
-                  <img src={beer.image_url} alt={beer.name} />
-                  <h5>{beer.name}</h5>
-                  <p>{beer.abv}</p>
-                </div>
-              </Link>
+              <FeaturedBeerLinks href={`/brews/${beer.id}`} key={beer.id}>
+                <DashboardFeaturedDiv key={beer.id}>
+                  <ImageDiv>
+                    <BeerImage src={beer.image_url} alt={beer.name} />
+                  </ImageDiv>
+                  <BeerName>{beer.name}</BeerName>
+                  <BeerText>ABV: {beer.abv}</BeerText>
+                </DashboardFeaturedDiv>
+              </FeaturedBeerLinks>
             ))}
-          </div>
+          </DashboardFlexFeaturedDiv>
 
-          <div>
+          <DashboardFlexDiv>
             {props.beer.map((beer) => (
-              <Link to="/" key={beer.id}>
-                <div key={beer.id}>
-                  <img src={beer.image_url} alt={beer.name} />
-                  <h3>{beer.name}</h3>
-                  <p><i>{beer.tagline}</i></p>
-                  <p>{beer.description}</p>
-                  <p>{beer.abv}</p>
-                </div>
-              </Link>
+              <BeerLinks href={`/brews/${beer.id}`} key={beer.id}>
+                <DashboardFeaturedDiv key={beer.id}>
+                  <ImageDiv>
+                    <BeerImage src={beer.image_url} alt={beer.name} />
+                  </ImageDiv>
+                  <BeerName>{beer.name}</BeerName>
+                  <BeerText><i>{beer.tagline}</i></BeerText>
+                  <BeerText>{beer.description}</BeerText>
+                  <BeerText>ABV: {beer.abv}</BeerText>
+                </DashboardFeaturedDiv>
+              </BeerLinks>
             ))}
-          </div>
+          </DashboardFlexDiv>
         </div>
       )}
     </div>
