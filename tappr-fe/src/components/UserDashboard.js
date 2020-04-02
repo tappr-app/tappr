@@ -5,10 +5,12 @@ import { Link } from 'react-router-dom';
 import { getPunkBeers, addMyBrews } from '../actions/index';
 import UserNavbar from './UserNavbar';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
+import Spinner from 'react-bootstrap/Spinner'
 import  { 
   DashboardFlexFeaturedDiv, 
   DashboardFlexDiv, 
   DashboardFeaturedDiv, 
+  DrinkscoverBeer,
   MyBrewsDashboardDiv,
   BeerListDashboardDiv,
   BeerImage, 
@@ -26,7 +28,6 @@ import  {
 
 const UserDashboard = (props) => {
   const user_id = window.localStorage.getItem('user_id');
-
   const [randomBeers, setRandomBeers] = useState([]);
   const [myBeers, setMyBeers] = useState([]);
   const [addBrew, setAddBrew] = useState({
@@ -89,7 +90,7 @@ const UserDashboard = (props) => {
               <SectionTitle>Drinkscover</SectionTitle>
               <DashboardFlexFeaturedDiv>
                 {props.beer.map((beer) => (
-                  <BeerLinks href={`/brews/${beer.id}`} key={beer.id}>
+                  <DrinkscoverBeer key={beer.id}>
                     <ImageDiv>
                       <DiscoverBeerImage src={beer.image_url} alt={beer.name} />
                     </ImageDiv>
@@ -97,8 +98,11 @@ const UserDashboard = (props) => {
                     <BeerText><i>{beer.tagline}</i></BeerText>
                     <BeerText>{beer.description}</BeerText>
                     <BeerText>ABV: {beer.abv}</BeerText>
-                    <FavoriteButton>Favorite</FavoriteButton>
-                  </BeerLinks>
+                    <div className='actions-dashboard'>
+                    <BeerLinks href={`/brews/${beer.id}`}>More Details</BeerLinks>
+                    {props.isPosting ? <Spinner animation="border" variant="success"/> : <FavoriteButton onClick={()=> handleAddBrew(beer.id)}>Favorite</FavoriteButton> }
+                    </div>
+                  </DrinkscoverBeer>
                 ))}
               </DashboardFlexFeaturedDiv>
             </BeerListDashboardDiv>
