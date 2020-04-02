@@ -134,7 +134,8 @@ const UserDashboard = (props) => {
 const mapStateToProps = state => {
   return {
     beer: state.beer,
-    isFetching: state.isFetching
+    isFetching: state.isFetching,
+    isPosting: state.isPosting
   };
 };
 

@@ -22,7 +22,7 @@ const BeerDetails = (props) => {
   const updateBeer = (id) => {
     props.history.push(`/update-a-beer/${id}`)
   };
-  console.log(thisBeer)
+  console.log('beer details for',thisBeer)
   return (
     <div>
       <UserNavbar />
