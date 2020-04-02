@@ -13,7 +13,9 @@ import {
   FormTextBox,
   FormButtonMainDiv,
   FormButtonDiv,
-  FormButton
+  FormButton,
+  SearchDiv,
+  SearchResult
  } from '../styles/Styled';
 
 const initialBeerState = {
@@ -52,15 +54,8 @@ function AddBeer(props) {
       });
   };
 
-  const fillInBeer = (beer) => {
-    setNewBeer({
-      ...newBeer,
-      name: beer.name,
-      tagline: beer.tagline,
-      description: beer.description,
-      image_url: beer.image_url,
-      abv: beer.abv
-    });
+  const selectBeer = (beer) => {
+    props.history.push(`/brews/${beer.id}`)
   };
 
   const onSubmit = () => {
@@ -80,22 +75,22 @@ function AddBeer(props) {
             <FormTitle>Add a Beer</FormTitle>
             <FormLabel htmlFor="name">Beer Name</FormLabel>
             <br />
-            <div>
+            <SearchDiv>
               <FormInput
                 name="name"
                 ref={register({ required: true })}
                 onChange={search}
               />
-              <div className="dropdown-menu">
+              <SearchDiv className="dropdown-menu">
                 {results !== undefined ? 
                 <>
                   {results.map((beer) => (
-                    <p onClick={() => fillInBeer(beer)}>{beer.name}</p>
+                    <SearchResult onClick={() => selectBeer(beer)}>{beer.name}</SearchResult>
                   ))}
                 </>
                 : null}
-              </div>
-            </div>
+              </SearchDiv>
+            </SearchDiv>
             {errors.name && errors.name.type === 'required' && 'Name is required!'}
             <br />
             <FormLabel htmlFor="tagline">Tagline</FormLabel>

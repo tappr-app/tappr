@@ -287,3 +287,22 @@ export const FavoriteButton = styled.button`
       cursor: pointer;
     }
 `;
+
+// ADD A BEER FORM
+
+export const SearchDiv = styled.div`
+    width: 100%;
+`;
+
+export const SearchResult = styled.button`
+    width: 100%;
+    font-size: 12px;
+    border: none;
+    background: white;
+    color: #C96E12;
+    border-radius: 5px;
+    &:hover {
+      background: black;
+      cursor: pointer;
+    }
+`;
