@@ -306,7 +306,7 @@ export const FavoriteButton = styled.button`
     }
 `;
 
-// ADD A BEER FORM
+// ADD A BEER FORM STYLING
 
 export const SearchDiv = styled.div`
     width: 100%;
@@ -322,5 +322,42 @@ export const SearchResult = styled.button`
     &:hover {
       background: black;
       cursor: pointer;
+    }
+`;
+
+// SEARCH COMPONENT STYLING
+
+export const InputDiv = styled.div`
+    padding: 1%;
+    margin: 1%;
+    display: flex;
+    justify-content: center;
+`;
+
+export const SearchInput = styled.input`
+    width: 25%;
+    height: 5vh:
+    font-size: 16px;
+    border-radius: 5px;
+`;
+
+export const SearchButton = styled.button`
+    height: 5vh;
+    font-size: 16px;
+    background: #C96E12;
+    border-radius: 5px;
+`;
+
+export const FillItUpLink = styled.a`
+    align-self: center;
+    width: 50%;
+    color: #C96E12;
+    margin: 0 auto;
+    margin-bottom: 3%;
+    font-size: 24px;
+    text-decoration: none;
+    text-align: center;
+    &:hover {
+      color: #F6C101;
     }
 `;
