@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { getPunkBeers, addMyBrews, getProfile } from '../actions/index';
 import UserNavbar from './UserNavbar';
 import SearchForm from './SearchForm';
-// import Spinner from 'react-bootstrap/Spinner';
+import Spinner from 'react-bootstrap/Spinner';
 import  { 
   DashboardFlexFeaturedDiv, 
   DashboardFlexDiv, 
@@ -91,7 +91,7 @@ const UserDashboard = (props) => {
                     <BeerText>ABV: {beer.abv}</BeerText>
                     <div className='actions-dashboard'>
                     <BeerLinks href={`/brews/${beer.id}`}>More Details</BeerLinks>
-                    {props.isPosting ? null : <FavoriteButton onClick={e =>{
+                    {props.isPosting ? <Spinner animation="border" variant="success"/> : <FavoriteButton onClick={e =>{
                       e.preventDefault();
                       handleAddBrew(beer)
                     }

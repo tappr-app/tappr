@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
+import * as yup from 'yup';
 import { connect } from 'react-redux';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import { addBeer } from '../actions/index';
@@ -26,8 +27,12 @@ const initialBeerState = {
   abv: ''
 };
 
+const ValidationSchema = yup.object().shape({
+  name: yup.string().required("Name is required")
+});
+
 function AddBeer(props) {
-  const { register, errors } = useForm();
+  const { register, errors } = useForm({ validationSchema: ValidationSchema });
 
   const [newBeer, setNewBeer] = useState(initialBeerState);
   const [results, setResults] = useState();
@@ -39,6 +44,7 @@ function AddBeer(props) {
     });
   };
 
+  // It's searching ... need to fix so it only searches when name input is being typed
   const search = (e) => {
     setNewBeer({
       ...newBeer,
@@ -58,13 +64,19 @@ function AddBeer(props) {
     props.history.push(`/brews/${beer.id}`)
   };
 
-  const onSubmit = () => {
+  const onSubmit = (e) => {
+    e.preventDefault();
+    console.log(`New Beer Name`, newBeer.name);
+    if (newBeer.name === '') {
+      document.getElementById('#name-error-message').classList.add('show');
+    } else {
       props.addBeer(newBeer);
       props.history.push('/my-dashboard');
+    }
   };
 
   const cancel = () => {
-    props.history.goBack();
+    props.history.push('/my-dashboard');
   };
 
   return (
@@ -90,8 +102,8 @@ function AddBeer(props) {
                 </>
                 : null}
               </SearchDiv>
+              {errors.name && <span id="name-error-message">{errors.name.message}</span>}
             </SearchDiv>
-            {errors.name && errors.name.type === 'required' && 'Name is required!'}
             <br />
             <FormLabel htmlFor="tagline">Tagline</FormLabel>
             <br />
