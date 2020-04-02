@@ -3,6 +3,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { getPunkBeers } from '../actions/index';
 import GuestNavbar from './GuestNavbar';
+import SearchForm from './SearchForm';
 import  { 
   DashboardFlexFeaturedDiv, 
   DashboardFlexDiv, 
@@ -53,6 +54,8 @@ const Dashboard = (props) => {
               </FeaturedBeerLinks>
             ))}
           </DashboardFlexFeaturedDiv>
+
+          <SearchForm />
 
           <DashboardFlexDiv>
             {props.beer.map((beer) => (

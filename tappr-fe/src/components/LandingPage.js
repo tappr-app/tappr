@@ -33,7 +33,7 @@ const LandingPage = () => {
           </ul>
         </div>
         <div>
-          <h3>Login</h3>
+          <h3>Lager-In</h3>
           <ul>
             <li>Sign-in with your new credentials</li>
           </ul>
