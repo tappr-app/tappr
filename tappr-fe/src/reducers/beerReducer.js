@@ -24,7 +24,10 @@ import {
   UPDATE_BEER_FAILURE,
   ADD_BEER_COMMENT,
   ADD_BEER_COMMENT_SUCCESS,
-  ADD_BEER_COMMENT_FAILURE
+  ADD_BEER_COMMENT_FAILURE,
+  UPDATE_BEER_COMMENT,
+  UPDATE_BEER_COMMENT_SUCCESS,
+  UPDATE_BEER_COMMENT_FAILURE
 } from '../actions/index';
 
 
@@ -33,6 +36,7 @@ const initialState = {
     active_user: {},
     isFetching: false,
     isPosting: false,
+    isPutting: false,
     readyToMount: false,
     error: ''
 };
@@ -118,36 +122,51 @@ export const beerReducer = (state = initialState, action) => {
         ...state,
         error: action.payload
       }
-      case ADD_PAIRING:
-        return{
-          ...state,
-          isPosting: true
-        }
-      case ADD_PAIRING_SUCCESS:
-        return{
-          ...state,
-          isPosting: false
-        }
-      case ADD_PAIRING_FAILURE:
-        return{
-          ...state,
-          error: action.payload
-        }
-      case ADD_BEER_COMMENT:
-        return{
-          ...state,
-          isPosting: true
-        }
-      case ADD_BEER_COMMENT_SUCCESS:
-        return{
-          ...state,
-          isPosting: false
-        }
-      case ADD_BEER_COMMENT_FAILURE:
-        return{
-          ...state,
-          error: action.payload
-        }
+    case ADD_PAIRING:
+      return{
+        ...state,
+        isPosting: true
+      }
+    case ADD_PAIRING_SUCCESS:
+      return{
+        ...state,
+        isPosting: false
+      }
+    case ADD_PAIRING_FAILURE:
+      return{
+        ...state,
+        error: action.payload
+      }
+    case ADD_BEER_COMMENT:
+      return{
+        ...state,
+        isPosting: true
+      }
+    case ADD_BEER_COMMENT_SUCCESS:
+      return{
+        ...state,
+        isPosting: false
+      }
+  case ADD_BEER_COMMENT_FAILURE:
+    return{
+      ...state,
+      error: action.payload
+    }
+    case UPDATE_BEER_COMMENT:
+      return{
+        ...state,
+        isPutting: true
+      }
+    case UPDATE_BEER_COMMENT_SUCCESS:
+      return{
+        ...state,
+        isPutting: false
+      }
+    case UPDATE_BEER_COMMENT_FAILURE:
+      return{
+        ...state,
+        error: action.payload
+      }
     case ADD_BEER:
       return {
         ...state,

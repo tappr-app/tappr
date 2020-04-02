@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { addPairing, addBeerComment, getProfile } from '../actions/index';
+import { addPairing, addBeerComment, getProfile, updateBeerComment } from '../actions/index';
 import UserNavbar from './UserNavbar';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 
@@ -12,13 +12,19 @@ const BeerDetails = (props) => {
   const params = useParams();
   const activeId = window.localStorage.getItem('user_id')
 
-  const [canCrud, setCanCrud] = useState(false);
   const [editingPairing, setEditingPairing] = useState(false);
   const [newPairing, setNewPairing] = useState({
     food_name: ''
   });
   const [editingComment, setEditingComment] = useState(false);
   const [newComment, setNewComment] = useState({
+    comment: '',
+    beer_id: params.id,
+    user_id: activeId
+  })
+  const [updatingComment, setUpdatingComment] = useState(false)
+  const [updateComment, setUpdateComment] = useState({
+    id: NaN,
     comment: '',
     beer_id: params.id,
     user_id: activeId
@@ -82,7 +88,21 @@ const handleAddComment = e =>{
   })
   setEditingComment(false)
 }
+const handleUpdatingComment = e =>{
+  e.preventDefault();
+  setUpdatingComment(true);
+}
+const handleUpdateCommentChanges = e =>{
+  setUpdateComment({
+    ...updateComment,
+    [e.target.name]: e.target.value
+  })
+}
 
+const handleUpdateComment = (beerId, comment) =>{
+  props.updateBeerComment(beerId, comment)
+}
+console.log(thisBeer)
   return (
     <div>
       <UserNavbar />
@@ -109,10 +129,20 @@ const handleAddComment = e =>{
           <div>Comments:{thisBeer.comments.map(element => {
             return (
             <div key={element.user_id}>
-              <p>{element.comment}</p>
+              <p key={element.id}>{element.comment}</p>
               {parseInt(activeId) === element.user_id ?
               <div>
-              <button>edit</button>
+              {updatingComment ? (
+              <form onSubmit={e =>{
+              e.preventDefault();
+              handleUpdateComment(params.id, {...updateComment, id: element.id})
+              }}>
+                <input name='comment'  onChange={handleUpdateCommentChanges}/>
+                <button type='submit'>update</button>
+                <button onClick={()=> setUpdatingComment(false)}>cancel</button>
+              </form>) 
+              : <button onClick={handleUpdatingComment}>edit</button>
+              }
               <button>X</button>
               </div> : <div></div>}
 
@@ -151,4 +181,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { addPairing, addBeerComment, getProfile })(BeerDetails);
+export default connect(mapStateToProps, { addPairing, addBeerComment, getProfile, updateBeerComment })(BeerDetails);
