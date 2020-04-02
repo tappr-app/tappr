@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addPairing, addBeerComment, getProfile } from '../actions/index';
 import UserNavbar from './UserNavbar';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
+
+import { BeerLinks } from '../styles/Styled';
 
 
 const BeerDetails = (props) => {
@@ -36,7 +38,7 @@ const BeerDetails = (props) => {
   // put props actions in dependency?
   // onClick handler for Update Button
   const updateBeer = (id) => {
-    props.history.push(`/update-a-beer/${id}`)
+    props.history.push(``)
   };
 
   // ===== Pairing CRUD functions ===== //
@@ -92,12 +94,16 @@ const handleAddComment = e =>{
           <p>{thisBeer.beer.tagline}</p>
           <p>{thisBeer.beer.description}</p>
           <p>ABV: {thisBeer.beer.abv}</p>
+          <BeerLinks href={`/update-a-beer/${params.id}`}>Update This Beer</BeerLinks>
           {thisBeer.food === [] ? <p>Pairings: None yet! Add some below.</p>
           :<div>
           <p>Pairings:</p>
           <ul>{thisBeer.food.map(element => {
             return <li key={element.id}>{element.food_name}</li>
-          })}</ul></div>}
+          })}</ul>
+          <button>Edit Pairings</button>
+          </div>
+          }
           {thisBeer.comments === [] ? <p>Comments: No Comments. Add some below!</p>
           :
           <div>Comments:{thisBeer.comments.map(element => {
@@ -107,7 +113,7 @@ const handleAddComment = e =>{
               {parseInt(activeId) === element.user_id ?
               <div>
               <button>edit</button>
-              <button>delete</button>
+              <button>X</button>
               </div> : <div></div>}
 
             </div>
