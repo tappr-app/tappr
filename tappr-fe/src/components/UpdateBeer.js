@@ -3,6 +3,17 @@ import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux'; 
 import { updateBeer } from '../actions/index';
 import UserNavbar from './UserNavbar';
+import { 
+  OuterFormDiv,
+  Form,
+  FormTitle,
+  FormLabel,
+  FormInput,
+  FormTextBox,
+  FormButtonMainDiv,
+  FormButtonDiv,
+  FormButton
+ } from '../styles/Styled';
 
 const initialBeerState = {
   name: '',
@@ -43,50 +54,60 @@ const UpdateBeer = (props) => {
   return (
     <div>
       <UserNavbar />
-      <form onSubmit={() => handleSubmit(id)}>
-        <div>
-          <label htmlFor="name">Name</label>
-          <input
+      <OuterFormDiv>
+        <Form onSubmit={() => handleSubmit(id)}>
+          <FormTitle>Update Beer</FormTitle>
+          <FormLabel htmlFor="name">Name</FormLabel>
+          <br />
+          <FormInput
             id="name"
             name="name"
             defaultValue={updatedBeer.name}
             onChange={handleChange} />
-        </div>
-        <div>
-          <label htmlFor="tagline">Tagline</label>
-          <input
+          <br />
+          <FormLabel htmlFor="tagline">Tagline</FormLabel>
+          <br />
+          <FormInput
             id="tagline"
             name="tagline"
             defaultValue={updatedBeer.tagline}
             onChange={handleChange} />
-        </div>
-        <div>
-          <label htmlFor="description">Description</label>
-          <input
+          <br />
+          <FormLabel htmlFor="description">Description</FormLabel>
+          <br />
+          <FormTextBox
             id="description"
             name="description"
             defaultValue={updatedBeer.description}
             onChange={handleChange} />
-        </div>
-        <div>
-          <label htmlFor="image_url">Image URL</label>
-          <input
+          <br />
+          <FormLabel htmlFor="image_url">Image URL</FormLabel>
+          <br />
+          <FormInput
               id="image_url"
               name="image_url"
               defaultValue={updatedBeer.image_url}
               onChange={handleChange} />
-        </div>
-        <div>
-          <label htmlFor="abv">ABV</label>
-          <input
+          <br />
+          <FormLabel htmlFor="abv">ABV</FormLabel>
+          <br />
+          <FormInput
               id="abv"
               name="abv"
               defaultValue={updatedBeer.abv}
               onChange={handleChange} />
-        </div>
-        <button>Update Beer</button>
-        <button onClick={cancel}>Cancel</button>
-      </form>
+          <br />
+          <FormButtonMainDiv>
+            <FormButtonDiv>
+              <FormButton>Update Beer</FormButton>
+            </FormButtonDiv>
+
+            <FormButtonDiv>
+              <FormButton onClick={cancel}>Cancel</FormButton>
+            </FormButtonDiv>
+          </FormButtonMainDiv>
+        </Form>
+      </OuterFormDiv>
     </div>
   );
 };

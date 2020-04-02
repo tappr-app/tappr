@@ -39,7 +39,6 @@ export const handlePostData = payload => dispatch => {
   axiosWithAuth()
     .post('/auth/register', payload)
     .then(res => {
-        console.log('POST', res);
         dispatch({ type: USER_CREATED });
         window.localStorage.setItem('user_id', res.data.user.id);
         window.localStorage.setItem('user_username', res.data.user.username);
@@ -54,7 +53,6 @@ export const handleLogin = credentials => dispatch =>{
     dispatch({type: USER_LOGIN});
     axios.post('https://tappr-app-api.herokuapp.com/api/auth/login', credentials)
       .then(res=>{
-          console.log('LOGIN', res);
           dispatch({ type: LOGGED_IN});
           window.localStorage.setItem('user_id', res.data.user.id);
           window.localStorage.setItem('user_username', res.data.user.username);
@@ -70,7 +68,6 @@ export const getProfile = id => dispatch =>{
   axiosWithAuth()
     .get(`/users/${id}`)
     .then(res=>{
-      console.log('user profile', res);
       dispatch({type: GET_USER_DATA_SUCCESS, payload: res.data})
     })
     .catch(error => {
@@ -104,14 +101,12 @@ export const addMyBrews = (payload) => dispatch =>{
     abv: payload.abv
   }
   axiosWithAuth().post('/users/beers', saveBeer)
-  .then(res => {
-    console.log(res);
-    dispatch({ type: ADD_MY_BREWS_SUCCESS, payload: res.data });
-  })
-  .catch(error => {
-    console.log(error);
-    dispatch({ type: ADD_MY_BREWS_FAILURE, payload: error.message });
-  });
+    .then(res => {
+      dispatch({ type: ADD_MY_BREWS_SUCCESS, payload: res.data });
+    })
+    .catch(error => {
+      dispatch({ type: ADD_MY_BREWS_FAILURE, payload: error.message });
+    });
 }
 
 
@@ -119,7 +114,6 @@ export const addBeer = (newBeer) => dispatch => {
   dispatch({ type: ADD_BEER });
   axiosWithAuth().post('/beers', newBeer)
     .then(res => {
-      console.log(res);
       dispatch({ type: ADD_BEER_SUCCESS, payload: res.data });
     })
     .catch(error => {

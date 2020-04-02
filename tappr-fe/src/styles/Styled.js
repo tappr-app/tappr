@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
+// FORM STYLING
+
 export const FormDiv = styled.div`
     // Outer most box
     display: flex;
@@ -69,6 +71,79 @@ export const FormDiv = styled.div`
     }
 `;
 
+export const OuterFormDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 5px solid #F6C101;
+  margin: 0 auto;
+  width: 25%;
+  // height: 50vh;
+  margin-bottom: 5%;
+  background-color: #C96E12;
+`;
+
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  color: #FFF897;
+`;
+
+export const FormTitle = styled.h1`
+  background-color: #FAE96F;
+  color: black;
+  width: 100%;
+  text-align: center;
+  margin: 0 0 5% 0;
+  padding: 4% 0;
+`;
+
+export const FormLabel = styled.label`
+  align-self: flex-start;
+`;
+
+export const FormInput = styled.input`
+  margin: 5% 0;
+  align-self: flex-start;
+  width: 50%;
+`;
+
+export const FormTextBox = styled.input`
+  margin: 5% 5%;
+  width: 100%;
+`;
+
+export const FormButtonMainDiv = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-end;
+  align-content: center;
+  width: 100%;
+  margin: 5%;
+`;
+
+export const FormButtonDiv = styled.div`
+  width: 35%;
+`;
+
+export const FormButton = styled.button`
+  background-color: #F6C101;
+  border: 2px solid #000000;
+  border-radius: 5px;
+  width: 100%;
+  &:hover {
+    background-color: black;
+    color: #F6C101;
+    cursor: pointer;
+  }
+`;
+
+// NAVBAR / LINKS STYLING
+
 export const Navbar = styled.nav`
     width: 100%;
     display: flex;
@@ -137,6 +212,8 @@ export const MyBrewsLinks = styled.a`
       color: #F6C101;
     }
 `;
+
+// DASHBOARD STYLING
 
 export const DashboardFlexFeaturedDiv = styled.div`
     display: flex;
@@ -216,15 +293,34 @@ export const LoadingText = styled.p`
 `;
 
 export const FavoriteButton = styled.button`
-    width: 30%;
-    font-size: 16px;
+    width: 40%;
+    font-size: 12px;
     border: 1px solid #F6C101;
     background: #C96E12;
-    margin-left: 35%;
-    border-radius: 10px;
+    margin: 2% 30%;
+    border-radius: 5px;
     &:hover {
-      color: black;
-      background: #F6C101;
+      background-color: black;
+      color: #F6C101;
+      cursor: pointer;
+    }
+`;
+
+// ADD A BEER FORM
+
+export const SearchDiv = styled.div`
+    width: 100%;
+`;
+
+export const SearchResult = styled.button`
+    width: 100%;
+    font-size: 12px;
+    border: none;
+    background: white;
+    color: #C96E12;
+    border-radius: 5px;
+    &:hover {
+      background: black;
       cursor: pointer;
     }
 `;

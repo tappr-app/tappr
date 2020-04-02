@@ -3,7 +3,6 @@ import { Route } from 'react-router-dom';
 import PrivateRoute from './utils/PrivateRoute';
 import LandingPage from './components/LandingPage';
 import LoginForm from './components/LoginForm';
-import Logout from './components/Logout';
 import RegisterForm from './components/RegisterForm';
 import Dashboard from './components/Dashboard';
 import UserDashboard from './components/UserDashboard';
@@ -30,7 +29,6 @@ function App() {
         <PrivateRoute path="/brews/:id" component={BeerDetails} />
         <PrivateRoute path="/add-a-beer" component={AddBeer} />
         <PrivateRoute path="/update-a-beer/:id" component={UpdateBeer} />
-        <PrivateRoute path="/logout" component={Logout} />
       </header>
     </div>
   );

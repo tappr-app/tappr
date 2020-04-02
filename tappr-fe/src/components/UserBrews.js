@@ -16,7 +16,6 @@ const UserBrews = (props) => {
 
   // onClick handler for Beer Details Button
   const beerDetails = beerId => {
-    console.log('id on click', beerId)
     props.history.push(`/brews/${beerId}`);
   };
 
