@@ -21,7 +21,10 @@ import {
   ADD_BEER_FAILURE,
   UPDATE_BEER,
   UPDATE_BEER_SUCCESS,
-  UPDATE_BEER_FAILURE
+  UPDATE_BEER_FAILURE,
+  ADD_BEER_COMMENT,
+  ADD_BEER_COMMENT_SUCCESS,
+  ADD_BEER_COMMENT_FAILURE
 } from '../actions/index';
 
 
@@ -126,6 +129,21 @@ export const beerReducer = (state = initialState, action) => {
           isPosting: false
         }
       case ADD_PAIRING_FAILURE:
+        return{
+          ...state,
+          error: action.payload
+        }
+      case ADD_BEER_COMMENT:
+        return{
+          ...state,
+          isPosting: true
+        }
+      case ADD_BEER_COMMENT_SUCCESS:
+        return{
+          ...state,
+          isPosting: false
+        }
+      case ADD_BEER_COMMENT_FAILURE:
         return{
           ...state,
           error: action.payload

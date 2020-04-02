@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { addPairing } from '../actions/index';
+import { addPairing, addBeerComment, getProfile } from '../actions/index';
 import UserNavbar from './UserNavbar';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 
 
 const BeerDetails = (props) => {
   const params = useParams();
+  const activeId = window.localStorage.getItem('user_id')
 
   const [editingPairing, setEditingPairing] = useState(false);
   const [newPairing, setNewPairing] = useState({
@@ -16,8 +17,8 @@ const BeerDetails = (props) => {
   const [editingComment, setEditingComment] = useState(false);
   const [newComment, setNewComment] = useState({
     comment: '',
-    beer_id: NaN,
-    user_id: NaN
+    beer_id: params.id,
+    user_id: activeId
   })
   const [thisBeer, setThisBeer] = useState()
   const [beerReady, setBeerReady] = useState(false)
@@ -69,9 +70,16 @@ const handleChangesComments = e =>{
 };
 const handleAddComment = e =>{
   e.preventDefault();
+  props.addBeerComment(newComment);
+  setNewComment({
+    comment: '',
+    beer_id: params.id,
+    user_id: activeId    
+  })
+  setEditingComment(false)
 }
-console.log(newComment)
-  
+
+  console.log(thisBeer)
   return (
     <div>
       <UserNavbar />
@@ -89,11 +97,16 @@ console.log(newComment)
           <ul>{thisBeer.food.map(element => {
             return <li key={element.id}>{element.food_name}</li>
           })}</ul></div>}
-          {thisBeer.comments !== [] ? <p>Comments: No Comments. Add some below!</p>
+          {thisBeer.comments === [] ? <p>Comments: No Comments. Add some below!</p>
           :
-          <p>Comments:{thisBeer.comments.forEach(element => {
-            return <li>{element}</li>
-          })}</p>}  
+          <div>Comments:{thisBeer.comments.map(element => {
+            return (
+            <div>
+              <p key={element.user_id}>{element.comment}</p><span>edit</span>
+              <span>delete</span>
+            </div>
+            )
+          })}</div>}  
           {editingPairing ? 
           (<form onSubmit={handleAddPairing}>
             <label>Food name:</label>
@@ -106,7 +119,7 @@ console.log(newComment)
           {editingComment ? 
           (<form onSubmit={handleAddComment}>
             <label>Leave Comment:</label>
-            <input name='food_name' onChange={handleChangesComments}/>
+            <input name='comment' onChange={handleChangesComments}/>
             <button type='submit'>Post</button>
             <span onClick={()=> setEditingComment(false)}>Cancel</span>
           </form>)
@@ -122,7 +135,8 @@ console.log(newComment)
 const mapStateToProps = state => {
   return {
     isPosting: state.isPosting,
+    active_user: state.active_user
   };
 };
 
-export default connect(mapStateToProps, { addPairing })(BeerDetails);
+export default connect(mapStateToProps, { addPairing, addBeerComment, getProfile })(BeerDetails);
