@@ -392,3 +392,34 @@ export const FillItUpLink = styled.a`
       color: #F6C101;
     }
 `;
+
+// USER PROFILE STYLING
+
+export const UserName = styled.p`
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 0;
+`;
+
+export const UserText = styled.p`
+    font-size: 20x;
+    text-align: center;
+`;
+
+export const UserImageDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 2%;
+`;
+
+export const UserImage = styled.img`
+    width: 8%;
+    height: 15vh;
+    border-radius: 5px;
+`;
+
+export const UserButtonDiv = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+`;

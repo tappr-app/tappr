@@ -3,7 +3,16 @@ import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 import UserNavbar from './UserNavbar';
 import { getProfile } from '../actions/index';
-import { axiosWithAuth } from '../utils/axiosWithAuth';
+import {
+  LoadingText,
+  SectionTitle,
+  UserImage,
+  UserImageDiv,
+  UserName,
+  UserText,
+  UserButtonDiv
+} from '../styles/Styled';
+import { Button } from 'react-bootstrap';
 
 const UserProfile = props => {
   const { id } = useParams();
@@ -21,24 +30,28 @@ const UserProfile = props => {
       <UserNavbar />
       {props.readyToMount ?
         <div>
-          <h2>{props.active_user.user.username}</h2>
-          <div>
+          <SectionTitle>{props.active_user.user.username}</SectionTitle>
+          <UserImageDiv>
             {props.active_user.user.user_image !== null ?
-              <img src={props.active_user.user.user_image} alt={props.active_user.user.username} /> : null}
-          </div>
+              <UserImage src={props.active_user.user.user_image} alt={props.active_user.user.username} /> : null}
+          </UserImageDiv>
 
           <div>
-            <p>Username: {props.active_user.user.username}</p>
-            <p>Age: {props.active_user.user.age}</p>
-            <h3>Bio</h3>
-            <p>{props.active_user.user.bio}</p>
+            <UserName>Username</UserName>
+            <UserText>{props.active_user.user.username}</UserText>
+            <UserName>Age</UserName>
+            <UserText>{props.active_user.user.age}</UserText>
+            <UserName>Bio</UserName>
+            <UserText>{props.active_user.user.bio}</UserText>
             {/* <div>
               <h3>Beer Badges</h3>
             </div> */}
-            <button onClick={() => editProfile()}>Edit Profile</button>
+            <UserButtonDiv>
+              <Button variant="warning" onClick={() => editProfile()}>Edit Profile</Button>
+            </UserButtonDiv>
           </div>
         </div>
-      : <div>Loading user profile...</div>}
+      : <LoadingText>Loading user profile...</LoadingText>}
     </div> 
   );
 };
