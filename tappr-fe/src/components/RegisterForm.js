@@ -3,10 +3,13 @@ import{ useForm } from 'react-hook-form';
 import { connect } from 'react-redux';
 import { handlePostData } from '../actions/index';
 import { FormDiv } from '../styles/Styled';
+import { Button, Modal } from 'react-bootstrap';
 import GuestNavbar from './GuestNavbar';
 
 const RegisterForm = props =>{
     const { register, handleSubmit, errors} = useForm();
+
+    const [show, setShow] = useState(false);
 
     const [newUser, setNewUser] = useState({
         username: '',
@@ -39,6 +42,10 @@ const RegisterForm = props =>{
     const returntoLogin = () => {
       props.history.push('/login');
     };
+
+    const handleClose = () => setShow(false);
+
+    const handleShow = () => setShow(true);
     
     return(
       <>
@@ -48,7 +55,7 @@ const RegisterForm = props =>{
               <GuestNavbar />
               <FormDiv>
               <h2 className='form-title'>Register</h2>
-              <form className='register-user' onSubmit={handleSubmit(onSubmit)}>
+              <form className='register-user' onSubmit={handleSubmit(handleShow)}>
               <label>Username</label>
               <input name='username' onChange={handleChanges}
                   ref={register({ required: true, maxLength: 10})}/>              
@@ -92,6 +99,21 @@ const RegisterForm = props =>{
             </>
           )
         }
+
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>Please Drink Responsibly</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>To use Tappr, pleaseagree to drink responsibly while exploring and tasting alcohol with this app.</Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                I'm Not Ready
+              </Button>
+              <Button variant="warning" onClick={onSubmit}>
+                I Will Drink Responsibly
+              </Button>
+            </Modal.Footer>
+          </Modal> 
         </>
     )
 }
