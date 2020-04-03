@@ -37,8 +37,6 @@ const UserProfile = props => {
           </UserImageDiv>
 
           <div>
-            <UserName>Username</UserName>
-            <UserText>{props.active_user.user.username}</UserText>
             <UserName>Age</UserName>
             <UserText>{props.active_user.user.age}</UserText>
             <UserName>Bio</UserName>
