@@ -148,6 +148,17 @@ const handleUpdateComment = (beerId, comment) =>{
   })
   .catch(err=> console.log(err));
 }
+
+const handleDeleteComment = (beerId, comment) =>{
+  props.deleteBeerComment(beerId, comment);
+  setUpdatingComment(false)
+  axiosWithAuth().get(`/beers/${params.id}`)
+  .then(res=>{
+    setThisBeer(res.data);
+    setBeerReady(true);
+  })
+  .catch(err=> console.log(err));
+}
 console.log(updatingPairings)
   return (
     <div>
@@ -209,7 +220,10 @@ console.log(updatingPairings)
               </form>) 
               : <button onClick={handleUpdatingComment}>edit</button>
               }
-              <button>X</button>
+              <button onClick={e => {
+                e.preventDefault();
+                handleDeleteComment(params.id, {...updateComment, id: element.id})
+              }}>delete</button>
               </div> : <div></div>}
 
             </div>
