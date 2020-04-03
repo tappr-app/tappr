@@ -15,7 +15,7 @@ const BeerDetails = (props) => {
   // state for updating the pairings list anyone can do this
   const [updatingPairings, setUpdatingPairings] = useState(false)
   const [updatePairings, setUpdatePairings] = useState({
-    beer_id: params.id,
+    id: NaN,
     food_name: '',
   })
   // State for adding a pairing
