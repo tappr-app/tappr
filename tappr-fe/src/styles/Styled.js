@@ -392,3 +392,61 @@ export const FillItUpLink = styled.a`
       color: #F6C101;
     }
 `;
+
+//BEER DETAILS STYLING
+
+export const BeerDetailsTitle = styled.h2`
+    margin: 2% 0 2% 2%;
+    font-size: 2.5rem;
+`;
+
+export const BeerDetailsDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    margin: 0 auto;
+    width: 50%;
+    padding: 1%;
+`;
+export const BeerDetailsImage = styled.img`
+    margin: 0 auto;
+    max-width: 100%;
+    object-fit: cover;
+`;
+
+export const BeerInfoDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    h3, p{
+        margin: 2%;
+    }
+`;
+
+export const PairingCommentDiv = styled.div`
+    display:flex;
+    flex-direction: column;
+    margin: 2% 0;
+`;
+
+export const CrudDiv= styled.div`
+    display: flex;
+    form{
+        width: 45%;
+        input{
+            margin-right: 3%;
+        }
+    }
+`;
+
+
+export const AddDiv =styled.div`
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 3%;
+    form{
+        input{
+            margin: 0 3% 0 3%;
+        }
+    }
+`;
