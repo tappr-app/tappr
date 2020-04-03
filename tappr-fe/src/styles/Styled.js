@@ -261,6 +261,44 @@ export const HeaderDiv = styled.div`
     
 
 `;
+export const FeaturesFlexDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    margin: 1%;
+    padding: 1%;
+`;
+
+export const StepsBoxDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    border: 1px solid black;
+    margin: 1%;
+    padding: 1%;
+    .steps{
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        .box{
+            background-color: #C96E12;
+            width: 100%;
+            border: 1px solid black;
+            margin: 1%;
+            padding: 1%;
+            h3{
+                color: #FFFFFF;
+            }
+            li, .register-link {
+                color: #F6C101;
+            }
+        }
+    }
+`;
+
+export const Footer = styled.footer`
+    text-align: center;
+`;
 
 // DASHBOARD STYLING
 
