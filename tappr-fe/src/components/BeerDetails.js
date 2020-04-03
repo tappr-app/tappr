@@ -12,43 +12,45 @@ import {
  } from '../actions/index';
 import UserNavbar from './UserNavbar';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
-
 import { BeerLinks } from '../styles/Styled';
-
 
 const BeerDetails = (props) => {
   const params = useParams();
   const activeId = window.localStorage.getItem('user_id')
 
   // state for updating the pairings list anyone can do this
-  const [updatingPairings, setUpdatingPairings] = useState(false)
+  const [updatingPairings, setUpdatingPairings] = useState(false);
   const [updatePairings, setUpdatePairings] = useState({
     id: NaN,
     food_name: '',
-  })
+  });
+
   // State for adding a pairing
   const [editingPairing, setEditingPairing] = useState(false);
   const [newPairing, setNewPairing] = useState({
     food_name: ''
   });
+
   // State for adding a comment
   const [editingComment, setEditingComment] = useState(false);
   const [newComment, setNewComment] = useState({
     comment: '',
     beer_id: params.id,
     user_id: activeId
-  })
+  });
+
   // State for adding a comment, ternary below has it so only the user who left the comment can edit
-  const [updatingComment, setUpdatingComment] = useState(false)
+  const [updatingComment, setUpdatingComment] = useState(false);
   const [updateComment, setUpdateComment] = useState({
     id: NaN,
     comment: '',
     beer_id: params.id,
     user_id: activeId
-  })
+  });
+
   // Local beer state
-  const [thisBeer, setThisBeer] = useState()
-  const [beerReady, setBeerReady] = useState(false)
+  const [thisBeer, setThisBeer] = useState();
+  const [beerReady, setBeerReady] = useState(false);
 
   useEffect(()=>{
     axiosWithAuth().get(`/beers/${params.id}`)
@@ -62,116 +64,124 @@ const BeerDetails = (props) => {
   // put props actions in dependency?
   // onClick handler for Update Button
   const updateBeer = (id) => {
-    props.history.push(``)
+    props.history.push(``);
   };
 
   // ===== Pairing CRUD functions ===== //
   const handleEditPairing = e =>{
     e.preventDefault();
-    setEditingPairing(true)
-  }
+    setEditingPairing(true);
+  };
+
   const handleChangesPairing = e =>{
     setNewPairing({
         ...newPairing,
         [e.target.name]: e.target.value
-    })
-};
+    });
+  };
 
-const handleAddPairing = e =>{
-  props.addPairing(thisBeer.beer.id, newPairing);
-  setNewPairing({
-    food_name: ''
-  });
-  setEditingPairing(false)
-}
+  const handleAddPairing = e =>{
+    props.addPairing(thisBeer.beer.id, newPairing);
+    setNewPairing({
+      food_name: ''
+    });
+    setEditingPairing(false);
+  };
 
-const handleUpdatingPairings = e =>{
-  e.preventDefault();
-  setUpdatingPairings(true);
-}
+  const handleUpdatingPairings = e =>{
+    e.preventDefault();
+    setUpdatingPairings(true);
+  };
 
-const handleUpdatePairingsChanges = e =>{
-  setUpdatePairings({
-    ...updatePairings,
-    [e.target.name]: e.target.value
-  })
-}
-
-const handleUpdatePairingSubmit = (beerId, pairing) =>{
-  props.updateFoodPairing(beerId, pairing);
-  setUpdatingPairings(false);
-  axiosWithAuth().get(`/beers/${params.id}`)
-  .then(res=>{
-    setThisBeer(res.data);
-    setBeerReady(true);
-  })
-  .catch(err=> console.log(err));
-}
-
-const handleDeleteFoodPairing = (beerId, pairing) =>{
-  props.deleteFoodPairing(beerId, pairing);
-  setUpdatingPairings(false)
-  axiosWithAuth().get(`/beers/${params.id}`)
-  .then(res=>{
-    setThisBeer(res.data);
-    setBeerReady(true);
-  })
-  .catch(err=> console.log(err));
-}
-// ===== Comment CRUD functions ===== //
-const handleEditComment = e =>{
-  e.preventDefault();
-  setEditingComment(true)
-}
-const handleChangesComments = e =>{
-  setNewComment({
-      ...newComment,
+  const handleUpdatePairingsChanges = e =>{
+    setUpdatePairings({
+      ...updatePairings,
       [e.target.name]: e.target.value
-  })
-};
-const handleAddComment = e =>{
-  e.preventDefault();
-  props.addBeerComment(newComment);
-  setNewComment({
-    comment: '',
-    beer_id: params.id,
-    user_id: activeId    
-  })
-  setEditingComment(false)
-}
-const handleUpdatingComment = e =>{
-  e.preventDefault();
-  setUpdatingComment(true);
-}
-const handleUpdateCommentChanges = e =>{
-  setUpdateComment({
-    ...updateComment,
-    [e.target.name]: e.target.value
-  })
-}
+    });
+  };
 
-const handleUpdateComment = (beerId, comment) =>{
-  props.updateBeerComment(beerId, comment);
-  setUpdatingComment(false)
-  axiosWithAuth().get(`/beers/${params.id}`)
-  .then(res=>{
-    setThisBeer(res.data);
-    setBeerReady(true);
-  })
-  .catch(err=> console.log(err));
-}
+  const handleUpdatePairingSubmit = (beerId, pairing) =>{
+    props.updateFoodPairing(beerId, pairing);
+    setUpdatingPairings(false);
+    axiosWithAuth().get(`/beers/${params.id}`)
+    .then(res=>{
+      setThisBeer(res.data);
+      setBeerReady(true);
+    })
+    .catch(err=> console.log(err));
+  };
 
-const handleDeleteComment = (beerId, comment) =>{
-  props.deleteBeerComment(beerId, comment);
-  setUpdatingComment(false)
-  axiosWithAuth().get(`/beers/${params.id}`)
-  .then(res=>{
-    setThisBeer(res.data);
-    setBeerReady(true);
-  })
-  .catch(err=> console.log(err));
-}
-console.log(updatingPairings)
+  const handleDeleteFoodPairing = (beerId, pairing) =>{
+    props.deleteFoodPairing(beerId, pairing);
+    setUpdatingPairings(false);
+    axiosWithAuth().get(`/beers/${params.id}`)
+    .then(res=>{
+      setThisBeer(res.data);
+      setBeerReady(true);
+    })
+    .catch(err=> console.log(err));
+  };
+
+  // ===== Comment CRUD functions ===== //
+  const handleEditComment = e =>{
+    e.preventDefault();
+    setEditingComment(true);
+  };
+
+  const handleChangesComments = e =>{
+    setNewComment({
+        ...newComment,
+        [e.target.name]: e.target.value
+    });
+  };
+
+  const handleAddComment = e =>{
+    e.preventDefault();
+    props.addBeerComment(newComment);
+    setNewComment({
+      comment: '',
+      beer_id: params.id,
+      user_id: activeId    
+    });
+    setEditingComment(false);
+  };
+
+  const handleUpdatingComment = e =>{
+    e.preventDefault();
+    setUpdatingComment(true);
+  };
+
+  const handleUpdateCommentChanges = e =>{
+    setUpdateComment({
+      ...updateComment,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleUpdateComment = (beerId, comment) =>{
+    props.updateBeerComment(beerId, comment);
+    setUpdatingComment(false);
+    axiosWithAuth().get(`/beers/${params.id}`)
+    .then(res=>{
+      setThisBeer(res.data);
+      setBeerReady(true);
+    })
+    .catch(err=> console.log(err));
+  };
+
+  const handleDeleteComment = (beerId, comment) =>{
+    props.deleteBeerComment(beerId, comment);
+    setUpdatingComment(false);
+    axiosWithAuth().get(`/beers/${params.id}`)
+    .then(res=>{
+      setThisBeer(res.data);
+      setBeerReady(true);
+    })
+    .catch(err=> console.log(err));
+  };
+
+  console.log(updatingPairings);
+  
   return (
     <div>
       <UserNavbar />

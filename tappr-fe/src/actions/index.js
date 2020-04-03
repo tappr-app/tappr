@@ -17,6 +17,10 @@ export const GET_USER_DATA = 'GET_USER_DATA';
 export const GET_USER_DATA_SUCCESS = 'GET_USER_DATA_SUCCESS';
 export const GET_USER_DATA_FAILURE = 'GET_USER_DATA_FAILURE';
 
+export const UPDATE_USER_DATA = 'UPDATE_USER_DATA';
+export const UPDATE_USER_DATA_SUCCESS = 'UPDATE_USER_DATA_SUCCESS';
+export const UPDATE_USER_DATA_FAILURE = 'UPDATE_USER_DATA_FAILURE';
+
 export const ADD_MY_BREWS = 'ADD_MY_BREWS';
 export const ADD_MY_BREWS_SUCCESS = 'ADD_MY_BREWS_SUCCESS';
 export const ADD_MY_BREWS_FAILURE = 'ADD_MY_BREWS_FAILURE';
@@ -40,18 +44,23 @@ export const UPDATE_BEER_FAILURE = 'UPDATE_BEER_FAILURE';
 export const ADD_PAIRING = 'ADD_PAIRING';
 export const ADD_PAIRING_SUCCESS = 'ADD_PAIRING_SUCCESS';
 export const ADD_PAIRING_FAILURE = 'ADD_PAIRING_FAILURE';
+
 export const UPDATE_FOOD_PAIRING = 'UPDATE_FOOD_PAIRING';
 export const UPDATE_FOOD_PAIRING_SUCCESS = 'UPDATE_FOOD_PAIRING_SUCCESS';
 export const UPDATE_FOOD_PAIRING_FAILURE = 'UPDATE_FOOD_PAIRING_FAILURE';
+
 export const DELETE_FOOD_PAIRING = 'DELETE_FOOD_PAIRING';
 export const DELETE_FOOD_PAIRING_SUCCESS = 'DELETE_FOOD_PAIRING_SUCCESS';
 export const DELETE_FOOD_PAIRING_FAILURE = 'DELETE_FOOD_PAIRING_FAILURE';
+
 export const ADD_BEER_COMMENT = 'ADD_BEER_COMMENT';
 export const ADD_BEER_COMMENT_SUCCESS = 'ADD_BEER_COMMENT_SUCCESS';
 export const ADD_BEER_COMMENT_FAILURE = 'ADD_BEER_COMMENT_FAILURE';
+
 export const DELETE_BEER_COMMENT = 'DELETE_BEER_COMMENT';
 export const DELETE_BEER_COMMENT_SUCCESS = 'DELETE_BEER_COMMENT_SUCCESS';
 export const DELETE_BEER_COMMENT_FAILURE = 'DELETE_BEER_COMMENT_FAILURE';
+
 export const UPDATE_BEER_COMMENT = 'UPDATE_BEER_COMMENT';
 export const UPDATE_BEER_COMMENT_SUCCESS = 'UPDATE_BEER_COMMENT_SUCCESS';
 export const UPDATE_BEER_COMMENT_FAILURE = 'UPDATE_BEER_COMMENT_FAILURE';
@@ -95,9 +104,7 @@ export const getProfile = id => dispatch =>{
     .catch(error => {
       dispatch({ type: GET_USER_DATA_FAILURE, payload: error.message });
     });
-}
-
-
+};
 
 export const getPunkBeers = () => dispatch => {
   dispatch({ type: GET_API_BEERS });
@@ -108,7 +115,6 @@ export const getPunkBeers = () => dispatch => {
     .catch(error => {
       dispatch({ type: GET_API_BEERS_FAILURE, payload: error.message });
     });
-
 };
 
 // adding to the brew takes an id and payload as an arg!
@@ -129,9 +135,7 @@ export const addMyBrews = (payload) => dispatch =>{
     .catch(error => {
       dispatch({ type: ADD_MY_BREWS_FAILURE, payload: error.message });
     });
-}
-
-
+};
 
 export const addBeer = (newBeer) => dispatch => {
   dispatch({ type: ADD_BEER });
@@ -163,7 +167,7 @@ export const updateFoodPairing = (beerId, updatedPairing) => dispatch => {
     })
     .catch(error => {
       dispatch({ type: UPDATE_FOOD_PAIRING_FAILURE, payload: error.message });
-    })
+    });
 };
 
 export const deleteFoodPairing = (beerId, pairing) => dispatch => {
@@ -175,8 +179,8 @@ export const deleteFoodPairing = (beerId, pairing) => dispatch => {
   })
   .catch(error => {
     dispatch({ type: DELETE_FOOD_PAIRING_FAILURE, payload: error.message });
-  })
-}
+  });
+};
 
 export const addBeerComment = (payload) => dispatch => {
   dispatch({ type: ADD_BEER_COMMENT });
@@ -203,7 +207,7 @@ export const updateBeerComment = (beerId, updatedBeerComment) => dispatch => {
     })
     .catch(error => {
       dispatch({ type: UPDATE_BEER_COMMENT_FAILURE, payload: error.message });
-    })
+    });
 };
 
 export const deleteBeerComment = (beerId, comment) => dispatch => {
@@ -214,8 +218,8 @@ export const deleteBeerComment = (beerId, comment) => dispatch => {
   })
   .catch(error => {
     dispatch({ type: DELETE_BEER_COMMENT_FAILURE, payload: error.message });
-  })
-}
+  });
+};
 
 export const updateBeer = (updatedBeer) => dispatch => {
   dispatch({ type: UPDATE_BEER });
@@ -225,9 +229,10 @@ export const updateBeer = (updatedBeer) => dispatch => {
     })
     .catch(error => {
       dispatch({ type: UPDATE_BEER_FAILURE, payload: error.message });
-    })
+    });
 };
 
+export const updateUser = (updatedUser) => dispatch => {
+  dispatch({ type: UPDATE_USER_DATA });
 
-
-
+}
