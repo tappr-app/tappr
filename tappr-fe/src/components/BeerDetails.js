@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { addPairing, addBeerComment, getProfile, updateBeerComment } from '../actions/index';
+import { addPairing, addBeerComment, getProfile, updateBeerComment, updateFoodPairing } from '../actions/index';
 import UserNavbar from './UserNavbar';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 
@@ -82,6 +82,23 @@ const handleUpdatingPairings = e =>{
   setUpdatingPairings(true);
 }
 
+const handleUpdatePairingsChanges = e =>{
+  setUpdatePairings({
+    ...updatePairings,
+    [e.target.name]: e.target.value
+  })
+}
+
+const handleUpdatePairingSubmit = (beerId, pairing) =>{
+  props.updateFoodPairing(beerId, pairing);
+  setUpdatingPairings(false);
+  axiosWithAuth().get(`/beers/${params.id}`)
+  .then(res=>{
+    setThisBeer(res.data);
+    setBeerReady(true);
+  })
+  .catch(err=> console.log(err));
+}
 // ===== Comment CRUD functions ===== //
 const handleEditComment = e =>{
   e.preventDefault();
@@ -146,11 +163,14 @@ console.log(updatingPairings)
                {updatingPairings ? 
                <div>
                 <li key={element.id}>{element.food_name}</li>
-                <form>
-                  <input name='food_name' />
-                  <button>update</button>
+                <form onSubmit={e=>{
+                  e.preventDefault();
+                  handleUpdatePairingSubmit(params.id, {...updatePairings, id: element.id});
+                }}>
+                  <input name='food_name' onChange={handleUpdatePairingsChanges} />
+                  <button type='submit'>update</button>
                 </form>
-                <span>X</span> 
+                <button>X</button> 
                 </div>
                 : 
                 <div>
@@ -220,4 +240,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { addPairing, addBeerComment, getProfile, updateBeerComment })(BeerDetails);
+export default connect(mapStateToProps, { addPairing, addBeerComment, getProfile, updateBeerComment, updateFoodPairing })(BeerDetails);
