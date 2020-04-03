@@ -12,16 +12,25 @@ const BeerDetails = (props) => {
   const params = useParams();
   const activeId = window.localStorage.getItem('user_id')
 
+  // state for updating the pairings list anyone can do this
+  const [updatingPairings, setUpdatingPairings] = useState(false)
+  const [updatePairings, setUpdatePairings] = useState({
+    beer_id: params.id,
+    food_name: '',
+  })
+  // State for adding a pairing
   const [editingPairing, setEditingPairing] = useState(false);
   const [newPairing, setNewPairing] = useState({
     food_name: ''
   });
+  // State for adding a comment
   const [editingComment, setEditingComment] = useState(false);
   const [newComment, setNewComment] = useState({
     comment: '',
     beer_id: params.id,
     user_id: activeId
   })
+  // State for adding a comment, ternary below has it so only the user who left the comment can edit
   const [updatingComment, setUpdatingComment] = useState(false)
   const [updateComment, setUpdateComment] = useState({
     id: NaN,
@@ -29,6 +38,7 @@ const BeerDetails = (props) => {
     beer_id: params.id,
     user_id: activeId
   })
+  // Local beer state
   const [thisBeer, setThisBeer] = useState()
   const [beerReady, setBeerReady] = useState(false)
 
