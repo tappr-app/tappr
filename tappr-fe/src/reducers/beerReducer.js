@@ -16,6 +16,9 @@ import {
   ADD_PAIRING,
   ADD_PAIRING_SUCCESS,
   ADD_PAIRING_FAILURE,
+  UPDATE_FOOD_PAIRING,
+  UPDATE_FOOD_PAIRING_SUCCESS,
+  UPDATE_FOOD_PAIRING_FAILURE,
   ADD_BEER,
   ADD_BEER_SUCCESS,
   ADD_BEER_FAILURE,
@@ -133,6 +136,21 @@ export const beerReducer = (state = initialState, action) => {
         isPosting: false
       }
     case ADD_PAIRING_FAILURE:
+      return{
+        ...state,
+        error: action.payload
+      }
+    case UPDATE_FOOD_PAIRING:
+      return{
+        ...state,
+        isPutting: true
+      }
+    case UPDATE_FOOD_PAIRING_SUCCESS:
+      return{
+        ...state,
+        isPutting: false
+      }
+    case UPDATE_FOOD_PAIRING_FAILURE:
       return{
         ...state,
         error: action.payload

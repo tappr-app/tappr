@@ -142,7 +142,7 @@ console.log(updatingPairings)
           <p>Pairings:</p>
           <ul>{thisBeer.food.map(element => {
             return (
-              <div>
+              <div key={element.id}>
                {updatingPairings ? 
                <div>
                 <li key={element.id}>{element.food_name}</li>
