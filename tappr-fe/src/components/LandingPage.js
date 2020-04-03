@@ -1,15 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import GuestNavbar from './GuestNavbar'
 
+import { Button } from 'react-bootstrap';
+
 const LandingPage = () => {
+  const history = useHistory();
   return (
     <div>
       <GuestNavbar />
       <header>
         <h1>TAPPR</h1>
       </header>
-      <button>Get Started</button>
+      <Button variant="warning" onClick={()=> history.push('/register')}>Get Started</Button>
       <div className='app-features'>
         <h2>What is Tappr?</h2>
         <p>There are over 6500 breweries in the U.S. alone. With all that hoppy goodness, there are a lot of beers that will come and go; forgotten and underappreciated.</p>
