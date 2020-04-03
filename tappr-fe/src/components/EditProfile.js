@@ -49,7 +49,6 @@ const EditProfile = props => {
       ...userData,
       [event.target.name]: event.target.value
     });
-    console.log(userData);
   };
 
   const handleSubmit = id => {
