@@ -30,8 +30,6 @@ function AddBeer(props) {
   const [newBeer, setNewBeer] = useState(initialBeerState);
   const [results, setResults] = useState([]);
 
-  console.log('Results:',results);
-
   const handleChanges = (e) => {
     setNewBeer({
       ...newBeer,
@@ -63,7 +61,6 @@ function AddBeer(props) {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(`New Beer Name`, newBeer.name);
     if (newBeer.name === '') {
       document.getElementById('#name-error-message').classList.add('show');
     } else {

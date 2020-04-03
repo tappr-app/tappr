@@ -50,7 +50,6 @@ const UserDashboard = (props) => {
 
   }, []);
   const handleAddBrew = beer =>{
-    console.log(beer)
     props.addMyBrews(beer);
   }
  
