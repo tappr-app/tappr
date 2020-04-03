@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux'; 
 import { updateBeer } from '../actions/index';
@@ -28,12 +29,20 @@ const UpdateBeer = (props) => {
   const { id } = useParams();
 
   useEffect(() => {
-    const beerToEdit = props.beer.find(beer => `${beer.id}` === id);
+    axios.get('https://tappr-app-api.herokuapp.com/api/beers')
+      .then(res => {
+        const beerToEdit = res.data.find(beer => {
+          return beer.id == id;
+        });
 
-    if (beerToEdit) {
-      setUpdatedBeer(beerToEdit);
-    };
-  }, [props.beer, id]);
+        if (beerToEdit) {
+          setUpdatedBeer(beerToEdit);
+        };
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, []);
 
   const handleChange = event => {
     setUpdatedBeer({
@@ -58,7 +67,6 @@ const UpdateBeer = (props) => {
         <Form onSubmit={() => handleSubmit(id)}>
           <FormTitle>Update Beer</FormTitle>
           <FormLabel htmlFor="name">Name</FormLabel>
-          <br />
           <FormInput
             id="name"
             name="name"
@@ -66,7 +74,6 @@ const UpdateBeer = (props) => {
             onChange={handleChange} />
           <br />
           <FormLabel htmlFor="tagline">Tagline</FormLabel>
-          <br />
           <FormInput
             id="tagline"
             name="tagline"
@@ -74,7 +81,6 @@ const UpdateBeer = (props) => {
             onChange={handleChange} />
           <br />
           <FormLabel htmlFor="description">Description</FormLabel>
-          <br />
           <FormTextBox
             id="description"
             name="description"
@@ -82,7 +88,6 @@ const UpdateBeer = (props) => {
             onChange={handleChange} />
           <br />
           <FormLabel htmlFor="image_url">Image URL</FormLabel>
-          <br />
           <FormInput
               id="image_url"
               name="image_url"
@@ -90,7 +95,6 @@ const UpdateBeer = (props) => {
               onChange={handleChange} />
           <br />
           <FormLabel htmlFor="abv">ABV</FormLabel>
-          <br />
           <FormInput
               id="abv"
               name="abv"
@@ -112,10 +116,4 @@ const UpdateBeer = (props) => {
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    beer: state.beer
-  };
-};
-
-export default connect(mapStateToProps, { updateBeer })(UpdateBeer);
+export default connect(null, { updateBeer })(UpdateBeer);

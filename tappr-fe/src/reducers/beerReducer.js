@@ -7,6 +7,9 @@ import {
   GET_USER_DATA,
   GET_USER_DATA_SUCCESS,
   GET_USER_DATA_FAILURE,
+  UPDATE_USER_DATA,
+  UPDATE_USER_DATA_SUCCESS,
+  UPDATE_USER_DATA_FAILURE,
   GET_API_BEERS, 
   GET_API_BEERS_SUCCESS, 
   GET_API_BEERS_FAILURE,
@@ -93,6 +96,25 @@ export const beerReducer = (state = initialState, action) => {
         error: ''
       }
     case GET_USER_DATA_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.payload
+      }
+    case UPDATE_USER_DATA:
+      return {
+        ...state,
+        isFetching: true,
+        error: ''
+      }
+    case UPDATE_USER_DATA_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        error: '',
+        active_user: action.payload
+      }
+    case UPDATE_USER_DATA_FAILURE:
       return {
         ...state,
         isFetching: false,
