@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { addPairing, addBeerComment, getProfile, updateBeerComment, updateFoodPairing } from '../actions/index';
+import { 
+  addPairing,
+  addBeerComment, 
+  getProfile, 
+  updateBeerComment,
+  deleteBeerComment, 
+  updateFoodPairing,
+ } from '../actions/index';
 import UserNavbar from './UserNavbar';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 
@@ -240,4 +247,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { addPairing, addBeerComment, getProfile, updateBeerComment, updateFoodPairing })(BeerDetails);
+export default connect(mapStateToProps, { addPairing, addBeerComment, getProfile, updateBeerComment, deleteBeerComment, updateFoodPairing })(BeerDetails);

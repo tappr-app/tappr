@@ -46,6 +46,9 @@ export const UPDATE_FOOD_PAIRING_FAILURE = 'UPDATE_FOOD_PAIRING_FAILURE'
 export const ADD_BEER_COMMENT = 'ADD_BEER_COMMENT';
 export const ADD_BEER_COMMENT_SUCCESS = 'ADD_BEER_COMMENT_SUCCESS';
 export const ADD_BEER_COMMENT_FAILURE = 'ADD_BEER_COMMENT_FAILURE';
+export const DELETE_BEER_COMMENT = 'DELETE_BEER_COMMENT';
+export const DELETE_BEER_COMMENT_SUCCESS = 'DELETE_BEER_COMMENT_SUCCESS';
+export const DELETE_BEER_COMMENT_FAILURE = 'DELETE_BEER_COMMENT_FAILURE';
 export const UPDATE_BEER_COMMENT = 'UPDATE_BEER_COMMENT';
 export const UPDATE_BEER_COMMENT_SUCCESS = 'UPDATE_BEER_COMMENT_SUCCESS';
 export const UPDATE_BEER_COMMENT_FAILURE = 'UPDATE_BEER_COMMENT_FAILURE';
@@ -187,6 +190,17 @@ export const updateBeerComment = (beerId, updatedBeerComment) => dispatch => {
       dispatch({ type: UPDATE_BEER_COMMENT_FAILURE, payload: error.message });
     })
 };
+
+export const deleteBeerComment = (beerId, comment) => dispatch => {
+  dispatch({type: DELETE_BEER_COMMENT});
+  axiosWithAuth().delete(`/beers/${beerId}/comments/${comment.id}`)
+  .then(res=>{
+    dispatch({type: DELETE_BEER_COMMENT_SUCCESS, payload: res.data})
+  })
+  .catch(error => {
+    dispatch({ type: DELETE_BEER_COMMENT_FAILURE, payload: error.message });
+  })
+}
 
 export const updateBeer = (updatedBeer) => dispatch => {
   dispatch({ type: UPDATE_BEER });

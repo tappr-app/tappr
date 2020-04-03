@@ -28,6 +28,9 @@ import {
   ADD_BEER_COMMENT,
   ADD_BEER_COMMENT_SUCCESS,
   ADD_BEER_COMMENT_FAILURE,
+  DELETE_BEER_COMMENT,
+  DELETE_BEER_COMMENT_SUCCESS,
+  DELETE_BEER_COMMENT_FAILURE,
   UPDATE_BEER_COMMENT,
   UPDATE_BEER_COMMENT_SUCCESS,
   UPDATE_BEER_COMMENT_FAILURE
@@ -40,6 +43,7 @@ const initialState = {
     isFetching: false,
     isPosting: false,
     isPutting: false,
+    isDeleting: false,
     readyToMount: false,
     error: ''
 };
@@ -166,6 +170,21 @@ export const beerReducer = (state = initialState, action) => {
         isPosting: false
       }
   case ADD_BEER_COMMENT_FAILURE:
+    return{
+      ...state,
+      error: action.payload
+    }
+    case DELETE_BEER_COMMENT:
+      return{
+        ...state,
+        isDeleting: true
+      }
+    case DELETE_BEER_COMMENT_SUCCESS:
+      return{
+        ...state,
+        isDeleting: false
+      }
+  case DELETE_BEER_COMMENT_FAILURE:
     return{
       ...state,
       error: action.payload
