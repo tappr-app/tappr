@@ -19,6 +19,9 @@ import {
   UPDATE_FOOD_PAIRING,
   UPDATE_FOOD_PAIRING_SUCCESS,
   UPDATE_FOOD_PAIRING_FAILURE,
+  DELETE_FOOD_PAIRING,
+  DELETE_FOOD_PAIRING_SUCCESS,
+  DELETE_FOOD_PAIRING_FAILURE,
   ADD_BEER,
   ADD_BEER_SUCCESS,
   ADD_BEER_FAILURE,
@@ -33,7 +36,7 @@ import {
   DELETE_BEER_COMMENT_FAILURE,
   UPDATE_BEER_COMMENT,
   UPDATE_BEER_COMMENT_SUCCESS,
-  UPDATE_BEER_COMMENT_FAILURE
+  UPDATE_BEER_COMMENT_FAILURE,
 } from '../actions/index';
 
 
@@ -159,6 +162,21 @@ export const beerReducer = (state = initialState, action) => {
         ...state,
         error: action.payload
       }
+    case DELETE_FOOD_PAIRING:
+      return{
+        ...state,
+        isDeleting: true
+      }
+    case DELETE_FOOD_PAIRING_SUCCESS:
+      return{
+        ...state,
+        isDeleting: false
+      }
+  case DELETE_FOOD_PAIRING_FAILURE:
+    return{
+      ...state,
+      error: action.payload
+    }
     case ADD_BEER_COMMENT:
       return{
         ...state,
