@@ -77,6 +77,11 @@ const handleAddPairing = e =>{
   setEditingPairing(false)
 }
 
+const handleUpdatingPairings = e =>{
+  e.preventDefault();
+  setUpdatingPairings(true);
+}
+
 // ===== Comment CRUD functions ===== //
 const handleEditComment = e =>{
   e.preventDefault();
@@ -119,7 +124,7 @@ const handleUpdateComment = (beerId, comment) =>{
   })
   .catch(err=> console.log(err));
 }
-console.log(thisBeer)
+console.log(updatingPairings)
   return (
     <div>
       <UserNavbar />
@@ -136,9 +141,26 @@ console.log(thisBeer)
           :<div>
           <p>Pairings:</p>
           <ul>{thisBeer.food.map(element => {
-            return <li key={element.id}>{element.food_name}</li>
+            return (
+              <div>
+               {updatingPairings ? 
+               <div>
+                <li key={element.id}>{element.food_name}</li>
+                <form>
+                  <input name='food_name' />
+                  <button>update</button>
+                </form>
+                <span>X</span> 
+                </div>
+                : 
+                <div>
+                  <li key={element.id}>{element.food_name}</li>
+                </div>
+               }
+              </div>
+            )
           })}</ul>
-          <button>Edit Pairings</button>
+          {updatingPairings ? <button onClick={()=> setUpdatingPairings(false)}>Cancel</button> : <button onClick={handleUpdatingPairings}>Edit Pairings</button> }
           </div>
           }
           {thisBeer.comments === [] ? <p>Comments: No Comments. Add some below!</p>
