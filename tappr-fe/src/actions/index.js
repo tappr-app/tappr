@@ -1,6 +1,5 @@
 import axios from 'axios'
 import { axiosWithAuth } from "../utils/axiosWithAuth";
-import { bindActionCreators } from 'redux';
 
 // General Actions
 export const SET_ERROR = 'SET_ERROR';
