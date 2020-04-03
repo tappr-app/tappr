@@ -101,6 +101,25 @@ export const beerReducer = (state = initialState, action) => {
         isFetching: false,
         error: action.payload
       }
+    case UPDATE_USER_DATA:
+      return {
+        ...state,
+        isFetching: true,
+        error: ''
+      }
+    case UPDATE_USER_DATA_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        error: '',
+        active_user: action.payload
+      }
+    case UPDATE_USER_DATA_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.payload
+      }
     case GET_API_BEERS:
       return {
         ...state,

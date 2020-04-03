@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+import { bindActionCreators } from 'redux';
 
 // General Actions
 export const SET_ERROR = 'SET_ERROR';
@@ -171,7 +172,6 @@ export const updateFoodPairing = (beerId, updatedPairing) => dispatch => {
 };
 
 export const deleteFoodPairing = (beerId, pairing) => dispatch => {
-  console.log('delete action on pairing', pairing)
   dispatch({type: DELETE_FOOD_PAIRING});
   axiosWithAuth().delete(`/beers/${beerId}/foods/${pairing.id}`)
   .then(res=>{
@@ -200,7 +200,6 @@ export const addBeerComment = (payload) => dispatch => {
 
 export const updateBeerComment = (beerId, updatedBeerComment) => dispatch => {
   dispatch({ type: UPDATE_BEER_COMMENT });
-  console.log('action log', updatedBeerComment)
   axiosWithAuth().put(`/beers/${beerId}/comments/${updatedBeerComment.id}`, updatedBeerComment)
     .then(res => {
       dispatch({ type: UPDATE_BEER_COMMENT_SUCCESS, payload: res.data });
@@ -234,5 +233,11 @@ export const updateBeer = (updatedBeer) => dispatch => {
 
 export const updateUser = (updatedUser) => dispatch => {
   dispatch({ type: UPDATE_USER_DATA });
-
-}
+  axiosWithAuth().put(`users/${updatedUser.id}`, updatedUser)
+    .then(res => {
+      dispatch({ type: UPDATE_USER_DATA_SUCCESS, payload: res.data });
+    })
+    .catch(error => {
+      dispatch({ type: UPDATE_USER_DATA_FAILURE, payload: error.message });
+    });
+};

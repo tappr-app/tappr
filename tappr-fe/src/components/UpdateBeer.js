@@ -67,7 +67,6 @@ const UpdateBeer = (props) => {
         <Form onSubmit={() => handleSubmit(id)}>
           <FormTitle>Update Beer</FormTitle>
           <FormLabel htmlFor="name">Name</FormLabel>
-          <br />
           <FormInput
             id="name"
             name="name"
@@ -75,7 +74,6 @@ const UpdateBeer = (props) => {
             onChange={handleChange} />
           <br />
           <FormLabel htmlFor="tagline">Tagline</FormLabel>
-          <br />
           <FormInput
             id="tagline"
             name="tagline"
@@ -83,7 +81,6 @@ const UpdateBeer = (props) => {
             onChange={handleChange} />
           <br />
           <FormLabel htmlFor="description">Description</FormLabel>
-          <br />
           <FormTextBox
             id="description"
             name="description"
@@ -91,7 +88,6 @@ const UpdateBeer = (props) => {
             onChange={handleChange} />
           <br />
           <FormLabel htmlFor="image_url">Image URL</FormLabel>
-          <br />
           <FormInput
               id="image_url"
               name="image_url"
@@ -99,7 +95,6 @@ const UpdateBeer = (props) => {
               onChange={handleChange} />
           <br />
           <FormLabel htmlFor="abv">ABV</FormLabel>
-          <br />
           <FormInput
               id="abv"
               name="abv"

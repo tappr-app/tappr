@@ -1,32 +1,25 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 import UserNavbar from './UserNavbar';
-import { getProfile, updateUser } from '../actions/index';
+import { getProfile } from '../actions/index';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 
 const UserProfile = props => {
-  const id = window.localStorage.getItem('user_id');
-
-  const [userData, setUserData] = useState({
-    id: id,
-    username: '',
-    password: '',
-    age: '',
-    bio: '',
-    user_image: ''
-  });
+  const { id } = useParams();
 
   useEffect(()=>{
-    props.getProfile(id)
+    props.getProfile(id);
   }, []);
 
   const editProfile = newData => {
-    props.updateUser(newData);
+    props.history.push(`/my-profile/${id}/edit`)
   };
 
   return (
     <div>
       <UserNavbar />
-      {props.readyToMount ? 
+      {props.readyToMount ?
         <div>
           <h2>{props.active_user.user.username}</h2>
           <div>
@@ -42,13 +35,10 @@ const UserProfile = props => {
             {/* <div>
               <h3>Beer Badges</h3>
             </div> */}
-            <button>Edit Profile</button>
+            <button onClick={() => editProfile()}>Edit Profile</button>
           </div>
         </div>
-      :
-      <div>Loading your profile...</div>
-      }
-
+      : <div>Loading user profile...</div>}
     </div> 
   );
 };
@@ -61,4 +51,4 @@ const mapPropsToState = state =>{
   }
 }
 
-export default connect(mapPropsToState, { getProfile, updateUser })(UserProfile);
+export default connect(mapPropsToState, { getProfile })(UserProfile);

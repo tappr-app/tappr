@@ -180,8 +180,6 @@ const BeerDetails = (props) => {
     .catch(err=> console.log(err));
   };
 
-  console.log(updatingPairings);
-  
   return (
     <div>
       <UserNavbar />
