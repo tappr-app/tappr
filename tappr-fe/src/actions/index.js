@@ -167,8 +167,9 @@ export const updateFoodPairing = (beerId, updatedPairing) => dispatch => {
 };
 
 export const deleteFoodPairing = (beerId, pairing) => dispatch => {
+  console.log('delete action on pairing', pairing)
   dispatch({type: DELETE_FOOD_PAIRING});
-  axiosWithAuth().delete(`/beers/${beerId}/comments/${pairing.id}`)
+  axiosWithAuth().delete(`/beers/${beerId}/foods/${pairing.id}`)
   .then(res=>{
     dispatch({type: DELETE_FOOD_PAIRING_SUCCESS, payload: res.data})
   })

@@ -8,6 +8,7 @@ import {
   updateBeerComment,
   deleteBeerComment, 
   updateFoodPairing,
+  deleteFoodPairing
  } from '../actions/index';
 import UserNavbar from './UserNavbar';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
@@ -106,6 +107,17 @@ const handleUpdatePairingSubmit = (beerId, pairing) =>{
   })
   .catch(err=> console.log(err));
 }
+
+const handleDeleteFoodPairing = (beerId, pairing) =>{
+  props.deleteFoodPairing(beerId, pairing);
+  setUpdatingPairings(false)
+  axiosWithAuth().get(`/beers/${params.id}`)
+  .then(res=>{
+    setThisBeer(res.data);
+    setBeerReady(true);
+  })
+  .catch(err=> console.log(err));
+}
 // ===== Comment CRUD functions ===== //
 const handleEditComment = e =>{
   e.preventDefault();
@@ -188,7 +200,10 @@ console.log(updatingPairings)
                   <input name='food_name' onChange={handleUpdatePairingsChanges} />
                   <button type='submit'>update</button>
                 </form>
-                <button>X</button> 
+                <button onClick={e =>{
+                  e.preventDefault();
+                  handleDeleteFoodPairing(params.id, {...updatePairings, id: element.id})
+                }}>X</button> 
                 </div>
                 : 
                 <div>
@@ -257,8 +272,10 @@ console.log(updatingPairings)
 const mapStateToProps = state => {
   return {
     isPosting: state.isPosting,
-    active_user: state.active_user
+    active_user: state.active_user,
+    isDeleting: state.isDeleting,
+    isPutting: state.isPutting
   };
 };
 
-export default connect(mapStateToProps, { addPairing, addBeerComment, getProfile, updateBeerComment, deleteBeerComment, updateFoodPairing })(BeerDetails);
+export default connect(mapStateToProps, { addPairing, addBeerComment, getProfile, updateBeerComment, deleteBeerComment, updateFoodPairing, deleteFoodPairing })(BeerDetails);
