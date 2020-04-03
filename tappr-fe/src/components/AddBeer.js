@@ -12,11 +12,11 @@ import {
   FormTextBox,
   FormButtonMainDiv,
   FormButtonDiv,
-  FormButton,
   SearchDiv,
   SearchResult,
   ErrorMessage
  } from '../styles/Styled';
+ import { Button } from 'react-bootstrap';
 
 const initialBeerState = {
   name: '',
@@ -123,11 +123,11 @@ function AddBeer(props) {
             <br />
             <FormButtonMainDiv>
               <FormButtonDiv>
-                <FormButton onClick={() => onSubmit()}>Create Beer</FormButton>
+                <Button variant="warning" onClick={() => onSubmit()}>Create Beer</Button>
               </FormButtonDiv>
 
               <FormButtonDiv>
-                <FormButton onClick={cancel}>Cancel</FormButton>
+                <Button variant="danger" onClick={cancel}>Cancel</Button>
               </FormButtonDiv>
             </FormButtonMainDiv>
         </Form>

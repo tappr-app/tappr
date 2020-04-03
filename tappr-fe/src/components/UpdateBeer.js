@@ -11,9 +11,9 @@ import {
   FormInput,
   FormTextBox,
   FormButtonMainDiv,
-  FormButtonDiv,
-  FormButton
+  FormButtonDiv
  } from '../styles/Styled';
+ import { Button } from 'react-bootstrap';
 
 const initialBeerState = {
   name: '',
@@ -99,11 +99,11 @@ const UpdateBeer = (props) => {
           <br />
           <FormButtonMainDiv>
             <FormButtonDiv>
-              <FormButton>Update Beer</FormButton>
+              <Button variant="warning">Update Beer</Button>
             </FormButtonDiv>
 
             <FormButtonDiv>
-              <FormButton onClick={cancel}>Cancel</FormButton>
+              <Button variant="danger" onClick={cancel}>Cancel</Button>
             </FormButtonDiv>
           </FormButtonMainDiv>
         </Form>
