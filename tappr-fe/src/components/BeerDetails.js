@@ -14,6 +14,7 @@ import UserNavbar from './UserNavbar';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 
 import { BeerLinks } from '../styles/Styled';
+import { Button } from 'react-bootstrap';
 
 
 const BeerDetails = (props) => {
@@ -171,11 +172,11 @@ const handleDeleteComment = (beerId, comment) =>{
   })
   .catch(err=> console.log(err));
 }
-console.log(updatingPairings)
+
   return (
     <div>
       <UserNavbar />
-      <span>BeerDetails</span>
+      <h2>BeerDetails</h2>
       {beerReady ? 
         <div>
           <img src={thisBeer.beer.image_url} alt='beer-picture' />
@@ -198,12 +199,12 @@ console.log(updatingPairings)
                   handleUpdatePairingSubmit(params.id, {...updatePairings, id: element.id});
                 }}>
                   <input name='food_name' onChange={handleUpdatePairingsChanges} />
-                  <button type='submit'>update</button>
+                  <Button variant="warning" type='submit'>update</Button>
                 </form>
-                <button onClick={e =>{
+                <Button variant="danger" onClick={e =>{
                   e.preventDefault();
                   handleDeleteFoodPairing(params.id, {...updatePairings, id: element.id})
-                }}>X</button> 
+                }}>X</Button> 
                 </div>
                 : 
                 <div>
@@ -213,7 +214,7 @@ console.log(updatingPairings)
               </div>
             )
           })}</ul>
-          {updatingPairings ? <button onClick={()=> setUpdatingPairings(false)}>Cancel</button> : <button onClick={handleUpdatingPairings}>Edit Pairings</button> }
+          {updatingPairings ? <Button variant="danger" onClick={()=> setUpdatingPairings(false)}>Cancel</Button> : <Button variant="info" onClick={handleUpdatingPairings}>Edit Pairings</Button> }
           </div>
           }
           {thisBeer.comments === [] ? <p>Comments: No Comments. Add some below!</p>
@@ -230,15 +231,15 @@ console.log(updatingPairings)
               handleUpdateComment(params.id, {...updateComment, id: element.id})
               }}>
                 <input name='comment'  onChange={handleUpdateCommentChanges}/>
-                <button type='submit'>update</button>
-                <button onClick={()=> setUpdatingComment(false)}>cancel</button>
+                <Button variant="warning" type='submit'>update</Button>
+                <Button variant="danger" onClick={()=> setUpdatingComment(false)}>cancel</Button>
               </form>) 
-              : <button onClick={handleUpdatingComment}>edit</button>
+              : <Button variant="info" onClick={handleUpdatingComment}>edit</Button>
               }
-              <button onClick={e => {
+              <Button variant="danger" onClick={e => {
                 e.preventDefault();
                 handleDeleteComment(params.id, {...updateComment, id: element.id})
-              }}>delete</button>
+              }}>delete</Button>
               </div> : <div></div>}
 
             </div>
@@ -248,19 +249,19 @@ console.log(updatingPairings)
           (<form onSubmit={handleAddPairing}>
             <label>Food name:</label>
             <input name='food_name' onChange={handleChangesPairing}/>
-            <button type='submit'>Post</button>
+            <Button variant="warning" type='submit'>Post</Button>
             <span onClick={()=> setEditingPairing(false)}>Cancel</span>
           </form>)
-          : (<button onClick={handleEditPairing}>Add Pairing</button>)
+          : (<Button variant="info" onClick={handleEditPairing}>Add Pairing</Button>)
           }
           {editingComment ? 
           (<form onSubmit={handleAddComment}>
             <label>Leave Comment:</label>
             <input name='comment' onChange={handleChangesComments}/>
-            <button type='submit'>Post</button>
+            <Button variant="warning" type='submit'>Post</Button>
             <span onClick={()=> setEditingComment(false)}>Cancel</span>
           </form>)
-          : (<button onClick={handleEditComment}>Add Comment</button>)
+          : (<Button variant="info" onClick={handleEditComment}>Add Comment</Button>)
           }                      
         </div>  
       : <div>Loading brewski</div>
