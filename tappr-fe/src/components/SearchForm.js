@@ -28,7 +28,6 @@ const SearchForm = () => {
   };
 
   const search = () => {
-    console.log('Search term', searchTerm);
     axiosWithAuth().get(`/beers?name=${searchTerm.name}`)
       .then(res => {
         console.log(res);

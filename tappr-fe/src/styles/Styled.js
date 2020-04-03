@@ -10,7 +10,7 @@ export const FormDiv = styled.div`
     align-items: center;
     border: 5px solid #F6C101;
     margin: 0 auto;
-    width: 25%;
+    width: 35%;
     // height: 50vh;
     margin-bottom: 5%;
     background-color: #C96E12;
@@ -60,7 +60,7 @@ export const FormDiv = styled.div`
                 width: 35%;
                 label{
                     margin-bottom: 5%;
-                    text-align: left;
+                    margin-left: 18%;
                 }
             }
             button.form-action{
@@ -78,7 +78,7 @@ export const OuterFormDiv = styled.div`
   align-items: center;
   border: 5px solid #F6C101;
   margin: 0 auto;
-  width: 25%;
+  width: 45%;
   // height: 50vh;
   margin-bottom: 5%;
   background-color: #C96E12;
@@ -107,19 +107,19 @@ export const FormLabel = styled.label`
 `;
 
 export const FormInput = styled.input`
-  margin: 5% 0;
+  margin: 5% 0 0 0;
   align-self: flex-start;
   width: 50%;
 `;
 
 export const FormTextBox = styled.input`
-  margin: 5% 5%;
+  margin: 5% 5% 0 5%;
   width: 100%;
 `;
 
 export const FormButtonMainDiv = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   align-items: flex-end;
   align-content: center;
   width: 100%;
@@ -140,6 +140,11 @@ export const FormButton = styled.button`
     color: #F6C101;
     cursor: pointer;
   }
+`;
+
+export const ErrorMessage = styled.div`
+  font-size: 14px;
+  color: #800000;
 `;
 
 // NAVBAR / LINKS STYLING

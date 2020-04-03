@@ -21,7 +21,7 @@ const UserNavbar = (props) => {
         <NavLinks href={`/my-brews/${user_id}`}>My Favorite Brews</NavLinks>
         <NavLinks href="/add-a-beer">Add a Beer</NavLinks>
         <NavLinks href='/login' onClick={() => logout()}>Logout</NavLinks>
-        <NavLinks href={`/my-profile/${user_id}`}>{user_username}</NavLinks>
+        <NavLinks href={`/my-profile/${user_id}`}>My Profile</NavLinks>
       </Navbar>
     </div>
   );
