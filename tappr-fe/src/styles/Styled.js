@@ -10,7 +10,7 @@ export const FormDiv = styled.div`
     align-items: center;
     border: 5px solid #F6C101;
     margin: 0 auto;
-    width: 25%;
+    width: 35%;
     // height: 50vh;
     margin-bottom: 5%;
     background-color: #C96E12;
@@ -60,7 +60,7 @@ export const FormDiv = styled.div`
                 width: 35%;
                 label{
                     margin-bottom: 5%;
-                    text-align: left;
+                    margin-left: 18%;
                 }
             }
             button.form-action{

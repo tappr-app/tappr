@@ -39,8 +39,8 @@ const LoginForm = props =>{
       <>
         <GuestNavbar />
         <FormDiv>
-            <h2 className='form-title'>Lager-In</h2>
-            <form className='login-user' onSubmit={handleSubmit(handleShow)}>
+          <h2 className='form-title'>Lager-In</h2>
+          <form className='login-user' onSubmit={handleSubmit(handleShow)}>
             <label>Username</label>
 
             <input name='username'
@@ -58,11 +58,11 @@ const LoginForm = props =>{
             {errors.password && 'Password Required'}
             <div className='form-btn-main'>
             <div className='form-submit'>
-                <button className='form-action main' type='submit'>Lager-In</button>
+                <Button variant="warning" type='submit'>Lager-In</Button>
             </div>
             <div className='route-form'>
                 <label>New User?</label>
-                <button className='form-action' onClick={() => registerUser()}>Register</button>                   
+                <Button variant="info" onClick={() => registerUser()}>Register</Button>                   
             </div>         
             </div>
           </form>
