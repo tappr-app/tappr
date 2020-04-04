@@ -17,6 +17,7 @@ const UserNavbar = (props) => {
   return (
     <div>
       <Navbar>
+        <h2><span role='img' aria-label='beer-clink' alt='beer-salute'>🍻</span>Tappr</h2>
         <NavLinks href='/my-dashboard'>Tap List</NavLinks>
         <NavLinks href={`/my-brews/${user_id}`}>My Favorite Brews</NavLinks>
         <NavLinks href="/add-a-beer">Add a Beer</NavLinks>
