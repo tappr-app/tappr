@@ -1,31 +1,55 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
-
 import UserNavbar from './UserNavbar';
 import { getProfile } from '../actions/index';
+import {
+  LoadingText,
+  SectionTitle,
+  UserImage,
+  UserImageDiv,
+  UserName,
+  UserText,
+  UserButtonDiv
+} from '../styles/Styled';
+import { Button } from 'react-bootstrap';
 
 const UserProfile = props => {
-  const id = window.localStorage.getItem('user_id')
+  const { id } = useParams();
+
   useEffect(()=>{
-    props.getProfile(id)
-  }, [])
+    props.getProfile(id);
+  }, []);
+
+  const editProfile = newData => {
+    props.history.push(`/my-profile/${id}/edit`)
+  };
+
   return (
     <div>
       <UserNavbar />
-      {props.readyToMount ? 
+      {props.readyToMount ?
         <div>
-        <span></span>
-        <h2>{props.active_user.user.username}</h2>
-        <h3>Bio</h3>
-        <p>{props.active_user.user.bio}</p>
-        <div>
-          <h3>Badges</h3>
-        </div>
-        </div>
-      :
-      <div>Loading your profile...</div>
-      }
+          <SectionTitle>{props.active_user.user.username}</SectionTitle>
+          <UserImageDiv>
+            {props.active_user.user.user_image !== null ?
+              <UserImage src={props.active_user.user.user_image} alt={props.active_user.user.username} /> : null}
+          </UserImageDiv>
 
+          <div>
+            <UserName>Age</UserName>
+            <UserText>{props.active_user.user.age}</UserText>
+            <UserName>Bio</UserName>
+            <UserText>{props.active_user.user.bio}</UserText>
+            {/* <div>
+              <h3>Beer Badges</h3>
+            </div> */}
+            <UserButtonDiv>
+              <Button variant="warning" onClick={() => editProfile()}>Edit Profile</Button>
+            </UserButtonDiv>
+          </div>
+        </div>
+      : <LoadingText>Loading user profile...</LoadingText>}
     </div> 
   );
 };

@@ -5,6 +5,7 @@ const GuestNavbar = () => {
   return (
     <div>
       <Navbar>
+        <h2><span role='img' aria-label='beer-clink' alt='beer-salute'>🍻</span>Tappr</h2>
         <NavLinks href='/'>Home</NavLinks>
         <NavLinks href='/dashboard'>Tap List</NavLinks>
         <NavLinks href='/register'>Register</NavLinks>

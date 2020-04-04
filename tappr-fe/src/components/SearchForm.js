@@ -30,7 +30,6 @@ const SearchForm = () => {
   const search = () => {
     axiosWithAuth().get(`/beers?name=${searchTerm.name}`)
       .then(res => {
-        console.log(res);
         setResults(res.data);
       })
       .catch(error => {

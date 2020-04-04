@@ -232,6 +232,74 @@ export const MyBrewsLinks = styled.a`
     }
 `;
 
+// LANDING PAGE STYLING
+export const HeaderDiv = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    border: 1px solid black;
+    margin: 1%;
+    padding: 1%;
+    background-image: url("https://images.unsplash.com/photo-1516920846492-81bc6da9fc38?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1349&q=80");
+    background-color: #cccccc; /* Used if the image is unavailable */
+    height: 500px; /* You must set a specified height */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */
+    .title-header{
+        color: #FFFFFF;
+        font-size: 10rem;
+        
+        text-shadow: -1px 1px 2px #C96E12,
+                      1px 1px 2px #C96E12,
+                      1px -1px 0 #C96E12,
+                      -1px -1px 0 #C96E12;
+    }
+    
+
+`;
+export const FeaturesFlexDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    margin: 1%;
+    padding: 1%;
+`;
+
+export const StepsBoxDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    border: 1px solid black;
+    margin: 1%;
+    padding: 1%;
+    .steps{
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        .box{
+            background-color: #C96E12;
+            width: 100%;
+            border: 1px solid black;
+            margin: 1%;
+            padding: 1%;
+            h3{
+                color: #FFFFFF;
+            }
+            li, .register-link {
+                color: #F6C101;
+            }
+        }
+    }
+`;
+
+export const Footer = styled.footer`
+    text-align: center;
+`;
+
 // DASHBOARD STYLING
 
 export const DashboardFlexFeaturedDiv = styled.div`
@@ -393,6 +461,7 @@ export const FillItUpLink = styled.a`
     }
 `;
 
+
 //BEER DETAILS STYLING
 
 export const BeerDetailsTitle = styled.h2`
@@ -449,4 +518,35 @@ export const AddDiv =styled.div`
             margin: 0 3% 0 3%;
         }
     }
+
+// USER PROFILE STYLING
+
+export const UserName = styled.p`
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 0;
+`;
+
+export const UserText = styled.p`
+    font-size: 20x;
+    text-align: center;
+`;
+
+export const UserImageDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 2%;
+`;
+
+export const UserImage = styled.img`
+    width: 8%;
+    height: 15vh;
+    border-radius: 5px;
+`;
+
+export const UserButtonDiv = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
 `;
