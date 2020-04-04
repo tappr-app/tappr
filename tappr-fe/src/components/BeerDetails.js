@@ -12,7 +12,10 @@ import {
  } from '../actions/index';
 import UserNavbar from './UserNavbar';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
-import { BeerLinks } from '../styles/Styled';
+
+import { BeerLinks, BeerDetailsImage, BeerDetailsTitle, BeerDetailsDiv, BeerInfoDiv, PairingCommentDiv, CrudDiv, AddDiv } from '../styles/Styled';
+import { Button } from 'react-bootstrap';
+
 
 const BeerDetails = (props) => {
   const params = useParams();
@@ -180,99 +183,124 @@ const BeerDetails = (props) => {
     .catch(err=> console.log(err));
   };
 
+
+const handleDeleteComment = (beerId, comment) =>{
+  props.deleteBeerComment(beerId, comment);
+  setUpdatingComment(false)
+  axiosWithAuth().get(`/beers/${params.id}`)
+  .then(res=>{
+    setThisBeer(res.data);
+    setBeerReady(true);
+  })
+  .catch(err=> console.log(err));
+}
+
+
   return (
     <div>
       <UserNavbar />
-      <span>BeerDetails</span>
-      {beerReady ? 
-        <div>
-          <img src={thisBeer.beer.image_url} alt='beer-picture' />
-          <h3>{thisBeer.beer.name}</h3>
-          <p>{thisBeer.beer.tagline}</p>
-          <p>{thisBeer.beer.description}</p>
-          <p>ABV: {thisBeer.beer.abv}</p>
-          <BeerLinks href={`/update-a-beer/${params.id}`}>Update This Beer</BeerLinks>
-          {thisBeer.food === [] ? <p>Pairings: None yet! Add some below.</p>
-          :<div>
-          <p>Pairings:</p>
-          <ul>{thisBeer.food.map(element => {
-            return (
-              <div key={element.id}>
-               {updatingPairings ? 
-               <div>
-                <li key={element.id}>{element.food_name}</li>
-                <form onSubmit={e=>{
-                  e.preventDefault();
-                  handleUpdatePairingSubmit(params.id, {...updatePairings, id: element.id});
-                }}>
-                  <input name='food_name' onChange={handleUpdatePairingsChanges} />
-                  <button type='submit'>update</button>
-                </form>
-                <button onClick={e =>{
-                  e.preventDefault();
-                  handleDeleteFoodPairing(params.id, {...updatePairings, id: element.id})
-                }}>X</button> 
-                </div>
-                : 
-                <div>
-                  <li key={element.id}>{element.food_name}</li>
-                </div>
-               }
+        <BeerDetailsTitle>Beer Details</BeerDetailsTitle>
+        {beerReady ? 
+          <BeerDetailsDiv>
+            <BeerInfoDiv className='beer-info'>
+              <BeerDetailsImage src={thisBeer.beer.image_url} alt='beer-picture' />
+              <h3>{thisBeer.beer.name}</h3>
+              <p>{thisBeer.beer.tagline}</p>
+              <p>{thisBeer.beer.description}</p>
+              <p>ABV: {thisBeer.beer.abv}</p>
+              <BeerLinks href={`/update-a-beer/${params.id}`}>Update This Beer</BeerLinks>
+            </BeerInfoDiv>
+            <PairingCommentDiv className='pairing-section'>
+              {thisBeer.food === [] ? <p>Pairings: None yet! Add some below.</p>
+              :<div>
+              <p>Pairings:</p>
+              <ul>{thisBeer.food.map(element => {
+                return (
+                  <div key={element.id}>
+                  {updatingPairings ? 
+                  <div>
+                    <li key={element.id}>{element.food_name}</li>
+                    <CrudDiv>
+                    <form onSubmit={e=>{
+                      e.preventDefault();
+                      handleUpdatePairingSubmit(params.id, {...updatePairings, id: element.id});
+                    }}>
+                      <input name='food_name' onChange={handleUpdatePairingsChanges} />
+                      <Button variant="warning" type='submit'>update</Button>
+                    </form>
+                    <Button variant="danger" onClick={e =>{
+                      e.preventDefault();
+                      handleDeleteFoodPairing(params.id, {...updatePairings, id: element.id})
+                    }}>X</Button>
+                    </CrudDiv> 
+                    </div>
+                    : 
+                    <div>
+                      <li key={element.id}>{element.food_name}</li>
+                    </div>
+                  }
+                  </div>
+                )
+              })}</ul>
+              {updatingPairings ? <Button variant="danger" onClick={()=> setUpdatingPairings(false)}>Cancel</Button> : <Button variant="info" onClick={handleUpdatingPairings}>Edit Pairings</Button> }
               </div>
-            )
-          })}</ul>
-          {updatingPairings ? <button onClick={()=> setUpdatingPairings(false)}>Cancel</button> : <button onClick={handleUpdatingPairings}>Edit Pairings</button> }
-          </div>
-          }
-          {thisBeer.comments === [] ? <p>Comments: No Comments. Add some below!</p>
-          :
-          <div>Comments:{thisBeer.comments.map(element => {
-            return (
-            <div key={element.user_id}>
-              <p key={element.id}>{element.comment}</p>
-              {parseInt(activeId) === element.user_id ?
-              <div>
-              {updatingComment ? (
-              <form onSubmit={e =>{
-              e.preventDefault();
-              handleUpdateComment(params.id, {...updateComment, id: element.id})
-              }}>
-                <input name='comment'  onChange={handleUpdateCommentChanges}/>
-                <button type='submit'>update</button>
-                <button onClick={()=> setUpdatingComment(false)}>cancel</button>
-              </form>) 
-              : <button onClick={handleUpdatingComment}>edit</button>
               }
-              <button onClick={e => {
-                e.preventDefault();
-                handleDeleteComment(params.id, {...updateComment, id: element.id})
-              }}>delete</button>
-              </div> : <div></div>}
+            </PairingCommentDiv>
+            <PairingCommentDiv className='comment-section'>
+              {thisBeer.comments === [] ? <p>Comments: No Comments. Add some below!</p>
+              :
+              <div>Comments:{thisBeer.comments.map(element => {
+                return (
+                <div key={element.user_id}>
+                  <p key={element.id}>{element.comment}</p>
+                  {parseInt(activeId) === element.user_id ?
+                  <div>
+                  {updatingComment ? (
+                  <CrudDiv>
+                  <form onSubmit={e =>{
+                  e.preventDefault();
+                  handleUpdateComment(params.id, {...updateComment, id: element.id})
+                  }}>
+                    <input name='comment'  onChange={handleUpdateCommentChanges}/>
+                    <Button variant="warning" type='submit'>update</Button>
+                    <Button variant="danger" onClick={()=> setUpdatingComment(false)}>cancel</Button>
+                  </form>
+                  </CrudDiv>) 
+                  : <Button variant="info" onClick={handleUpdatingComment}>edit</Button>
+                  }
+                  <Button variant="danger" onClick={e => {
+                    e.preventDefault();
+                    handleDeleteComment(params.id, {...updateComment, id: element.id})
+                  }}>delete</Button>
+                  </div> : <div></div>}
 
-            </div>
-            )
-          })}</div>}  
-          {editingPairing ? 
-          (<form onSubmit={handleAddPairing}>
-            <label>Food name:</label>
-            <input name='food_name' onChange={handleChangesPairing}/>
-            <button type='submit'>Post</button>
-            <span onClick={()=> setEditingPairing(false)}>Cancel</span>
-          </form>)
-          : (<button onClick={handleEditPairing}>Add Pairing</button>)
-          }
-          {editingComment ? 
-          (<form onSubmit={handleAddComment}>
-            <label>Leave Comment:</label>
-            <input name='comment' onChange={handleChangesComments}/>
-            <button type='submit'>Post</button>
-            <span onClick={()=> setEditingComment(false)}>Cancel</span>
-          </form>)
-          : (<button onClick={handleEditComment}>Add Comment</button>)
-          }                      
-        </div>  
-      : <div>Loading brewski</div>
-      }
+                </div>
+                )
+              })}</div>}  
+            </PairingCommentDiv>
+            <AddDiv>
+              {editingPairing ? 
+              (<form onSubmit={handleAddPairing}>
+                <label>Food name:</label>
+                <input name='food_name' onChange={handleChangesPairing}/>
+                <Button variant="warning" type='submit'>Post</Button>
+                <Button variant="danger" onClick={()=> setEditingPairing(false)}>Cancel</Button>
+              </form>)
+              : (<Button variant="info" onClick={handleEditPairing}>Add Pairing</Button>)
+              }
+              {editingComment ? 
+              (<form onSubmit={handleAddComment}>
+                <label>Leave Comment:</label>
+                <input name='comment' onChange={handleChangesComments}/>
+                <Button variant="warning" type='submit'>Post</Button>
+                <Button variant="danger" onClick={()=> setEditingComment(false)}>Cancel</Button>
+              </form>)
+              : (<Button variant="info" onClick={handleEditComment}>Add Comment</Button>)
+              } 
+            </AddDiv>                     
+          </BeerDetailsDiv>  
+        : <div>Loading brewski</div>
+        }
     </div>
   );
 };
