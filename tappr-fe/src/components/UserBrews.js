@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getProfile } from '../actions/index';
 import UserNavbar from './UserNavbar';
+import { Button } from 'react-bootstrap';
+import { DashboardFlexFeaturedDiv, FavoriteBeer, FavoriteBeerImage, BeerName, BeerText } from '../styles/Styled';
 
 const UserBrews = (props) => {
   const id = window.localStorage.getItem('user_id')
@@ -22,20 +24,26 @@ const UserBrews = (props) => {
       {props.readyToMount ? 
         <div>
         <h2>{props.active_user.user.username}'s Brew Collection</h2>
-        <div className='user-brews'>
+        <DashboardFlexFeaturedDiv className='user-brews'>
         {props.active_user.beers.map(beer => {
           return(
-          <div key={beer.id}>
-            <img src={beer.image_url} alt={beer.name} />
-            <h5>{beer.name}</h5>
-            <p>{beer.abv}</p>
+          <FavoriteBeer key={beer.id}>
+            <FavoriteBeerImage src={beer.image_url} alt={beer.name} />
+            <BeerName>{beer.name}</BeerName>
+            <BeerText>{beer.abv}</BeerText>
+            <BeerText>ABV: {beer.abv}</BeerText>
+            <div className='actions-dashboard'>
             <Link to={`/brews/${beer.id}`}>More Details</Link>
             <label>Remove from Collection</label>
-            <button>X</button>
-          </div> 
+            <Button variant='danger' onClick={()=>{
+              document.getElementsByClassName("ft-flag-off")[0].className = 'ft-flag';
+            }}>X</Button>
+            <span className='ft-flag-off'>* remove ft soon come</span>
+            </div>
+          </FavoriteBeer> 
           )         
         })}
-        </div>
+        </DashboardFlexFeaturedDiv>
         </div>
       :
       <div>Loading your personal tap...</div>

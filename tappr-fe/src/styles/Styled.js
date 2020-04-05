@@ -518,7 +518,7 @@ export const AddDiv =styled.div`
             margin: 0 3% 0 3%;
         }
     }
-
+`;
 // USER PROFILE STYLING
 
 export const UserName = styled.p`
@@ -549,4 +549,43 @@ export const UserButtonDiv = styled.div`
     display: flex;
     justify-content: center;
 
+`;
+
+// My Brews Styles
+
+export const FavoriteBeer = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    margin: 1%;
+    padding: 1%;
+    margin-bottom: 5%;
+    font-size: 20px;
+    border: 2px solid #F6C101;
+    color: black;
+    h5{
+        margin-top: 5%;
+    }
+    .actions-dashboard{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-content: center;
+        .btn-danger{
+            align-self: flex-start;
+            width: 10%;
+        }
+        .spinner-border{
+            margin: 0 auto;
+        }
+    }
+    .ft-flag-off {
+        display: none;
+    }
+`;
+
+export const FavoriteBeerImage = styled.img`
+    width: 85px;
+    height: 250px;
+    margin: 0 auto;
 `;
