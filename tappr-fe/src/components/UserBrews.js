@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { getProfile } from '../actions/index';
 import UserNavbar from './UserNavbar';
 import { Button } from 'react-bootstrap';
-import { DashboardFlexFeaturedDiv, FavoriteBeer, FavoriteBeerImage, BeerName, BeerText } from '../styles/Styled';
+import { DashboardFlexFeaturedDiv, FavoriteBeer, FavoriteBeerImage, BeerName, BeerText, SectionTitle } from '../styles/Styled';
 
 const UserBrews = (props) => {
   const id = window.localStorage.getItem('user_id')
@@ -23,7 +23,7 @@ const UserBrews = (props) => {
       <UserNavbar />
       {props.readyToMount ? 
         <div>
-        <h2>{props.active_user.user.username}'s Brew Collection</h2>
+        <SectionTitle>{props.active_user.user.username}'s Brew Collection</SectionTitle>
         <DashboardFlexFeaturedDiv className='user-brews'>
         {props.active_user.beers.map(beer => {
           return(
