@@ -184,17 +184,6 @@ const BeerDetails = (props) => {
   };
 
 
-const handleDeleteComment = (beerId, comment) =>{
-  props.deleteBeerComment(beerId, comment);
-  setUpdatingComment(false)
-  axiosWithAuth().get(`/beers/${params.id}`)
-  .then(res=>{
-    setThisBeer(res.data);
-    setBeerReady(true);
-  })
-  .catch(err=> console.log(err));
-}
-
 
   return (
     <div>
