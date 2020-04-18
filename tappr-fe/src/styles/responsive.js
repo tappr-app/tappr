@@ -9,12 +9,12 @@ export const size = {
   }
 
   export const device = {
-    iPhone5: `(min-width: ${size.iPhone5})`,
-    iPhone: `(min-width: ${size.iPhone})`,
-    iPhonePlus: `(min-width: ${size.iPhonePlus})`,
-    tablet: `(min-width: ${size.tablet})`,
-    laptop: `(min-width: ${size.laptop})`,
-    laptopL: `(min-width: ${size.laptopL})`,
-    desktop: `(min-width: ${size.desktop})`,
-    desktopL: `(min-width: ${size.desktop})`
+    iPhone5: `(max-width: ${size.iPhone5})`,
+    iPhone: `(max-width: ${size.iPhone})`,
+    iPhonePlus: `(max-width: ${size.iPhonePlus})`,
+    tablet: `(max-width: ${size.tablet})`,
+    laptop: `(max-width: ${size.laptop})`,
+    laptopL: `(max-width: ${size.laptopL})`,
+    desktop: `(max-width: ${size.desktop})`,
+    desktopL: `(max-width: ${size.desktop})`
   };
