@@ -157,6 +157,16 @@ export const Navbar = styled.nav`
     border-bottom: 2px solid #F6C101;
     padding: 1%;
     margin: 1%;
+    @media ${device.iPhone}{
+        max-width: 812px;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+        flex-flow: wrap;
+        h2{
+            display: none;
+        }
+    }
 `;
 
 export const NavLinks = styled.a`
@@ -258,6 +268,9 @@ export const HeaderDiv = styled.div`
                       1px 1px 2px #C96E12,
                       1px -1px 0 #C96E12,
                       -1px -1px 0 #C96E12;
+        @media ${device.iPhone}{
+            font-size: 7rem;
+        }
     }
     
 
@@ -277,10 +290,19 @@ export const StepsBoxDiv = styled.div`
     border: 1px solid black;
     margin: 1%;
     padding: 1%;
+    @media ${device.iPhone}{
+        margin-bottom: 10%;
+    }
     .steps{
         display: flex;
         justify-content: space-evenly;
         align-items: center;
+        @media ${device.iPhone}{
+            flex-direction: column;
+            .arrow {
+                display: none;
+            }
+        }
         .box{
             background-color: #C96E12;
             width: 100%;
@@ -292,6 +314,9 @@ export const StepsBoxDiv = styled.div`
             }
             li, .register-link {
                 color: #F6C101;
+            }
+            @media ${device.iPhone}{
+                padding: 2% 1%;
             }
         }
     }
