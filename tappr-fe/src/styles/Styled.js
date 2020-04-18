@@ -15,6 +15,10 @@ export const FormDiv = styled.div`
     // height: 50vh;
     margin-bottom: 5%;
     background-color: #C96E12;
+    @media ${device.iPhone}{
+        width: 90%;
+        margin-top: 5%;
+    }
     .form-title{
         background-color: #FAE96F;
         width: 100%;
@@ -36,6 +40,9 @@ export const FormDiv = styled.div`
             margin: 5% 0;
             align-self: flex-start;
             width: 50%;
+            @media ${device.iPhone}{
+                width: 100%;
+            }
         }
         .user-bio{
             margin: 5% 5%;
@@ -62,6 +69,10 @@ export const FormDiv = styled.div`
                 label{
                     margin-bottom: 5%;
                     margin-left: 18%;
+                    @media ${device.iPhone}{
+                       font-size: 1rem;
+                        margin-left: 10%;
+                    }
                 }
             }
             button.form-action{
