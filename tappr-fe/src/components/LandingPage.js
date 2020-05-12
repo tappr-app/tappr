@@ -41,14 +41,14 @@ const LandingPage = () => {
               <li>Set your password</li>
             </ul>
           </div>
-          <span classname='arrow' role='img' aria-label='next-step' alt='arrow'>➡️</span>
+          <span className='arrow' role='img' aria-label='next-step' alt='arrow'>➡️</span>
           <div className="box">
             <h3>Lager-In</h3>
             <ul>
               <li>Sign-in with your new credentials</li>
             </ul>
           </div>
-          <span classname='arrow' role='img' aria-label='next-step' alt='arrow'>➡️</span>
+          <span className='arrow' role='img' aria-label='next-step' alt='arrow'>➡️</span>
           <div className="box">
             <h3>Start happy hour!</h3>
             <span role='img' aria-label='beer-clink' alt='beer-salute'>🍻</span>

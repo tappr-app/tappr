@@ -1,4 +1,5 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
+import { device } from './responsive';
 
 // FORM STYLING
 
@@ -14,6 +15,10 @@ export const FormDiv = styled.div`
     // height: 50vh;
     margin-bottom: 5%;
     background-color: #C96E12;
+    @media ${device.iPhone} {
+        width: 90%;
+        margin-top: 5%;
+    }
     .form-title{
         background-color: #FAE96F;
         width: 100%;
@@ -35,6 +40,9 @@ export const FormDiv = styled.div`
             margin: 5% 0;
             align-self: flex-start;
             width: 50%;
+            @media ${device.iPhone}{
+                width: 100%;
+            }
         }
         .user-bio{
             margin: 5% 5%;
@@ -61,6 +69,10 @@ export const FormDiv = styled.div`
                 label{
                     margin-bottom: 5%;
                     margin-left: 18%;
+                    @media ${device.iPhone}{
+                       font-size: 1rem;
+                        margin-left: 10%;
+                    }
                 }
             }
             button.form-action{
@@ -156,6 +168,16 @@ export const Navbar = styled.nav`
     border-bottom: 2px solid #F6C101;
     padding: 1%;
     margin: 1%;
+    @media ${device.iPhone}{
+        max-width: 812px;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+        flex-flow: wrap;
+        h2{
+            display: none;
+        }
+    }
 `;
 
 export const NavLinks = styled.a`
@@ -175,6 +197,9 @@ export const FeaturedBeerLinks = styled.a`
     text-decoration: none;
     &:hover {
       color: #F6C101;
+    }
+    @media ${device.iPhone}{
+        width: 100%;
     }
 `;
 
@@ -210,6 +235,13 @@ export const DrinkscoverBeer = styled.div`
     margin: 1%;
     font-size: 20px;
     color: black;
+    @media ${device.iPhone}{
+        width: 100%;
+        margin: 0 auto;
+        margin-bottom: 1%;
+        padding: 3%;
+        border: .5px dashed black;
+    }
     .actions-dashboard{
         display: flex;
         flex-direction: column;
@@ -257,6 +289,9 @@ export const HeaderDiv = styled.div`
                       1px 1px 2px #C96E12,
                       1px -1px 0 #C96E12,
                       -1px -1px 0 #C96E12;
+        @media ${device.iPhone}{
+            font-size: 7rem;
+        }
     }
     
 
@@ -276,10 +311,19 @@ export const StepsBoxDiv = styled.div`
     border: 1px solid black;
     margin: 1%;
     padding: 1%;
+    @media ${device.iPhone}{
+        margin-bottom: 10%;
+    }
     .steps{
         display: flex;
         justify-content: space-evenly;
         align-items: center;
+        @media ${device.iPhone}{
+            flex-direction: column;
+            .arrow {
+                display: none;
+            }
+        }
         .box{
             background-color: #C96E12;
             width: 100%;
@@ -291,6 +335,9 @@ export const StepsBoxDiv = styled.div`
             }
             li, .register-link {
                 color: #F6C101;
+            }
+            @media ${device.iPhone}{
+                padding: 2% 1%;
             }
         }
     }
@@ -308,12 +355,22 @@ export const DashboardFlexFeaturedDiv = styled.div`
     border: 1px solid black;
     margin: 1%;
     padding: 1%;
+    @media ${device.iPhone}{
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-items: center;
+    }
 `;
 
 export const DashboardFlexDiv = styled.div`
     display: flex;
     flex-wrap: wrap;
     margin: 1%;
+    @media ${device.iPhone}{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 `;
 
 export const DashboardFeaturedDiv = styled.div`
@@ -341,8 +398,11 @@ export const MyBrewsDashboardDiv = styled.div`
 export const BeerImage = styled.img`
     width: 85px;
     height: 250px;
-    margin-left: 35%;
+    margin-left: 41%;
     margin-right: auto;
+    @media ${device.iPhone}{
+        margin: 0 auto;
+    }
 `;
 
 export const DiscoverBeerImage = styled.img`
@@ -350,11 +410,21 @@ export const DiscoverBeerImage = styled.img`
     height: 250px;
     margin-left: 25%;
     margin-right: auto;
+    @media ${device.iPhone}{
+        width: 100%;
+        height: 200px;
+        margin: 0 auto;
+    }
 `;
 
 export const ImageDiv = styled.div`
-  padding-left: 10%;
-  padding-right: 10%;
+    padding-left: 10%;
+    padding-right: 10%;
+    @media ${device.iPhone}{
+        display: flex;
+        align-content: center;
+        padding: 5% 0;
+    }
 `;
 
 export const SectionTitle = styled.h2`
@@ -365,6 +435,10 @@ export const SectionTitle = styled.h2`
 export const BeerName = styled.h5`
     font-size: 16px;
     text-align: center;
+    padding: 5%;
+    @media ${device.iPhone}{
+        width: 100%;
+    }
 `;
 
 export const BeerText = styled.p`
@@ -431,6 +505,12 @@ export const InputDiv = styled.div`
     margin: 1%;
     display: flex;
     justify-content: center;
+    @media ${device.iPhone}{
+        margin: 5% 0;
+        input {
+            width: 65%;
+        }
+    }
 `;
 
 export const SearchInput = styled.input`
@@ -445,6 +525,9 @@ export const SearchButton = styled.button`
     font-size: 16px;
     background: #C96E12;
     border-radius: 5px;
+    @media ${device.iPhone}{
+        width: 30%;
+    }
 `;
 
 export const FillItUpLink = styled.a`

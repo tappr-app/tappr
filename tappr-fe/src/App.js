@@ -16,7 +16,6 @@ import BeerDetails from './components/BeerDetails';
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
         <Route exact path="/" render={(props) => <LandingPage {...props} />} />
         <Route exact path="/login" render={(props) => <LoginForm {...props} />} />
         <Route exact path="/register" render={(props) => <RegisterForm {...props} />} />
@@ -29,7 +28,6 @@ function App() {
         <PrivateRoute path="/brews/:id" component={BeerDetails} />
         <PrivateRoute path="/add-a-beer" component={AddBeer} />
         <PrivateRoute path="/update-a-beer/:id" component={UpdateBeer} />
-      </header>
     </div>
   );
 }
