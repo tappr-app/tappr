@@ -10,12 +10,6 @@
         }
       }
     ],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "tappr-fe/$1"
-      }
-    ],
     "rewrites": [
       { "source": "/(.*)", "destination": "/index.html" }
     ]
