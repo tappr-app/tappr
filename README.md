@@ -4,7 +4,7 @@ This project is a web app designed to track beers that users have tried, along w
 
 ## Deployment
 
-*Not currently deployed
+*Not currently deployed*
 
 ## Tech Stack
 
